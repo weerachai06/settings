@@ -38,5 +38,5 @@ set btn to button returned of (display alert \"🔍 GitHub PR Review\" message \
 btn" 2>/dev/null)
 
 if [[ "$RESULT" == "Open GitHub" ]]; then
-  open "https://github.com/pulls/review-requested"
+  open "https://github.com/pulls?q=is%3Aopen+is%3Apr+review-requested%3A%40me+archived%3Afalse+draft%3Afalse+"
 fi

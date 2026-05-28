@@ -4,6 +4,11 @@ SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 PLIST_NAME="com.${1:-}.gh-pr-notifier"
 PLIST_PATH="$HOME/Library/LaunchAgents/${PLIST_NAME}.plist"
 
+NOTIFY_INTERVAL_MINITE=30
+NOTIFY_INTERVAL_SECOND=60
+NOTIFY_INTERVAL=$((NOTIFY_INTERVAL_MINITE * NOTIFY_INTERVAL_SECOND))
+
+
 # รับ your-name ถ้าไม่ได้ส่งมาเป็น argument
 if [[ -z "$1" ]]; then
   read -rp "กรอกชื่อสำหรับ LaunchAgent (เช่น weerachai): " INPUT_NAME
@@ -32,16 +37,16 @@ cat > "$PLIST_PATH" << EOF
   </array>
 
   <key>StartInterval</key>
-  <integer>3600</integer>
+  <integer>${NOTIFY_INTERVAL}</integer>
 
   <key>RunAtLoad</key>
   <true/>
 
   <key>StandardOutPath</key>
-  <string>/tmp/gh-pr-notifier.log</string>
+  <string>${SCRIPT_DIR}/gh-pr-notifier.log</string>
 
   <key>StandardErrorPath</key>
-  <string>/tmp/gh-pr-notifier-error.log</string>
+  <string>${SCRIPT_DIR}/gh-pr-notifier-error.log</string>
 
   <key>EnvironmentVariables</key>
   <dict>
@@ -64,7 +69,7 @@ echo "→ โหลด LaunchAgent"
 launchctl load "$PLIST_PATH"
 
 if launchctl list | grep -q "${PLIST_NAME}"; then
-  echo "✅ ติดตั้งสำเร็จ — จะแจ้งเตือนทุก 1 ชั่วโมง"
+  echo "✅ ติดตั้งสำเร็จ — จะแจ้งเตือนทุก ${NOTIFY_INTERVAL_MINITE} นาที"
 else
   echo "❌ โหลด LaunchAgent ไม่สำเร็จ ลองรัน: launchctl load $PLIST_PATH"
   exit 1
