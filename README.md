@@ -130,4 +130,3 @@ gh-notifier-review/
 ├── install.sh      # ติดตั้ง LaunchAgent อัตโนมัติ
 └── README.md
 ```
-# settings
