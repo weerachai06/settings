@@ -39,7 +39,8 @@ install() {
   link "$DOTFILES/zsh/.zprofile" "$HOME/.zprofile"
 
   # Git
-  link "$DOTFILES/git/.gitconfig" "$HOME/.gitconfig"
+  link "$DOTFILES/git/.gitconfig"        "$HOME/.gitconfig"
+  link "$DOTFILES/git/.gitignore_global" "$HOME/.gitignore_global"
 
   # WezTerm
   link "$DOTFILES/wezterm/wezterm.lua" "$HOME/.config/wezterm/wezterm.lua"
@@ -56,6 +57,7 @@ install() {
 
   # Claude
   link "$DOTFILES/claude/settings.json" "$HOME/.claude/settings.json"
+  link "$DOTFILES/claude/CLAUDE.md"     "$HOME/.claude/CLAUDE.md"
 
   echo "Done."
 }
@@ -67,12 +69,14 @@ prune() {
   unlink "$HOME/.zshenv"
   unlink "$HOME/.zprofile"
   unlink "$HOME/.gitconfig"
+  unlink "$HOME/.gitignore_global"
   unlink "$HOME/.config/wezterm/wezterm.lua"
   unlink "$HOME/.config/zed/settings.json"
   unlink "$HOME/.config/zed/keymap.json"
   unlink "$HOME/global-protect.sh"
   unlink "$HOME/.config/opencode/opencode.jsonc"
   unlink "$HOME/.claude/settings.json"
+  unlink "$HOME/.claude/CLAUDE.md"
 
   echo "Done."
 }

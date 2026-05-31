@@ -5,3 +5,5 @@
 	adog = log --all --decorate --oneline --graph
 [pull]
 	rebase = true
+[core]
+	excludesfile = ~/.gitignore_global

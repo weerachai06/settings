@@ -1,0 +1,5 @@
+# Temporary experiment files (Claude Code convention)
+tmp/
+
+# macOS
+.DS_Store
