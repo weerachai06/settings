@@ -47,10 +47,10 @@ brew_install uv
 
 echo
 echo "==> Apps"
-brew_cask_install wezterm
+brew_cask_install wezterm "WezTerm.app"
 
 echo
-brew_cask_install zed
+brew_cask_install zed "Zed.app"
 
 echo
 brew_install orbstack

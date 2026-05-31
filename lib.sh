@@ -29,10 +29,13 @@ brew_install() {
 }
 
 brew_cask_install() {
-  if brew list --cask "$1" &>/dev/null 2>&1; then
-    echo "  skip: $1 (already installed)"
+  local cask="$1" app="${2:-}"
+  if brew list --cask "$cask" &>/dev/null 2>&1; then
+    echo "  skip: $cask (already installed)"
+  elif [ -n "$app" ] && [ -d "/Applications/$app" ]; then
+    echo "  skip: $cask (already installed at /Applications/$app)"
   else
-    brew install --cask "$1"
+    brew install --cask "$cask"
   fi
 }
 
