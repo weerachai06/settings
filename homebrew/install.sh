@@ -13,10 +13,22 @@ fi
 
 BREWFILE="$(dirname "$0")/Brewfile"
 
+# brew bundle does not evaluate `unless ENV[...]` Ruby conditionals — build
+# HOMEBREW_BUNDLE_BREW_SKIP from formulas whose feature flag is set in .local.
+_skip_brews=""
+while IFS= read -r line; do
+  formula=$(echo "$line" | sed 's/brew "\([^"]*\)".*/\1/')
+  flag=$(echo "$line" | sed -n 's/.*ENV\["\([^"]*\)"\].*/\1/p')
+  if [ -n "$flag" ] && [ "${!flag}" == "1" ]; then
+    echo "  skip: $formula ($flag=1)"
+    _skip_brews="${_skip_brews} $formula"
+  fi
+done < <(grep '^brew ' "$BREWFILE")
+export HOMEBREW_BUNDLE_BREW_SKIP="${_skip_brews# }"
+
 # Detect casks already installed outside Homebrew to avoid adoption failures
 # (e.g. xattr permission errors on SIP-protected files).
-# Only check casks whose feature-flag env var isn't already set (those are
-# excluded by the Brewfile `unless` clause and need no further handling).
+# Only check casks whose feature-flag env var isn't already set.
 _casks=()
 while IFS= read -r line; do
   cask=$(echo "$line" | sed 's/cask "\([^"]*\)".*/\1/')
