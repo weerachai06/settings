@@ -51,6 +51,12 @@ install() {
   # GlobalProtect
   link "$DOTFILES/global-protect/global-protect.sh" "$HOME/global-protect.sh"
 
+  # Opencode
+  link "$DOTFILES/opencode/opencode.jsonc" "$HOME/.config/opencode/opencode.jsonc"
+
+  # Claude
+  link "$DOTFILES/claude/settings.json" "$HOME/.claude/settings.json"
+
   echo "Done."
 }
 
@@ -65,6 +71,8 @@ prune() {
   unlink "$HOME/.config/zed/settings.json"
   unlink "$HOME/.config/zed/keymap.json"
   unlink "$HOME/global-protect.sh"
+  unlink "$HOME/.config/opencode/opencode.jsonc"
+  unlink "$HOME/.claude/settings.json"
 
   echo "Done."
 }
