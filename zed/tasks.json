@@ -62,7 +62,7 @@
     "tags": ["git-command"],
     "use_new_terminal": true,
     "reveal": "always",
-    "hide": "never"
+    "hide": "never",
   },
   {
     "label": "Checkout: $ZED_GIT_SHA_SHORT",
@@ -70,6 +70,6 @@
     "tags": ["git-command"],
     "use_new_terminal": true,
     "reveal": "always",
-    "hide": "on_success"
-  }
+    "hide": "always",
+  },
 ]
