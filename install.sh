@@ -55,6 +55,9 @@ install() {
   # Opencode
   link "$DOTFILES/opencode/opencode.jsonc" "$HOME/.config/opencode/opencode.jsonc"
 
+  # Opencode agents
+  link "$DOTFILES/.opencode/AGENTS.md" "$HOME/.opencode/AGENTS.md"
+
   # Claude
   link "$DOTFILES/claude/settings.json" "$HOME/.claude/settings.json"
   link "$DOTFILES/claude/CLAUDE.md"     "$HOME/.claude/CLAUDE.md"
@@ -75,6 +78,7 @@ prune() {
   unlink "$HOME/.config/zed/keymap.json"
   unlink "$HOME/global-protect.sh"
   unlink "$HOME/.config/opencode/opencode.jsonc"
+  unlink "$HOME/.opencode/AGENTS.md"
   unlink "$HOME/.claude/settings.json"
   unlink "$HOME/.claude/CLAUDE.md"
 
