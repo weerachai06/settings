@@ -30,30 +30,12 @@ else
 fi
 
 echo
-echo "==> fnm"
-brew_install fnm
-
-echo
 echo "==> bun"
 if cmd_installed bun; then
   echo "  skip: bun (already installed)"
 else
   curl -fsSL https://bun.sh/install | bash
 fi
-
-echo
-echo "==> uv"
-brew_install uv
-
-echo
-echo "==> Apps"
-brew_cask_install wezterm "WezTerm.app"
-
-echo
-brew_cask_install zed "Zed.app"
-
-echo
-brew_install orbstack
 
 echo
 echo "==> Dotfiles"

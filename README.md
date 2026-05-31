@@ -60,6 +60,13 @@ Symlinked to `~/.config/wezterm/wezterm.lua`.
 
 Symlinked to `~/.config/zed/settings.json`, `~/.config/zed/keymap.json`, and `~/.config/zed/tasks.json`.
 
+### Homebrew
+
+All packages are declared in `homebrew/Brewfile` and installed via `brew bundle`. Includes:
+
+- **Formulae**: cmake, fnm, gh, jq, minikube, openssl@3, uv, zsh, zsh-autosuggestions, zsh-syntax-highlighting, vault
+- **Casks**: android-platform-tools, blackhole-2ch/64ch, font-meslo-lg-nerd-font, localsend, orbstack, wezterm, zed
+
 ### Claude Code
 
 Symlinked to `~/.claude/settings.json` and `~/.claude/CLAUDE.md`.
@@ -92,6 +99,7 @@ bash install.sh yourname
 ```
 .dotfiles/
 ├── claude/             # Claude Code settings and CLAUDE.md
+├── homebrew/           # Brewfile + install.sh
 ├── gh-pr-notifier/     # GitHub PR review notifier (LaunchAgent)
 ├── git/                # .gitconfig, .gitignore_global
 ├── global-protect/     # GlobalProtect VPN helper

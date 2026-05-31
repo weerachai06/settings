@@ -8,7 +8,7 @@ source "$DOTFILES/lib.sh"
 install() {
   echo "Installing dotfiles..."
 
-  for dir in zsh git wezterm zed global-protect opencode claude gh-pr-notifier; do
+  for dir in homebrew zsh git wezterm zed global-protect opencode claude gh-pr-notifier; do
     script="$DOTFILES/$dir/install.sh"
     if [ -f "$script" ]; then
       bash "$script"
