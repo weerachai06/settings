@@ -67,6 +67,24 @@ All packages are declared in `homebrew/Brewfile` and installed via `brew bundle`
 - **Formulae**: cmake, fnm, gh, jq, minikube, openssl@3, uv, zsh, zsh-autosuggestions, zsh-syntax-highlighting, vault
 - **Casks**: android-platform-tools, blackhole-2ch/64ch, font-meslo-lg-nerd-font, localsend, orbstack, wezterm, zed
 
+#### Per-machine feature flags
+
+Optional packages can be disabled per machine without modifying the shared Brewfile:
+
+```bash
+cp homebrew/.local.example homebrew/.local
+```
+
+Then uncomment any packages to skip in `homebrew/.local`:
+
+```bash
+SKIP_ORBSTACK=1
+SKIP_MINIKUBE=1
+# ...
+```
+
+`homebrew/.local` is gitignored — each machine keeps its own copy.
+
 ### Claude Code
 
 Symlinked to `~/.claude/settings.json` and `~/.claude/CLAUDE.md`.
