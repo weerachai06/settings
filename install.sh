@@ -62,6 +62,9 @@ install() {
   link "$DOTFILES/claude/settings.json" "$HOME/.claude/settings.json"
   link "$DOTFILES/claude/CLAUDE.md"     "$HOME/.claude/CLAUDE.md"
 
+  # Agent skills — installs mattpocock/skills globally for all agents (Claude Code, opencode, etc.)
+  npx --yes skills@latest add mattpocock/skills --global --all
+
   echo "Done."
 }
 
