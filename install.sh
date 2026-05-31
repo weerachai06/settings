@@ -48,6 +48,7 @@ install() {
   # Zed
   link "$DOTFILES/zed/settings.json" "$HOME/.config/zed/settings.json"
   link "$DOTFILES/zed/keymap.json"   "$HOME/.config/zed/keymap.json"
+  link "$DOTFILES/zed/tasks.json"    "$HOME/.config/zed/tasks.json"
 
   # GlobalProtect
   link "$DOTFILES/global-protect/global-protect.sh" "$HOME/global-protect.sh"
@@ -79,6 +80,7 @@ prune() {
   unlink "$HOME/.config/wezterm/wezterm.lua"
   unlink "$HOME/.config/zed/settings.json"
   unlink "$HOME/.config/zed/keymap.json"
+  unlink "$HOME/.config/zed/tasks.json"
   unlink "$HOME/global-protect.sh"
   unlink "$HOME/.config/opencode/opencode.jsonc"
   unlink "$HOME/.opencode/AGENTS.md"
