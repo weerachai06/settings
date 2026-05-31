@@ -17,10 +17,11 @@ Personal macOS dotfiles managed with symlinks.
 ```bash
 git clone <repo-url> ~/.dotfiles
 cd ~/.dotfiles
+bash check-deps.sh   # verify dependencies
 bash install.sh
 ```
 
-`install.sh` creates symlinks from `~` (and `~/.config`) to files in this repo. Existing files are backed up with a `.bak` suffix before being replaced.
+`install.sh` installs brew packages, then creates symlinks from `~` (and `~/.config`) to files in this repo. Existing files are backed up with a `.bak` suffix before being replaced.
 
 To remove all symlinks:
 
@@ -34,8 +35,9 @@ bash install.sh prune
 
 Symlinked to `~/.zshrc`, `~/.zshenv`, `~/.zprofile`.
 
-- Oh My Zsh with `robbyrussell` theme
-- `git` plugin
+- Oh My Zsh with `robbyrussell` theme and `git` plugin
+- [zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions) — fish-style inline suggestions
+- [zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting) — command highlighting as you type
 - fnm shell integration
 - bun, uv, OpenSSL environment setup
 - Sources `~/global-protect.sh` for VPN helpers
@@ -77,5 +79,6 @@ bash install.sh yourname
 ├── wezterm/            # WezTerm config
 ├── zed/                # Zed settings and keymap
 ├── zsh/                # .zshrc, .zshenv, .zprofile
+├── check-deps.sh       # Dependency checker
 └── install.sh          # Symlink installer / pruner
 ```
