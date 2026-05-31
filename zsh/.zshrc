@@ -114,18 +114,16 @@ eval "$(fnm env --use-on-cd --shell zsh)"
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
-# VS Code shell integration
-[[ "$TERM_PROGRAM" == "vscode" ]] && . "$(code --locate-shell-integration-path zsh)"
-
 export OPENSSL_ROOT_DIR=$(brew --prefix openssl@3)
 export OPENSSL_LIB_DIR=$OPENSSL_ROOT_DIR/lib
 export OPENSSL_INCLUDE_DIR=$OPENSSL_ROOT_DIR/include
-
-# Added by Antigravity
-export PATH="/Users/weerachaiplodkaew/.antigravity/antigravity/bin:$PATH"
 
 . "$HOME/.local/bin/env"
 eval "$(uv generate-shell-completion zsh)"
 
 # GlobalProtect
 source "$HOME/global-protect.sh"
+
+# zsh-autosuggestions & zsh-syntax-highlighting (must be last)
+source "$(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
+source "$(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"

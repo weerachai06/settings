@@ -30,6 +30,9 @@ unlink() {
 install() {
   echo "Installing dotfiles..."
 
+  # Zsh plugins
+  brew install zsh-autosuggestions zsh-syntax-highlighting
+
   # Zsh
   link "$DOTFILES/zsh/.zshrc"    "$HOME/.zshrc"
   link "$DOTFILES/zsh/.zshenv"   "$HOME/.zshenv"
