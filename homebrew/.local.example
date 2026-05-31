@@ -1,0 +1,12 @@
+# Machine-local package flags. Copy this file to homebrew/.local and
+# uncomment any packages you want to skip on this machine.
+
+# SKIP_ORBSTACK=1
+# SKIP_WEZTERM=1
+# SKIP_ZED=1
+# SKIP_MINIKUBE=1
+# SKIP_VAULT=1
+# SKIP_ANDROID_PLATFORM_TOOLS=1
+# SKIP_BLACKHOLE=1
+# SKIP_LOCALSEND=1
+# SKIP_FONT_MESLO=1
