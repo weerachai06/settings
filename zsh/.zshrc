@@ -128,7 +128,7 @@ export PATH="/Users/weerachaiplodkaew/.antigravity/antigravity/bin:$PATH"
 eval "$(uv generate-shell-completion zsh)"
 
 # GlobalProtect
-gp() {
+globalprotect() {
   case $1 in
     start)
       echo "Starting GlobalProtect..."
@@ -143,7 +143,7 @@ gp() {
       echo "Done!"
       ;;
     *)
-      echo "Usage: gp {start|stop}"
+      echo "Usage: globalprotect {start|stop}"
       ;;
   esac
 }
