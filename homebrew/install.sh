@@ -17,7 +17,7 @@ BREWFILE="$(dirname "$0")/Brewfile"
 # HOMEBREW_BUNDLE_BREW_SKIP from formulas whose feature flag is set in .local.
 _skip_brews=""
 while IFS= read -r line; do
-  formula=$(echo "$line" | sed 's/brew "\([^"]*\)".*/\1/')
+  formula=$(echo "$line" | sed 's/brew "\([^"]*\)".*/\1/' | sed 's|.*/||')
   flag=$(echo "$line" | sed -n 's/.*ENV\["\([^"]*\)"\].*/\1/p')
   if [ -n "$flag" ] && [ "${!flag}" == "1" ]; then
     echo "  skip: $formula ($flag=1)"
