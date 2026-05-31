@@ -63,5 +63,21 @@
     "use_new_terminal": true,
     "reveal": "always",
     "hide": "never"
+  },
+  {
+    "label": "Checkout commit: $ZED_GIT_SHA_SHORT",
+    "command": "git -C \"${ZED_GIT_REPOSITORY_PATH:-.}\" checkout $ZED_GIT_SHA && echo \"Checked out: $ZED_GIT_SHA\"",
+    "tags": ["git-command"],
+    "use_new_terminal": true,
+    "reveal": "always",
+    "hide": "never"
+  },
+  {
+    "label": "Checkout branch",
+    "command": "printf 'Branch name: ' && read -r name && git -C \"${ZED_GIT_REPOSITORY_PATH:-.}\" checkout \"$name\" && echo \"Checked out: $name\"",
+    "tags": ["git-command"],
+    "use_new_terminal": true,
+    "reveal": "always",
+    "hide": "never"
   }
 ]
