@@ -58,11 +58,7 @@
   },
   {
     "label": "Create branch from: $ZED_GIT_SHA_SHORT",
-    "command": "bash",
-    "args": [
-      "-c",
-      "sha=\"${ZED_GIT_SHA:-}\"; repo=\"${ZED_GIT_REPOSITORY_PATH:-.}\"; read -rp 'New branch name: ' name; if [ -n \"$sha\" ]; then git -C \"$repo\" checkout -b \"$name\" \"$sha\"; else git -C \"$repo\" checkout -b \"$name\"; fi && echo \"Created: $name\""
-    ],
+    "command": "printf 'New branch name: ' && read -r name && git -C \"${ZED_GIT_REPOSITORY_PATH:-.}\" checkout -b \"$name\" $ZED_GIT_SHA && echo \"Created: $name\"",
     "tags": ["git-command"],
     "use_new_terminal": true,
     "reveal": "always",
