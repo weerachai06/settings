@@ -48,8 +48,12 @@ brew_install uv
 echo
 echo "==> Apps"
 brew_cask_install wezterm
+
+echo
 brew_cask_install zed
-brew_cask_install orbstack
+
+echo
+brew_install orbstack
 
 echo
 echo "==> Dotfiles"
