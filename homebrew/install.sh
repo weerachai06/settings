@@ -14,6 +14,20 @@ fi
 BREWFILE="$(dirname "$0")/Brewfile"
 
 # brew bundle does not evaluate `unless ENV[...]` Ruby conditionals — build
+# HOMEBREW_BUNDLE_TAP_SKIP, HOMEBREW_BUNDLE_BREW_SKIP, and
+# HOMEBREW_BUNDLE_CASK_SKIP from entries whose feature flag is set in .local.
+_skip_taps=""
+while IFS= read -r line; do
+  tap=$(echo "$line" | sed 's/tap "\([^"]*\)".*/\1/')
+  flag=$(echo "$line" | sed -n 's/.*ENV\["\([^"]*\)"\].*/\1/p')
+  if [ -n "$flag" ] && [ "${!flag}" == "1" ]; then
+    echo "  skip: $tap ($flag=1)"
+    _skip_taps="${_skip_taps} $tap"
+  fi
+done < <(grep '^tap ' "$BREWFILE")
+export HOMEBREW_BUNDLE_TAP_SKIP="${_skip_taps# }"
+
+# brew bundle does not evaluate `unless ENV[...]` Ruby conditionals — build
 # HOMEBREW_BUNDLE_BREW_SKIP from formulas whose feature flag is set in .local.
 _skip_brews=""
 while IFS= read -r line; do

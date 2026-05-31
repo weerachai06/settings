@@ -1,4 +1,4 @@
-tap "hashicorp/tap"
+tap "hashicorp/tap" unless ENV["SKIP_VAULT"] == "1"
 
 brew "cmake"
 brew "fnm"
