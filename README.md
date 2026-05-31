@@ -64,8 +64,10 @@ Symlinked to `~/.config/zed/settings.json`, `~/.config/zed/keymap.json`, and `~/
 
 All packages are declared in `homebrew/Brewfile` and installed via `brew bundle`. Includes:
 
-- **Formulae**: cmake, fnm, gh, jq, minikube, openssl@3, uv, zsh, zsh-autosuggestions, zsh-syntax-highlighting, vault
-- **Casks**: android-platform-tools, blackhole-2ch/64ch, font-meslo-lg-nerd-font, localsend, orbstack, wezterm, zed
+- **Formulae**: cmake, fnm, gh, jq, openssl@3, uv, zsh, zsh-autosuggestions, zsh-syntax-highlighting
+- **Optional formulae**: minikube (`SKIP_MINIKUBE`), vault (`SKIP_VAULT`)
+- **Casks**: android-platform-tools, blackhole-2ch/64ch, font-meslo-lg-nerd-font, localsend, wezterm, zed
+- **Optional casks**: orbstack (`SKIP_ORBSTACK`)
 
 #### Per-machine feature flags
 
@@ -80,10 +82,13 @@ Then uncomment any packages to skip in `homebrew/.local`:
 ```bash
 SKIP_ORBSTACK=1
 SKIP_MINIKUBE=1
+SKIP_VAULT=1
 # ...
 ```
 
 `homebrew/.local` is gitignored — each machine keeps its own copy.
+
+Setting a flag skips the tap, formula, or cask entirely — `brew bundle` won't fetch, install, or upgrade it. The skip is logged during bootstrap so you can see what was excluded.
 
 ### Claude Code
 
