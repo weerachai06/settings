@@ -1,0 +1,7 @@
+[user]
+	email = clkeen157@gmail.com
+	name = Weerachai Plodkaew
+[alias]
+	adog = log --all --decorate --oneline --graph
+[pull]
+	rebase = true
