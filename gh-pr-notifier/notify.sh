@@ -33,9 +33,15 @@ print('\n'.join(lines))
 " <<< "$PR_JSON" 2>/dev/null)
 fi
 
-RESULT=$(/usr/bin/osascript -e "
-set btn to button returned of (display alert \"🔍 GitHub PR Review\" message \"$SUBTITLE\" & \"\n\" & \"$BODY\" buttons {\"Dismiss\", \"Open GitHub\"} default button \"Open GitHub\")
-btn" 2>/dev/null)
+RESULT=$(/usr/bin/osascript - "$SUBTITLE" "$BODY" 2>/dev/null <<'APPLESCRIPT'
+on run argv
+  set subtitle to item 1 of argv
+  set body to item 2 of argv
+  set btn to button returned of (display alert "🔍 GitHub PR Review" message subtitle & "\n" & body buttons {"Dismiss", "Open GitHub"} default button "Open GitHub")
+  return btn
+end run
+APPLESCRIPT
+)
 
 if [[ "$RESULT" == "Open GitHub" ]]; then
   open "https://github.com/pulls?q=is%3Aopen+is%3Apr+review-requested%3A%40me+archived%3Afalse+draft%3Afalse+"
