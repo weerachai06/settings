@@ -1,5 +1,12 @@
 # Claude Code — Global Instructions
 
+## Task Scope & Completion
+
+- **Break every task into 3–7 bullets.** If a task needs more than 7 steps, split it into smaller sub-tasks first.
+- **After completing a task, always end with a two-part summary:**
+  - ✅ **Done** — what was completed in this turn.
+  - ⬜ **Remaining** — what is still missing or left to do (write "nothing" if fully done).
+
 ## Before Every Implementation
 
 - **Show the plan first.** Present a concise implementation plan and wait for confirmation before writing any code.
@@ -18,3 +25,4 @@
 ## Environment
 
 - **Never use the system `/tmp` directory.** For temporary files or experiments, use a `./tmp` folder at the project root instead — it stays close to the code and is gitignored globally.
+- **Run `fnm use` before every Bash tool call** that depends on Node.js or npm, so the correct Node version is active in the shell.

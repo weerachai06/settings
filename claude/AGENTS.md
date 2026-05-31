@@ -1,4 +1,4 @@
-# Agents — Global Instructions
+# Global Agent Instructions
 
 ## Task Scope & Completion
 
