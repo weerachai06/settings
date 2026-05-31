@@ -53,6 +53,30 @@ bash install.sh yourname
 
 ---
 
+## สิทธิ์ที่ต้องให้ (Permissions)
+
+`notify.sh` ใช้ `osascript` เพื่อแสดง dialog box — LaunchAgent รัน script ผ่าน `/bin/bash` โดยตรง ไม่ผ่าน Terminal ดังนั้น macOS จะขอสิทธิ์จาก `/bin/bash` ไม่ใช่จาก Terminal app
+
+เปิด **System Settings → Privacy & Security → Accessibility** แล้วเพิ่ม `/bin/bash`:
+
+1. คลิก 🔒 เพื่อปลดล็อก
+2. คลิก **`+`**
+3. กด **`Cmd + Shift + G`** เพื่อเปิด "Go to folder"
+4. พิมพ์ `/bin/bash` → **Go**
+5. คลิก **Open**
+
+ถ้า dialog ยังไม่ขึ้น ให้ตรวจสอบที่ **Automation** เพิ่มเติม:
+
+- **System Settings → Privacy & Security → Automation** → เปิด `/bin/bash → System Events`
+
+> หลังให้สิทธิ์แล้ว ต้อง reload LaunchAgent:
+> ```bash
+> launchctl unload ~/Library/LaunchAgents/com.weerachai.gh-pr-notifier.plist
+> launchctl load ~/Library/LaunchAgents/com.weerachai.gh-pr-notifier.plist
+> ```
+
+---
+
 ## วิธีใช้งาน
 
 ### ทดสอบรัน manual
