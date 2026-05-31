@@ -128,4 +128,4 @@ export PATH="/Users/weerachaiplodkaew/.antigravity/antigravity/bin:$PATH"
 eval "$(uv generate-shell-completion zsh)"
 
 # GlobalProtect
-source "$HOME/.dotfiles/zsh/global-protect.sh"
+source "$HOME/global-protect.sh"

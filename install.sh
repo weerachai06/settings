@@ -45,6 +45,9 @@ install() {
   link "$DOTFILES/zed/settings.json" "$HOME/.config/zed/settings.json"
   link "$DOTFILES/zed/keymap.json"   "$HOME/.config/zed/keymap.json"
 
+  # GlobalProtect
+  link "$DOTFILES/global-protect/global-protect.sh" "$HOME/global-protect.sh"
+
   echo "Done."
 }
 
@@ -58,6 +61,7 @@ prune() {
   unlink "$HOME/.config/wezterm/wezterm.lua"
   unlink "$HOME/.config/zed/settings.json"
   unlink "$HOME/.config/zed/keymap.json"
+  unlink "$HOME/global-protect.sh"
 
   echo "Done."
 }
