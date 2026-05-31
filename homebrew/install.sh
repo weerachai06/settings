@@ -21,7 +21,9 @@ _casks=()
 while IFS= read -r line; do
   cask=$(echo "$line" | sed 's/cask "\([^"]*\)".*/\1/')
   flag=$(echo "$line" | sed -n 's/.*ENV\["\([^"]*\)"\].*/\1/p')
-  if [ -z "$flag" ] || [ "${!flag}" != "1" ]; then
+  if [ -n "$flag" ] && [ "${!flag}" == "1" ]; then
+    echo "  skip: $cask ($flag=1)"
+  else
     _casks+=("$cask")
   fi
 done < <(grep '^cask ' "$BREWFILE")
