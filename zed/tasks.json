@@ -61,7 +61,7 @@
     "command": "bash",
     "args": [
       "-c",
-      "read -rp 'New branch name: ' name && git -C \"$ZED_GIT_REPOSITORY_PATH\" checkout -b \"$name\" \"$ZED_GIT_SHA\" && echo \"Created and switched to branch: $name\""
+      "sha=\"${ZED_GIT_SHA:-}\"; repo=\"${ZED_GIT_REPOSITORY_PATH:-.}\"; read -rp 'New branch name: ' name; if [ -n \"$sha\" ]; then git -C \"$repo\" checkout -b \"$name\" \"$sha\"; else git -C \"$repo\" checkout -b \"$name\"; fi && echo \"Created: $name\""
     ],
     "tags": ["git-command"],
     "use_new_terminal": true,
