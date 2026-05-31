@@ -2,28 +2,34 @@
 
 Personal macOS dotfiles managed with symlinks.
 
-## Requirements
-
-- macOS
-- [Homebrew](https://brew.sh/)
-- [GitHub CLI (`gh`)](https://cli.github.com/) — for `gh-pr-notifier`
-- [Oh My Zsh](https://ohmyz.sh/) — for zsh config
-- [fnm](https://github.com/Schniz/fnm) — Node version manager
-- [WezTerm](https://wezfurlong.org/wezterm/) — terminal emulator
-- [Zed](https://zed.dev/) — editor
-
 ## Installation
 
 ```bash
 git clone <repo-url> ~/.dotfiles
 cd ~/.dotfiles
-bash check-deps.sh   # verify dependencies
+bash bootstrap.sh
+```
+
+`bootstrap.sh` handles everything from a clean Mac:
+
+1. Installs Homebrew (if missing)
+2. Installs Oh My Zsh (if missing)
+3. Installs Rust (if missing)
+4. Installs fnm, bun, uv via Homebrew / official installers
+5. Installs apps: WezTerm, Zed, OrbStack
+6. Runs `install.sh` to create all symlinks
+
+### Symlinks only
+
+To (re-)apply symlinks without installing tools:
+
+```bash
 bash install.sh
 ```
 
-`install.sh` installs brew packages, then creates symlinks from `~` (and `~/.config`) to files in this repo. Existing files are backed up with a `.bak` suffix before being replaced.
+Existing files are backed up with a `.bak` suffix before being replaced.
 
-To remove all symlinks:
+### Remove symlinks
 
 ```bash
 bash install.sh prune
@@ -44,7 +50,7 @@ Symlinked to `~/.zshrc`, `~/.zshenv`, `~/.zprofile`.
 
 ### git
 
-Symlinked to `~/.gitconfig`.
+Symlinked to `~/.gitconfig` and `~/.gitignore_global`.
 
 ### WezTerm
 
@@ -52,7 +58,19 @@ Symlinked to `~/.config/wezterm/wezterm.lua`.
 
 ### Zed
 
-Symlinked to `~/.config/zed/settings.json` and `~/.config/zed/keymap.json`.
+Symlinked to `~/.config/zed/settings.json`, `~/.config/zed/keymap.json`, and `~/.config/zed/tasks.json`.
+
+### Claude Code
+
+Symlinked to `~/.claude/settings.json` and `~/.claude/CLAUDE.md`.
+
+### opencode
+
+Symlinked to `~/.config/opencode/opencode.jsonc` and `~/.opencode/AGENTS.md`.
+
+### Skills
+
+Claude Code and opencode skills are managed via the `skills/` directory and symlinked into `~/.claude/skills` and `~/.config/opencode/skills`.
 
 ### GlobalProtect
 
@@ -73,12 +91,17 @@ bash install.sh yourname
 
 ```
 .dotfiles/
+├── claude/             # Claude Code settings and CLAUDE.md
 ├── gh-pr-notifier/     # GitHub PR review notifier (LaunchAgent)
-├── git/                # .gitconfig
+├── git/                # .gitconfig, .gitignore_global
 ├── global-protect/     # GlobalProtect VPN helper
+├── opencode/           # opencode config and AGENTS.md
+├── skills/             # Claude Code / opencode skills
 ├── wezterm/            # WezTerm config
-├── zed/                # Zed settings and keymap
+├── zed/                # Zed settings, keymap, and tasks
 ├── zsh/                # .zshrc, .zshenv, .zprofile
+├── bootstrap.sh        # Full machine setup (tools + symlinks)
 ├── check-deps.sh       # Dependency checker
-└── install.sh          # Symlink installer / pruner
+├── install.sh          # Symlink installer / pruner
+└── lib.sh              # Shared shell helpers
 ```
