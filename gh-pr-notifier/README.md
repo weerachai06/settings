@@ -22,20 +22,20 @@ cd ~/.dotfiles
 bash install.sh
 ```
 
-### 2. รัน install script
+### 2. รัน setup script
 
 ```bash
 cd ~/.dotfiles/gh-pr-notifier
-bash install.sh yourname
+bash setup.sh yourname
 ```
 
 script จะถามชื่อสำหรับ LaunchAgent แล้วจัดการทุกอย่างให้อัตโนมัติ หรือจะส่งชื่อเป็น argument เลยก็ได้:
 
 ```bash
-bash install.sh yourname
+bash setup.sh yourname
 ```
 
-**install.sh ทำอะไรบ้าง:**
+**setup.sh ทำอะไรบ้าง:**
 1. สร้างไฟล์ `.plist` ใน `~/Library/LaunchAgents/` พร้อม path จริงอัตโนมัติ
 2. ให้สิทธิ์ execute กับ `notify.sh`
 3. โหลด LaunchAgent ให้ทันที
@@ -153,6 +153,7 @@ launchctl load ~/Library/LaunchAgents/com.weerachai.gh-pr-notifier.plist
 ```
 gh-pr-notifier/
 ├── notify.sh       # script หลัก
-├── install.sh      # ติดตั้ง LaunchAgent อัตโนมัติ
+├── install.sh      # ติดตั้ง brew deps (gh, python3)
+├── setup.sh        # ติดตั้ง LaunchAgent อัตโนมัติ
 └── README.md
 ```

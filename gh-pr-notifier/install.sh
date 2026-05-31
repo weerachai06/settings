@@ -1,76 +1,17 @@
-#!/bin/bash
+#!/usr/bin/env bash
+set -e
+DOTFILES="$(cd "$(dirname "$0")/.." && pwd)"
+# shellcheck source=../lib.sh
+source "$DOTFILES/lib.sh"
 
-SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
-PLIST_NAME="com.${1:-}.gh-pr-notifier"
-PLIST_PATH="$HOME/Library/LaunchAgents/${PLIST_NAME}.plist"
-
-NOTIFY_INTERVAL_MINITE=30
-NOTIFY_INTERVAL_SECOND=60
-NOTIFY_INTERVAL=$((NOTIFY_INTERVAL_MINITE * NOTIFY_INTERVAL_SECOND))
-
-
-# รับ your-name ถ้าไม่ได้ส่งมาเป็น argument
-if [[ -z "$1" ]]; then
-  read -rp "กรอกชื่อสำหรับ LaunchAgent (เช่น weerachai): " INPUT_NAME
-  if [[ -z "$INPUT_NAME" ]]; then
-    echo "❌ กรุณากรอกชื่อ"
-    exit 1
-  fi
-  PLIST_NAME="com.${INPUT_NAME}.gh-pr-notifier"
-  PLIST_PATH="$HOME/Library/LaunchAgents/${PLIST_NAME}.plist"
+echo "==> gh-pr-notifier"
+brew_install gh
+if cmd_installed python3; then
+  echo "  skip: python3 (already installed)"
+else
+  brew install python3
 fi
 
-echo "→ สร้างไฟล์ $PLIST_PATH"
-
-cat > "$PLIST_PATH" << EOF
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<plist version="1.0">
-<dict>
-  <key>Label</key>
-  <string>${PLIST_NAME}</string>
-
-  <key>ProgramArguments</key>
-  <array>
-    <string>/bin/bash</string>
-    <string>${SCRIPT_DIR}/notify.sh</string>
-  </array>
-
-  <key>StartInterval</key>
-  <integer>${NOTIFY_INTERVAL}</integer>
-
-  <key>RunAtLoad</key>
-  <true/>
-
-  <key>StandardOutPath</key>
-  <string>${SCRIPT_DIR}/gh-pr-notifier.log</string>
-
-  <key>StandardErrorPath</key>
-  <string>${SCRIPT_DIR}/gh-pr-notifier-error.log</string>
-
-  <key>EnvironmentVariables</key>
-  <dict>
-    <key>PATH</key>
-    <string>/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin</string>
-    <key>HOME</key>
-    <string>${HOME}</string>
-  </dict>
-</dict>
-</plist>
-EOF
-
-echo "→ ให้สิทธิ์ execute กับ notify.sh"
-chmod +x "$SCRIPT_DIR/notify.sh"
-
-# unload ก่อนถ้ามีอยู่แล้ว
-launchctl unload "$PLIST_PATH" 2>/dev/null
-
-echo "→ โหลด LaunchAgent"
-launchctl load "$PLIST_PATH"
-
-if launchctl list | grep -q "${PLIST_NAME}"; then
-  echo "✅ ติดตั้งสำเร็จ — จะแจ้งเตือนทุก ${NOTIFY_INTERVAL_MINITE} นาที"
-else
-  echo "❌ โหลด LaunchAgent ไม่สำเร็จ ลองรัน: launchctl load $PLIST_PATH"
-  exit 1
+if cmd_installed gh && ! gh auth status &>/dev/null 2>&1; then
+  echo "  note: gh not authenticated — run: gh auth login"
 fi
