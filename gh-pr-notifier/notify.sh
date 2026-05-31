@@ -1,6 +1,6 @@
 #!/bin/bash
 
-GH="/opt/homebrew/bin/gh"
+GH="$(which gh)"
 
 PR_JSON=$("$GH" search prs --review-requested=@me --state=open --draft=false \
   --json "number,title,url,repository,updatedAt" 2>/dev/null)
