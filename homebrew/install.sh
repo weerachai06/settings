@@ -30,16 +30,17 @@ export HOMEBREW_BUNDLE_BREW_SKIP="${_skip_brews# }"
 # (e.g. xattr permission errors on SIP-protected files).
 # Only check casks whose feature-flag env var isn't already set.
 _casks=()
+_skip_casks=""
 while IFS= read -r line; do
   cask=$(echo "$line" | sed 's/cask "\([^"]*\)".*/\1/')
   flag=$(echo "$line" | sed -n 's/.*ENV\["\([^"]*\)"\].*/\1/p')
   if [ -n "$flag" ] && [ "${!flag}" == "1" ]; then
     echo "  skip: $cask ($flag=1)"
+    _skip_casks="${_skip_casks} $cask"
   else
     _casks+=("$cask")
   fi
 done < <(grep '^cask ' "$BREWFILE")
-_skip_casks=""
 if [ ${#_casks[@]} -gt 0 ]; then
   _cask_info=$(brew info --cask --json=v2 "${_casks[@]}" 2>/dev/null)
   while IFS='|' read -r token app_basename; do
