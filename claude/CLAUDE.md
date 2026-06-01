@@ -10,6 +10,7 @@
 ## Before Every Implementation
 
 - **Show the plan first.** Present a concise implementation plan and wait for confirmation before writing any code.
+- **One step at a time.** After completing each implementation step (e.g. service, helper, component), stop and wait for confirmation before moving to the next step.
 - **Cite your references.** State which files, functions, or docs informed the approach before acting on it.
 
 ## Uncertainty & Hardcoding
