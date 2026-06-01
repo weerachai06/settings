@@ -17,6 +17,10 @@
 - **Don't implement what you're not sure about.** If the right approach is unclear, ask an open question instead of guessing or hardcoding a value.
 - **No speculative or placeholder code.** Only implement what is well-understood and properly derived from the codebase.
 
+## Helper Functions
+
+When writing or modifying helper functions, use the `/tdd` skill.
+
 ## Bug Fixes
 
 - **Find evidence before fixing.** Identify the root cause through logs, code inspection, or reproduction — not intuition.
