@@ -17,7 +17,7 @@ install() {
 
   echo "==> skills"
   npx --yes skills@latest add mattpocock/skills --global --all
-  npx --yes skills@latest add vercel/react-best-practice --global --yes
+  npx --yes skills@latest add vercel-labs/agent-skills --skill vercel-react-best-practices --global --yes
 
   echo "Done."
 }
