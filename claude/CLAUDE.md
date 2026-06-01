@@ -33,4 +33,4 @@ When writing or modifying helper functions, use the `/tdd` skill.
 
 ## React
 
-**When working in a React project**, before reviewing, writing or modifying each component, ***invoke the `vercel-react-best-practices` skill*** and identify which rules apply to that component.
+**When working in a React project**, before reviewing, writing, or modifying any React component, **use the Skill tool to invoke `vercel-react-best-practices`** (not the `review` skill) and identify which rules apply to that component.
