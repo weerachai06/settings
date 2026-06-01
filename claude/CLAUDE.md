@@ -26,3 +26,11 @@
 
 - **Never use the system `/tmp` directory.** For temporary files or experiments, use a `./tmp` folder at the project root instead — it stays close to the code and is gitignored globally.
 - **Run `fnm use` before every Bash tool call** that depends on Node.js or npm, so the correct Node version is active in the shell.
+
+## React
+
+When working in a React project:
+1. Read `~/instructions/react.md` to understand the available rule categories.
+2. Before writing or modifying any file, identify which categories apply to that file (e.g. a Server Component → server-side + waterfall rules; a client component with state → re-render rules).
+3. Read the specific rule files under `~/.agents/skills/vercel-react-best-practices/rules/` that apply.
+4. Apply only the rules relevant to the file being changed — do not apply all rules blindly.
