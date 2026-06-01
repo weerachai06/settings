@@ -17,6 +17,10 @@
 - **Don't implement what you're not sure about.** If the right approach is unclear, ask an open question instead of guessing or hardcoding a value.
 - **No speculative or placeholder code.** Only implement what is well-understood and properly derived from the codebase.
 
+## Helper Functions
+
+When writing or modifying helper functions, use the `/tdd` skill.
+
 ## Bug Fixes
 
 - **Find evidence before fixing.** Identify the root cause through logs, code inspection, or reproduction — not intuition.
@@ -25,4 +29,8 @@
 ## Environment
 
 - **Never use the system `/tmp` directory.** For temporary files or experiments, use a `./tmp` folder at the project root instead — it stays close to the code and is gitignored globally.
-- **Run `fnm use` before every shell/Bash command** that depends on Node.js or npm, so the correct Node version is active in the shell.
+- **Run `fnm use` before every Bash tool call** that depends on Node.js or npm, so the correct Node version is active in the shell.
+
+## React
+
+When working in a React project, before writing or modifying each component, read the rules in the `vercel-react-best-practices` skill and identify which ones apply to that component.
