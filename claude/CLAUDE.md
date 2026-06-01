@@ -33,8 +33,4 @@ When writing or modifying helper functions, use the `/tdd` skill.
 
 ## React
 
-When working in a React project:
-1. Read `~/instructions/react.md` to understand the available rule categories.
-2. Before writing or modifying any file, identify which categories apply to that file (e.g. a Server Component → server-side + waterfall rules; a client component with state → re-render rules).
-3. Read the specific rule files under `~/.agents/skills/vercel-react-best-practices/rules/` that apply.
-4. Apply only the rules relevant to the file being changed — do not apply all rules blindly.
+When working in a React project, use the `vercel-react-best-practices` skill.
