@@ -33,7 +33,7 @@ prune() {
     "$HOME/global-protect.sh" \
     "$HOME/.config/opencode/opencode.jsonc" "$HOME/.opencode/AGENTS.md" \
     "$HOME/.config/opencode/skills" \
-    "$HOME/.claude/settings.json" "$HOME/.claude/CLAUDE.md"
+    "$HOME/.claude/settings.json" "$HOME/.claude/CLAUDE.md" "$HOME/.claude/skills"
   do
     unlink_path "$dst"
   done
