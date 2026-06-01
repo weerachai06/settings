@@ -33,4 +33,6 @@ When writing or modifying helper functions, use the `/tdd` skill.
 
 ## React
 
-**When working in a React project**, before reviewing, writing, or modifying any React component, **use the Skill tool to invoke `vercel-react-best-practices`** (not the `review` skill) and identify which rules apply to that component.
+**When working in a React project**, before reviewing, writing, or modifying any React component, **use the Skill tool to invoke `vercel-react-best-practices`** and identify which rules apply to that component.
+
+Trigger this skill whenever the user's message includes any of these keywords: `review component`, `review components`, `create component`, `add component`, `modify component`, `refactor component`, `RSC`, `server component`, `client component`, `react best practice`, `best practice`, `Next.js component`, `optimize component`.
