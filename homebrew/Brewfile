@@ -1,4 +1,5 @@
 tap "hashicorp/tap" unless ENV["SKIP_VAULT"] == "1"
+tap "steipete/tap" unless ENV["SKIP_CODEXBAR"] == "1"
 
 brew "cmake"
 brew "fnm"
@@ -21,3 +22,4 @@ cask "blackhole-2ch" unless ENV["SKIP_BLACKHOLE"] == "1"
 cask "blackhole-64ch" unless ENV["SKIP_BLACKHOLE"] == "1"
 cask "font-meslo-lg-nerd-font" unless ENV["SKIP_FONT_MESLO"] == "1"
 cask "localsend" unless ENV["SKIP_LOCALSEND"] == "1"
+cask "steipete/tap/codexbar" unless ENV["SKIP_CODEXBAR"] == "1"
