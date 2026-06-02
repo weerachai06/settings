@@ -90,6 +90,11 @@ SKIP_VAULT=1
 
 Setting a flag skips the tap, formula, or cask entirely — `brew bundle` won't fetch, install, or upgrade it. The skip is logged during bootstrap so you can see what was excluded.
 
+> **Note:** Always run Homebrew installs via the module script — not `brew bundle` directly — so feature flags are applied:
+> ```bash
+> bash ~/.dotfiles/homebrew/install.sh
+> ```
+
 ### Claude Code
 
 Symlinked to `~/.claude/settings.json` and `~/.claude/CLAUDE.md`.
