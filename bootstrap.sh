@@ -38,5 +38,13 @@ else
 fi
 
 echo
+echo "==> opencode"
+if cmd_installed opencode; then
+  echo "  skip: opencode (already installed)"
+else
+  curl -fsSL https://opencode.ai/install | bash
+fi
+
+echo
 echo "==> Dotfiles"
 bash "$DOTFILES/install.sh"
