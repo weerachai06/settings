@@ -8,16 +8,12 @@ source "$DOTFILES/lib.sh"
 install() {
   echo "Installing dotfiles..."
 
-  for dir in homebrew zsh git wezterm zed global-protect opencode claude gh-pr-notifier instructions; do
+  for dir in homebrew zsh git wezterm zed global-protect opencode claude gh-pr-notifier instructions skills; do
     script="$DOTFILES/$dir/install.sh"
     if [ -f "$script" ]; then
       bash "$script"
     fi
   done
-
-  echo "==> skills"
-  npx --yes skills@latest add mattpocock/skills --global --all
-  npx --yes skills@latest add vercel-labs/agent-skills --skill vercel-react-best-practices --global --yes
 
   echo "Done."
 }
