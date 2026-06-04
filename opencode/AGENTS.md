@@ -70,17 +70,12 @@ After completing a task, always end with a two-part summary:
 - ✅ **Done** — what was completed in this turn.
 - ⬜ **Remaining** — what is still missing or left to do (write "nothing" if fully done).
 
-## Helper Functions
+## Skills
 
-When writing or modifying helper functions, use the `/tdd` skill.
+- **Helper functions** — invoke `/tdd`.
+- **React components** — invoke `vercel-react-best-practices`. Triggers: `review/create/add/modify/refactor component`, `RSC`, `server/client component`, `react best practice`, `Next.js component`, `optimize component`.
 
 ## Environment
 
 - **Never use the system `/tmp` directory.** For temporary files or experiments, use a `./tmp` folder at the project root instead — it stays close to the code and is gitignored globally.
 - **Run `fnm use` before every Bash tool call** that depends on Node.js or npm, so the correct Node version is active in the shell.
-
-## React
-
-**When working in a React project**, before reviewing, writing, or modifying any React component, invoke the `vercel-react-best-practices` skill and identify which rules apply to that component.
-
-Trigger this skill whenever the user's message includes any of these keywords: `review component`, `review components`, `create component`, `add component`, `modify component`, `refactor component`, `RSC`, `server component`, `client component`, `react best practice`, `best practice`, `Next.js component`, `optimize component`.
