@@ -127,3 +127,6 @@ source "$HOME/global-protect.sh"
 # zsh-autosuggestions & zsh-syntax-highlighting (must be last)
 source "$(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
 source "$(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+
+# opencode
+export PATH=/Users/weerachaiplodkaew/.opencode/bin:$PATH
