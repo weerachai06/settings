@@ -62,10 +62,9 @@ Strong success criteria let you loop independently. Weak criteria ("make it work
 
 ## Task Scope & Completion
 
-- **Break every task into 3–7 bullets.** If a task needs more than 7 steps, split it into smaller sub-tasks first.
-- **After completing a task, always end with a two-part summary:**
-  - ✅ **Done** — what was completed in this turn.
-  - ⬜ **Remaining** — what is still missing or left to do (write "nothing" if fully done).
+After completing a task, always end with a two-part summary:
+- ✅ **Done** — what was completed in this turn.
+- ⬜ **Remaining** — what is still missing or left to do (write "nothing" if fully done).
 
 ## Helper Functions
 
