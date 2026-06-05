@@ -72,8 +72,10 @@ After completing a task, always end with a two-part summary:
 
 ## Skills
 
-- **Helper functions** — invoke `/tdd`.
-- **React components** — invoke `vercel-react-best-practices`. Triggers: `review/create/add/modify/refactor component`, `RSC`, `server/client component`, `react best practice`, `Next.js component`, `optimize component`.
+**BLOCKING REQUIREMENT:** When trigger conditions below match, invoke the skill immediately — before generating any other response. Do not paraphrase, inline, or skip.
+
+- **Helper functions** — invoke `/tdd`. Triggers: `write helper`, `add util`, `TDD`, `red-green-refactor`, `write tests first`, `test-driven`.
+- **React components** — invoke the `vercel-react-best-practices` skill. Triggers: any task that mentions reviewing, creating, adding, modifying, or refactoring a component; RSC; server component; client component; React best practice; Next.js component; optimize component; component performance.
 
 ## Environment
 
