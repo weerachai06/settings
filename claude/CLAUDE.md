@@ -72,10 +72,10 @@ After completing a task, always end with a two-part summary:
 
 ## Skills
 
-**BLOCKING REQUIREMENT:** When trigger conditions below match, invoke the skill immediately — before generating any other response. Do not paraphrase, inline, or skip.
+Skills live at `~/.agents/skills/<name>/SKILL.md`. **BLOCKING REQUIREMENT:** When trigger conditions below match, invoke the skill immediately (via Skill tool) — before generating any other response. Do not paraphrase, inline, or skip.
 
-- **Helper functions** — invoke `/tdd`. Triggers: `write helper`, `add util`, `TDD`, `red-green-refactor`, `write tests first`, `test-driven`.
-- **React components** — invoke the `vercel-react-best-practices` skill (via Skill tool). Triggers: any task that mentions reviewing, creating, adding, modifying, or refactoring a component; RSC; server component; client component; React best practice; Next.js component; optimize component; component performance.
+- **Helper functions** — invoke `/tdd`. Triggers: write helper, add util, TDD, red-green-refactor, write tests first, test-driven.
+- **React components (`*.{tsx,jsx}`)** — invoke the `vercel-react-best-practices` skill (via Skill tool). Triggers: any task that mentions reviewing, creating, adding, modifying, or refactoring a component; RSC; server component; client component; React best practice; Next.js component; optimize component; component performance.
 
 ## Environment
 
