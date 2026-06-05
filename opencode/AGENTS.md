@@ -75,7 +75,7 @@ After completing a task, always end with a two-part summary:
 Skills live at `~/.agents/skills/<name>/SKILL.md`. **BLOCKING REQUIREMENT:** When trigger conditions below match, read that file immediately and follow every instruction in it — before generating any other response. Do not paraphrase, inline, or skip.
 
 - **Helper functions** — read `~/.agents/skills/tdd/SKILL.md`. Triggers: write helper, add util, TDD, red-green-refactor, write tests first, test-driven.
-- **React components** — read `~/.agents/skills/vercel-react-best-practices/SKILL.md`. Triggers: any task that mentions reviewing, creating, adding, modifying, or refactoring a component; RSC; server component; client component; React best practice; Next.js component; optimize component; component performance.
+- **React components (*.{tsx,jsx})** — read `~/.agents/skills/vercel-react-best-practices/SKILL.md`. Triggers: any task that mentions reviewing, creating, adding, modifying, or refactoring a component; RSC; server component; client component; React best practice; Next.js component; optimize component; component performance.
 
 ## Environment
 
