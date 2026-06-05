@@ -70,13 +70,6 @@ After completing a task, always end with a two-part summary:
 - ✅ **Done** — what was completed in this turn.
 - ⬜ **Remaining** — what is still missing or left to do (write "nothing" if fully done).
 
-## Skills
-
-Skills live at `~/.agents/skills/<name>/SKILL.md`. **BLOCKING REQUIREMENT:** When trigger conditions below match, read that file immediately and follow every instruction in it — before generating any other response. Do not paraphrase, inline, or skip.
-
-- **Helper functions** — read `~/.agents/skills/tdd/SKILL.md`. Triggers: write helper, add util, TDD, red-green-refactor, write tests first, test-driven.
-- **React components (*.{tsx,jsx})** — read `~/.agents/skills/vercel-react-best-practices/SKILL.md`. Triggers: any task that mentions reviewing, creating, adding, modifying, or refactoring a component; RSC; server component; client component; React best practice; Next.js component; optimize component; component performance.
-
 ## Environment
 
 - **Never use the system `/tmp` directory.** For temporary files or experiments, use a `./tmp` folder at the project root instead — it stays close to the code and is gitignored globally.
