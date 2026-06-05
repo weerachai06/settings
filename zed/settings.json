@@ -92,6 +92,9 @@
     "dark": "Catppuccin Mocha",
   },
   "agent_servers": {
+    "claude-acp": {
+      "type": "registry"
+    },
     "opencode": {
       "type": "registry",
     },
