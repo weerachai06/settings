@@ -72,6 +72,7 @@
     "provider": "zed",
   },
   "agent": {
+    "sidebar_side": "right",
     "dock": "right",
     "default_profile": "ask",
     "default_model": {
