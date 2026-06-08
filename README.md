@@ -101,7 +101,7 @@ Symlinked to `~/.claude/settings.json` and `~/.claude/CLAUDE.md`.
 
 ### opencode
 
-Symlinked to `~/.config/opencode/opencode.jsonc` and `~/.opencode/AGENTS.md`.
+Symlinked to `~/.config/opencode/opencode.jsonc` and `~/.config/opencode/AGENTS.md`.
 
 ### Skills
 

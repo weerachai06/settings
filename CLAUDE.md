@@ -45,7 +45,7 @@ All install scripts source `lib.sh` for three helpers:
 | `wezterm/` | `~/.config/wezterm/wezterm.lua` |
 | `zed/` | `~/.config/zed/settings.json`, `keymap.json`, `tasks.json` |
 | `claude/` | `~/.claude/settings.json`, `~/.claude/CLAUDE.md` |
-| `opencode/` | `~/.config/opencode/opencode.jsonc`, `~/.opencode/AGENTS.md` |
+| `opencode/` | `~/.config/opencode/opencode.jsonc`, `~/.config/opencode/AGENTS.md` |
 | `global-protect/` | `~/global-protect.sh` |
 | `instructions/` | `~/instructions/*.md` |
 | `gh-pr-notifier/` | macOS LaunchAgent (see its README) |

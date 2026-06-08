@@ -27,7 +27,7 @@ prune() {
     "$HOME/.config/wezterm/wezterm.lua" \
     "$HOME/.config/zed/settings.json" "$HOME/.config/zed/keymap.json" "$HOME/.config/zed/tasks.json" \
     "$HOME/global-protect.sh" \
-    "$HOME/.config/opencode/opencode.jsonc" "$HOME/.opencode/AGENTS.md" \
+    "$HOME/.config/opencode/opencode.jsonc" "$HOME/.config/opencode/AGENTS.md" \
     "$HOME/.claude/settings.json" "$HOME/.claude/CLAUDE.md"
   do
     unlink_path "$dst"
