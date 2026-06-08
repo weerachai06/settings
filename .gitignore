@@ -1,2 +1,4 @@
 homebrew/.local
 homebrew/Brewfile.lock.json
+.agents/
+skills-lock.json

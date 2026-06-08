@@ -12,5 +12,5 @@ echo "==> custom skills (claude + opencode)"
 mkdir -p "$HOME/.agents/skills"
 for skill_dir in "$DOTFILES/skills"/*/; do
   skill_name="$(basename "$skill_dir")"
-  cp -r "$skill_dir" "$HOME/.agents/skills/$skill_name"
+  ln -sf "$skill_dir" "$HOME/.agents/skills/$skill_name"
 done

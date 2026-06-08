@@ -34,6 +34,8 @@ prune() {
     unlink_path "$dst"
   done
 
+  rm -rf "$HOME/.agents/skills"
+
   echo "Done."
 }
 
