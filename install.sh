@@ -28,13 +28,12 @@ prune() {
     "$HOME/.config/zed/settings.json" "$HOME/.config/zed/keymap.json" "$HOME/.config/zed/tasks.json" \
     "$HOME/global-protect.sh" \
     "$HOME/.config/opencode/opencode.jsonc" "$HOME/.opencode/AGENTS.md" \
-    "$HOME/.config/opencode/skills" \
-    "$HOME/.claude/settings.json" "$HOME/.claude/CLAUDE.md" "$HOME/.claude/skills"
+    "$HOME/.claude/settings.json" "$HOME/.claude/CLAUDE.md"
   do
     unlink_path "$dst"
   done
 
-  rm -rf "$HOME/.agents/skills"
+  rm -rf "$HOME/.claude/skills" "$HOME/.config/opencode/skills" "$HOME/.agents/skills"
 
   echo "Done."
 }
