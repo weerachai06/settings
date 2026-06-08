@@ -1,4 +1,4 @@
-# Global Instructions
+# CLAUDE.md
 
 Ask before assuming. If something is unclear, name it — don't guess silently.
 

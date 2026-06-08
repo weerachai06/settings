@@ -1,4 +1,4 @@
-# Global Instructions
+# AGENTS.md
 
 Ask before assuming. If something is unclear, name it — don't guess silently.
 
@@ -10,12 +10,13 @@ If you notice unrelated dead code, mention it — don't delete it.
 
 Before multi-step tasks, state the plan: `[step] → verify: [check]`. Loop until each passes.
 
-After every task:
+**After every task:**
 - ✅ Done — what changed.
 - ⬜ Remaining — what's left (or "nothing").
 
 Never use `/tmp`. Use `./tmp` at project root.
 Run `fnm use` before any Node/npm command.
+
 
 ## Git Safety
 
