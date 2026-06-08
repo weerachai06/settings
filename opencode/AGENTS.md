@@ -16,3 +16,7 @@ After every task:
 
 Never use `/tmp`. Use `./tmp` at project root.
 Run `fnm use` before any Node/npm command.
+
+## Git Safety
+
+Never force push. Ask before destructive git ops (`git reset --hard`, `git push --force*`, etc.). Use `git revert` instead.

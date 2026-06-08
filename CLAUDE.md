@@ -21,6 +21,10 @@ bash homebrew/install.sh
 bash <module>/install.sh
 ```
 
+## Git Safety
+
+Never force push. Ask before destructive git ops (`git reset --hard`, `git push --force*`, etc.). Use `git revert` instead.
+
 ## Architecture
 
 This repo uses a **module-per-tool** layout. Each subdirectory owns its config files and an `install.sh` that creates the symlinks. The top-level `install.sh` iterates over all modules and calls their `install.sh` in order.
