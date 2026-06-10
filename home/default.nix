@@ -48,10 +48,12 @@
   # `ignores` generates the global ignore and wires core.excludesFile for us.
   programs.git = {
     enable = true;
-    userName = "Weerachai Plodkaew";
-    userEmail = "clkeen157@gmail.com";
-    aliases.adog = "log --all --decorate --oneline --graph";
-    extraConfig.pull.rebase = true;
+    settings = {
+      user.name = "Weerachai Plodkaew";
+      user.email = "clkeen157@gmail.com";
+      alias.adog = "log --all --decorate --oneline --graph";
+      pull.rebase = true;
+    };
     ignores = [
       "tmp/"
       ".DS_Store"
