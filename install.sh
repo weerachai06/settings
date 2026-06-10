@@ -16,13 +16,26 @@ if [ ! -e "$HOME/.dotfiles" ]; then
   ln -sf "$DOTFILES_DIR" "$HOME/.dotfiles"
 fi
 
-# Install Nix (single-user, no daemon — works in containers)
-if ! command -v nix &>/dev/null; then
+# Install Nix if not present (single-user, no daemon — works in containers)
+if ! command -v nix &>/dev/null && [ ! -e /nix/store ]; then
   echo "Installing Nix (single-user)..."
   curl -sSfL https://nixos.org/nix/install | sh -s -- --no-daemon
 fi
+
+# Source Nix — path differs between single-user and multi-user installs
 # shellcheck disable=SC1091
-. "$HOME/.nix-profile/etc/profile.d/nix.sh"
+if [ -e "$HOME/.nix-profile/etc/profile.d/nix.sh" ]; then
+  . "$HOME/.nix-profile/etc/profile.d/nix.sh"
+elif [ -e /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh ]; then
+  . /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
+  # Multi-user install needs daemon running
+  if ! nix store ping &>/dev/null; then
+    sudo /nix/var/nix/profiles/default/bin/nix-daemon &
+    sleep 3
+  fi
+else
+  echo "error: Nix profile not found"; exit 1
+fi
 
 echo "Activating home-manager config for $NIX_SYSTEM (user: $USER)..."
 nix run home-manager/master -- switch \
