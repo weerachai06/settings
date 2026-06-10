@@ -37,6 +37,10 @@ else
   echo "error: Nix profile not found"; exit 1
 fi
 
+# Enable flakes + nix-command (required for home-manager)
+mkdir -p "$HOME/.config/nix"
+echo 'experimental-features = nix-command flakes' >> "$HOME/.config/nix/nix.conf"
+
 echo "Activating home-manager config for $NIX_SYSTEM (user: $USER)..."
 nix run home-manager/master -- switch \
   --flake "${DOTFILES_DIR}#${NIX_SYSTEM}" \
