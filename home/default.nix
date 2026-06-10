@@ -4,7 +4,9 @@
   # Tool configs land here incrementally as they migrate off the shell scripts.
 
   home.username = "weerachaiplodkaew";
-  home.homeDirectory = "/Users/weerachaiplodkaew";
+  # Platform-aware: macOS uses /Users, NixOS uses /home.
+  home.homeDirectory =
+    if pkgs.stdenv.isDarwin then "/Users/weerachaiplodkaew" else "/home/weerachaiplodkaew";
 
   # Pins the home-manager state version. Do not change after the first switch.
   home.stateVersion = "24.11";
