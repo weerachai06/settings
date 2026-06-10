@@ -1,7 +1,5 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, username, ... }:
 let
-  # Single source of truth for the user. Change this one line per person.
-  username = "weerachaiplodkaew";
   repoDir = "${config.home.homeDirectory}/.dotfiles";
 in
 {

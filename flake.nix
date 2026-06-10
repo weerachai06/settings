@@ -18,6 +18,12 @@
         home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.${system};
           modules = [ ./home.nix ];
+          extraSpecialArgs = {
+            # builtins.getEnv requires --impure; returns "" in pure mode → fallback used.
+            username =
+              let u = builtins.getEnv "USER";
+              in if u != "" then u else "weerachaiplodkaew";
+          };
         };
     in
     {
