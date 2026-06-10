@@ -20,4 +20,21 @@
     openssl
     uv
   ];
+
+  # Phase 3: git as a native module (replaces git/.gitconfig + .gitignore_global).
+  # `ignores` generates the global ignore and wires core.excludesFile for us.
+  programs.git = {
+    enable = true;
+    userName = "Weerachai Plodkaew";
+    userEmail = "clkeen157@gmail.com";
+    aliases.adog = "log --all --decorate --oneline --graph";
+    extraConfig.pull.rebase = true;
+    ignores = [
+      "tmp/"
+      ".DS_Store"
+      "wiki/"
+      "AGENTS.md"
+      "CLAUDE.md"
+    ];
+  };
 }
