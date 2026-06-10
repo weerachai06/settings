@@ -21,6 +21,20 @@ bash homebrew/install.sh
 bash <module>/install.sh
 ```
 
+## Agent skills
+
+### Issue tracker
+
+Issues and PRDs live as markdown files in `.scratch/`. See `docs/agents/issue-tracker.md`.
+
+### Triage labels
+
+Using default canonical labels (`needs-triage`, `needs-info`, `ready-for-agent`, `ready-for-human`, `wontfix`). See `docs/agents/triage-labels.md`.
+
+### Domain docs
+
+Single-context repo with optional `CONTEXT.md` and `docs/adr/` at the root. See `docs/agents/domain.md`.
+
 ## Git Safety
 
 Never force push. Ask before destructive git ops (`git reset --hard`, `git push --force*`, etc.). Use `git revert` instead.
