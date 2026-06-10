@@ -63,13 +63,11 @@ The username lives in one `let` binding in `home.nix`; change that one line per 
 ├── home.nix            # the portable dev env (packages, git, zsh, app configs)
 ├── claude/             # Claude Code settings and CLAUDE.md
 ├── gh-pr-notifier/     # GitHub PR review notifier (LaunchAgent) — not in Nix
-├── git/                # legacy .gitconfig/.gitignore_global (now inlined in home.nix)
 ├── global-protect/     # GlobalProtect VPN helper — not in Nix
 ├── opencode/           # opencode config and AGENTS.md
 ├── skills/             # Claude Code / opencode skills — not in Nix
 ├── wezterm/            # WezTerm config
 ├── zed/                # Zed settings, keymap, and tasks
-├── zsh/                # legacy .zshrc/.zshenv/.zprofile (now inlined in home.nix)
 ├── check-deps.sh       # Dependency checker
 ├── CONTEXT.md          # Domain glossary
 └── docs/adr/           # Architecture decision records
