@@ -75,11 +75,12 @@ in
     "zed/tasks.json".source = ./zed/tasks.json;
     "zed/settings.json".source = config.lib.file.mkOutOfStoreSymlink "${repoDir}/zed/settings.json";
 
+  } // lib.optionalAttrs pkgs.stdenv.isDarwin {
     "opencode/AGENTS.md".source = ./opencode/AGENTS.md;
     "opencode/opencode.jsonc".source = config.lib.file.mkOutOfStoreSymlink "${repoDir}/opencode/opencode.jsonc";
   };
 
-  home.file = {
+  home.file = lib.optionalAttrs pkgs.stdenv.isDarwin {
     ".claude/CLAUDE.md".source = ./claude/CLAUDE.md;
     ".claude/settings.json".source = config.lib.file.mkOutOfStoreSymlink "${repoDir}/claude/settings.json";
   };
