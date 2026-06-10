@@ -2,7 +2,9 @@
 
 ## Status
 
-accepted
+superseded by ADR-0002 (the nix-darwin + NixOS host architecture was replaced
+with home-manager standalone). The migration *off* shell scripts and onto Nix
+still holds; the cross-platform-via-system-hosts decision does not.
 
 ## Context
 

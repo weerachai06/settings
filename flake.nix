@@ -1,13 +1,8 @@
 {
-  description = "weerachai's cross-platform Nix configuration (macOS + NixOS)";
+  description = "Portable dev environment (home-manager standalone)";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-
-    nix-darwin = {
-      url = "github:nix-darwin/nix-darwin/master";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
 
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -16,34 +11,21 @@
   };
 
   outputs =
-    { self, nixpkgs, nix-darwin, home-manager }:
+    { nixpkgs, home-manager, ... }:
+    let
+      mkHome =
+        system:
+        home-manager.lib.homeManagerConfiguration {
+          pkgs = nixpkgs.legacyPackages.${system};
+          modules = [ ./home.nix ];
+        };
+    in
     {
-      # macOS host — Mac mini (Apple Silicon).
-      darwinConfigurations."mac-mini" = nix-darwin.lib.darwinSystem {
-        system = "aarch64-darwin";
-        modules = [
-          ./hosts/mac-mini
-          home-manager.darwinModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.users.weerachaiplodkaew = import ./home;
-          }
-        ];
-      };
-
-      # NixOS host — PLACEHOLDER name "nixos" and x86_64-linux; confirm both.
-      nixosConfigurations."nixos" = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [
-          ./hosts/nixos
-          home-manager.nixosModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.users.weerachaiplodkaew = import ./home;
-          }
-        ];
+      # One config, every platform — pick by the machine's system arch.
+      homeConfigurations = {
+        "aarch64-darwin" = mkHome "aarch64-darwin"; # Mac (Apple Silicon)
+        "x86_64-linux" = mkHome "x86_64-linux"; # Linux / NixOS
+        "aarch64-linux" = mkHome "aarch64-linux";
       };
     };
 }

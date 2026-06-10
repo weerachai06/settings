@@ -1,85 +1,75 @@
 # dotfiles
 
-Personal cross-platform machine configuration managed with **Nix** (a single flake
-for macOS via nix-darwin and NixOS), sharing a common home-manager layer.
+A personal, portable development environment managed with **home-manager standalone**.
+One config (`home.nix`) gives every machine — macOS or Linux — the same dev setup:
+CLI tools, zsh, git, and app configs. No system management, no sudo.
 
-> **Status: migration in progress, not yet verified.** The shell-script installer
-> has been removed in favour of the Nix flake, but the flake has not yet been built
-> on a machine with Nix installed (no `flake.lock` is committed yet). The first
-> `darwin-rebuild`/`nix build` may surface eval errors that need fixing. See
-> [ADR-0001](docs/adr/0001-cross-platform-nix-migration.md) for the design and
-> [`CONTEXT.md`](CONTEXT.md) for terminology.
+See [ADR-0002](docs/adr/0002-home-manager-standalone.md) for the design and
+[`CONTEXT.md`](CONTEXT.md) for terminology.
 
 ## Installation
 
-1. Install Nix with the [Determinate Systems installer](https://github.com/DeterminateSystems/nix-installer):
+1. Install Nix (e.g. the [Determinate Systems installer](https://github.com/DeterminateSystems/nix-installer)):
 
    ```bash
    curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install
    ```
 
-2. Clone and build:
+2. Clone and activate (pick your system arch):
 
    ```bash
    git clone <repo-url> ~/.dotfiles
    cd ~/.dotfiles
 
-   # macOS (Mac mini host):
-   sudo nix run nix-darwin/master#darwin-rebuild -- switch --flake '.#mac-mini'
-
-   # NixOS host (not yet defined — Phase 8):
-   # sudo nixos-rebuild switch --flake '.#<host>'
+   # first time
+   nix run home-manager/master -- switch --flake '.#aarch64-darwin'
+   # afterwards
+   home-manager switch --flake '.#aarch64-darwin'
    ```
 
-   To verify the config builds without activating it:
+   Configs available: `aarch64-darwin` (Mac), `x86_64-linux`, `aarch64-linux`.
+
+   To check it builds without activating:
 
    ```bash
-   nix build '.#darwinConfigurations.mac-mini.system'
+   nix build '.#homeConfigurations.aarch64-darwin.activationPackage'
    ```
 
-## What Nix manages
+## What home-manager manages
 
-- **CLI tools** (`cmake`, `fnm`, `gh`, `jq`, `openssl`, `uv`) — from nixpkgs, shared layer
+- **CLI tools** — `cmake`, `fnm`, `gh`, `jq`, `openssl`, `uv`
 - **git** — `programs.git` (user, `adog` alias, `pull.rebase`, global ignores)
-- **zsh** — `programs.zsh`: Oh My Zsh (`robbyrussell`, `git` plugin), autosuggestions,
-  syntax-highlighting, fnm `env --use-on-cd`, uv completion
+- **zsh** — Oh My Zsh (`robbyrussell`, `git` plugin), autosuggestions,
+  syntax-highlighting, fnm, uv completion. macOS-only integrations (brew, orbstack,
+  global-protect, bun, opencode, cargo) are guarded with `isDarwin`.
 - **App configs** — wezterm, zed, opencode, claude via `home.file`/`xdg.configFile`.
-  App-writable configs (claude/zed settings, `opencode.jsonc`) use out-of-store
-  symlinks so the apps can still write to them.
-- **Casks** — orbstack, wezterm, zed, codexbar, fonts, blackhole, android-platform-tools,
-  localsend, plus `vault`/`minikube` brews — declared through nix-darwin's `homebrew` block
+  App-writable configs use out-of-store symlinks so the apps can still write them.
 
-### Per-machine differences
+The username lives in one `let` binding in `home.nix`; change that one line per user.
 
-Each host (`darwinConfigurations.<host>`, `nixosConfigurations.<host>`) declares its own
-package set in `hosts/<host>/`. This replaces the old gitignored `SKIP_*` feature flags.
+## Not managed by Nix (deliberately — see ADR-0002)
 
-## Not yet migrated (still script-based or pending)
-
-- **`gh-pr-notifier/`** — macOS LaunchAgent; run `bash gh-pr-notifier/install.sh <name>` (Phase: follow-up for NixOS parity)
-- **`global-protect/`** — macOS VPN helper; `global-protect/install.sh`, sourced by `.zshrc`
+- **GUI apps** — orbstack, zed, wezterm, codexbar, fonts: install manually
+- **`gh-pr-notifier/`** — macOS LaunchAgent; `bash gh-pr-notifier/install.sh <name>`
+- **`global-protect/`** — macOS VPN helper; `global-protect/install.sh`
 - **`skills/`** — `bash skills/install.sh`
-- **bun, rust, opencode** — installers not yet ported to Nix
-- **Deferred zsh lines** — `brew shellenv`, orbstack, global-protect, bun, opencode,
-  cargo env, openssl env vars (to move into the darwin layer)
+- **bun, rust, opencode** — installed via their own installers
 
 ## Structure
 
 ```
 .dotfiles/
-├── flake.nix           # nixpkgs-unstable, nix-darwin, home-manager
-├── home/               # shared home-manager layer (git, zsh, packages, app configs)
-├── hosts/
-│   └── mac-mini/       # macOS host (nix-darwin system + homebrew casks)
+├── flake.nix           # inputs + homeConfigurations.<system>
+├── home.nix            # the portable dev env (packages, git, zsh, app configs)
 ├── claude/             # Claude Code settings and CLAUDE.md
-├── gh-pr-notifier/     # GitHub PR review notifier (LaunchAgent) — not migrated
-├── git/                # .gitconfig, .gitignore_global (now inlined in home/)
-├── global-protect/     # GlobalProtect VPN helper — not migrated
+├── gh-pr-notifier/     # GitHub PR review notifier (LaunchAgent) — not in Nix
+├── git/                # legacy .gitconfig/.gitignore_global (now inlined in home.nix)
+├── global-protect/     # GlobalProtect VPN helper — not in Nix
 ├── opencode/           # opencode config and AGENTS.md
-├── skills/             # Claude Code / opencode skills — not migrated
+├── skills/             # Claude Code / opencode skills — not in Nix
 ├── wezterm/            # WezTerm config
 ├── zed/                # Zed settings, keymap, and tasks
-├── zsh/                # .zshrc, .zshenv, .zprofile (config files; superseded by home/)
+├── zsh/                # legacy .zshrc/.zshenv/.zprofile (now inlined in home.nix)
 ├── check-deps.sh       # Dependency checker
 ├── CONTEXT.md          # Domain glossary
 └── docs/adr/           # Architecture decision records

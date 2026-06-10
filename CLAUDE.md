@@ -5,24 +5,22 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Commands
 
 ```bash
-# Build the macOS config without activating (verify it evaluates)
-nix build '.#darwinConfigurations.mac-mini.system'
+# Build the config without activating (verify it evaluates)
+nix build '.#homeConfigurations.aarch64-darwin.activationPackage'
 
-# Apply the macOS config
-sudo nix run nix-darwin/master#darwin-rebuild -- switch --flake '.#mac-mini'
+# Activate (no sudo). Use the matching system arch.
+home-manager switch --flake '.#aarch64-darwin'   # or .#x86_64-linux
+# first time, before home-manager is on PATH:
+nix run home-manager/master -- switch --flake '.#aarch64-darwin'
 
 # Update flake inputs (regenerate flake.lock)
 nix flake update
 
-# Not-yet-migrated modules (still script-based)
+# Script-based pieces (deliberately not in Nix — see ADR-0002)
 bash gh-pr-notifier/install.sh <name>
 bash global-protect/install.sh
 bash skills/install.sh
 ```
-
-> Migration status: the Nix flake replaces the old `bootstrap.sh`/`install.sh`
-> shell installers but has not yet been built/verified (no `flake.lock` yet).
-> See `docs/adr/0001-cross-platform-nix-migration.md`.
 
 ## Agent skills
 
@@ -44,31 +42,25 @@ Never force push. Ask before destructive git ops (`git reset --hard`, `git push 
 
 ## Architecture
 
-This repo is a single **Nix flake** (`nixpkgs-unstable`) providing both
-`darwinConfigurations` (macOS via nix-darwin) and `nixosConfigurations` (NixOS),
-sharing one home-manager layer. See `docs/agents/domain.md` terminology in
+This repo is a **home-manager standalone** flake (`nixpkgs-unstable`). It manages the
+user dev environment only — no nix-darwin, no system config, no sudo. See
 [`CONTEXT.md`](CONTEXT.md): a **tool config** is a per-tool directory of files; a
-**module** is a Nix config unit; a **host** is a named machine config.
+**module** is a Nix config unit; a **home config** is a `homeConfigurations.<system>`.
 
 ### Layout
 
-- `flake.nix` — inputs (nixpkgs, nix-darwin, home-manager) and host outputs
-- `home/` — **shared layer**: home-manager config applied to every host
-  (CLI packages, `programs.git`, `programs.zsh`, app config symlinks)
-- `hosts/<host>/` — **darwin/nixos layer**: per-host system config (e.g.
-  `hosts/mac-mini/` holds the nix-darwin system + `homebrew` cask block)
+- `flake.nix` — inputs (nixpkgs, home-manager) + `homeConfigurations.<system>`
+- `home.nix` — the entire portable dev env (CLI packages, `programs.git`,
+  `programs.zsh`, app config symlinks). Username is one `let` binding.
 
 ### Config style (hybrid)
 
 - **Native modules** where Nix adds value and translation is clean — `programs.git`, `programs.zsh`
 - **Symlinks** (`home.file`/`xdg.configFile`) for files better left native — wezterm, zed, opencode, claude. App-writable configs use `config.lib.file.mkOutOfStoreSymlink` to the repo so the apps can still write them.
+- OS-specific shell bits are guarded with `lib.optionalString pkgs.stdenv.isDarwin`.
 
-### Per-host configuration
+### Deliberately outside Nix (see ADR-0002)
 
-Each host declares its own package set in `hosts/<host>/`. This replaces the old
-gitignored `SKIP_*` Homebrew feature flags — there is no shared opt-out list.
-
-### Still script-based (not yet migrated)
-
+GUI apps (orbstack, zed, wezterm, codexbar, fonts) are installed manually.
 `gh-pr-notifier/`, `global-protect/`, and `skills/` retain their own `install.sh`.
-bun, rust, and opencode installers are not yet ported to Nix.
+bun, rust, and opencode use their own installers.

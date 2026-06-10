@@ -1,32 +1,27 @@
 # Dotfiles
 
-A personal, cross-platform machine configuration repository. Provisions both macOS (via nix-darwin) and NixOS (Linux) from a single Nix flake, sharing a common user-environment layer.
+A personal, portable development environment managed with **home-manager standalone**.
+One config (`home.nix`) provides the same dev environment — CLI tools, shell, git,
+app configs — on any machine (macOS or Linux), without managing the system itself.
 
 ## Language
 
 **Tool config**:
-The set of configuration files for one tool (zsh, git, wezterm, etc.). In the shell-script era these were per-tool directories each with an `install.sh`.
+The set of configuration files for one tool (zsh, git, wezterm, etc.). Some are now
+expressed natively in `home.nix`; others are symlinked from their directory.
 _Avoid_: Module (reserved for the Nix meaning below)
 
 **Module**:
-A Nix configuration unit (NixOS or home-manager) exposing `options`/`config`. Always refers to the Nix sense, never to a tool config directory.
+A Nix configuration unit (here, home-manager) exposing `options`/`config`. Always
+the Nix sense, never a tool config directory.
 _Avoid_: Using "module" for a tool config
 
-**Host**:
-A specific machine the flake can build a configuration for, named under `darwinConfigurations.<host>` or `nixosConfigurations.<host>`.
-_Avoid_: Machine, target (when referring to a named config)
+**Home config**:
+A `homeConfigurations.<system>` output, built/activated with `home-manager switch`.
+Keyed by system arch (e.g. `aarch64-darwin`) so one definition serves every machine.
+_Avoid_: Host (this setup does not manage whole machines)
 
-**Shared layer**:
-Configuration applied to every host regardless of OS — primarily the home-manager user environment (dotfiles, CLI tools).
-_Avoid_: Common, base
-
-**Darwin layer**:
-Configuration applied only on macOS hosts (nix-darwin system config plus macOS-only tool configs).
-_Avoid_: Mac layer, macOS module
-
-**NixOS layer**:
-Configuration applied only on NixOS hosts.
-_Avoid_: Linux layer (the repo only targets NixOS, not generic Linux)
-
-**Portable-first**:
-The migration stance: NixOS receives only functionality that ports cleanly; macOS-only features (e.g. `gh-pr-notifier`, `global-protect`) stay Darwin-only until a later parity pass.
+**Portable**:
+The guiding stance: the same `home.nix` works for any user on any machine. Machine-
+or OS-specific bits are guarded (e.g. `lib.optionalString pkgs.stdenv.isDarwin`) or
+left out of Nix entirely (GUI apps, system services).
