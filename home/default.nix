@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 {
   # Shared home-manager layer — applies to every host.
   # Tool configs land here incrementally as they migrate off the shell scripts.
@@ -57,5 +57,29 @@
       "AGENTS.md"
       "CLAUDE.md"
     ];
+  };
+
+  # Phase 5: app config files (replaces wezterm/zed/opencode/claude install.sh).
+  # App-writable configs use mkOutOfStoreSymlink -> the repo, so the apps can
+  # still write them (matching the old `link` behavior). Read-only configs are
+  # plain store symlinks. Assumes the repo lives at ~/.dotfiles.
+  # instructions/ has no .md files yet, so nothing to link there.
+  xdg.configFile = {
+    "wezterm/wezterm.lua".source = ../wezterm/wezterm.lua;
+
+    "zed/keymap.json".source = ../zed/keymap.json;
+    "zed/tasks.json".source = ../zed/tasks.json;
+    "zed/settings.json".source =
+      config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/zed/settings.json";
+
+    "opencode/AGENTS.md".source = ../opencode/AGENTS.md;
+    "opencode/opencode.jsonc".source =
+      config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/opencode/opencode.jsonc";
+  };
+
+  home.file = {
+    ".claude/CLAUDE.md".source = ../claude/CLAUDE.md;
+    ".claude/settings.json".source =
+      config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/claude/settings.json";
   };
 }
