@@ -61,7 +61,7 @@ in
       export BUN_INSTALL="$HOME/.bun"
       export PATH="$BUN_INSTALL/bin:$PATH"
       [ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
-      export PATH="$HOME/.opencode/bin:$PATH"
+      export PATH="$HOME/.opencode/bin:$HOME/.local/bin:$PATH"
       [ -f "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"
     '';
   };
