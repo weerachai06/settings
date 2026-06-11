@@ -3,12 +3,15 @@ set -euo pipefail
 
 DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-# Detect Linux arch
+# Detect OS + arch → Nix system double
+OS="$(uname -s)"
 ARCH="$(uname -m)"
-case "$ARCH" in
-  x86_64)  NIX_SYSTEM="x86_64-linux" ;;
-  aarch64) NIX_SYSTEM="aarch64-linux" ;;
-  *) echo "Unsupported arch: $ARCH"; exit 1 ;;
+case "$OS-$ARCH" in
+  Darwin-arm64)  NIX_SYSTEM="aarch64-darwin" ;;
+  Darwin-x86_64) NIX_SYSTEM="x86_64-darwin" ;;
+  Linux-x86_64)  NIX_SYSTEM="x86_64-linux" ;;
+  Linux-aarch64) NIX_SYSTEM="aarch64-linux" ;;
+  *) echo "Unsupported platform: $OS-$ARCH"; exit 1 ;;
 esac
 
 # home.nix expects ~/.dotfiles to be the repo root (for mkOutOfStoreSymlink paths)
@@ -16,10 +19,16 @@ if [ ! -e "$HOME/.dotfiles" ]; then
   ln -sf "$DOTFILES_DIR" "$HOME/.dotfiles"
 fi
 
-# Install Nix if not present (single-user, no daemon — works in containers)
+# Install Nix if not present.
+# macOS requires a multi-user (daemon) install; Linux/containers use single-user.
 if ! command -v nix &>/dev/null && [ ! -e /nix/store ]; then
-  echo "Installing Nix (single-user)..."
-  curl -sSfL https://nixos.org/nix/install | sh -s -- --no-daemon
+  if [ "$OS" = "Darwin" ]; then
+    echo "Installing Nix (multi-user, daemon)..."
+    curl -sSfL https://nixos.org/nix/install | sh -s -- --daemon
+  else
+    echo "Installing Nix (single-user)..."
+    curl -sSfL https://nixos.org/nix/install | sh -s -- --no-daemon
+  fi
 fi
 
 # Source Nix — path differs between single-user and multi-user installs
@@ -28,8 +37,8 @@ if [ -e "$HOME/.nix-profile/etc/profile.d/nix.sh" ]; then
   . "$HOME/.nix-profile/etc/profile.d/nix.sh"
 elif [ -e /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh ]; then
   . /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
-  # Multi-user install needs daemon running
-  if ! nix store ping &>/dev/null; then
+  # Linux multi-user installs need the daemon started manually (macOS uses launchd)
+  if [ "$OS" = "Linux" ] && ! nix store ping &>/dev/null; then
     sudo /nix/var/nix/profiles/default/bin/nix-daemon &
     sleep 3
   fi
