@@ -52,6 +52,8 @@ in
       eval "$(fnm env --use-on-cd --shell zsh)"
       # uv shell completion
       eval "$(uv generate-shell-completion zsh)"
+      # machine-local overrides, not tracked in this repo
+      [ -f "$HOME/.zshrc.local" ] && source "$HOME/.zshrc.local"
     ''
     # macOS-only integrations (GUI apps + tools managed outside Nix).
     + lib.optionalString pkgs.stdenv.isDarwin ''
