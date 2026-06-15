@@ -2,7 +2,6 @@
 set -e
 DOTFILES="$(cd "$(dirname "$0")/.." && pwd)"
 # shellcheck source=../lib.sh
-source "$DOTFILES/lib.sh"
 
 echo "==> skills (via npx)"
 npx --yes skills@latest add mattpocock/skills --global --all
