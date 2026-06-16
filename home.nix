@@ -68,6 +68,21 @@ in
     '';
   };
 
+  programs.tmux = {
+    enable = true;
+    prefix = "C-a";
+    mouse = true;
+    keyMode = "vi";
+    terminal = "tmux-256color";
+    extraConfig = ''
+      # true color passthrough (works with wezterm)
+      set -ag terminal-overrides ",xterm-256color:RGB"
+      # vi-style selection in copy mode
+      bind-key -T copy-mode-vi v send-keys -X begin-selection
+      bind-key -T copy-mode-vi y send-keys -X copy-selection-and-cancel
+    '';
+  };
+
   # App config files. App-writable configs use mkOutOfStoreSymlink -> the repo
   # so the apps can still write them; read-only configs are store symlinks.
   xdg.configFile = {
