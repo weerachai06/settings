@@ -4,8 +4,9 @@ A personal, portable development environment managed with **home-manager standal
 One config (`home.nix`) gives every machine — macOS or Linux — the same dev setup:
 CLI tools, zsh, git, and app configs. No system management, no sudo.
 
-See [ADR-0002](docs/adr/0002-home-manager-standalone.md) for the design and
-[`CONTEXT.md`](CONTEXT.md) for terminology.
+See [ADR-0002](docs/adr/0002-home-manager-standalone.md) for the design,
+[`CONTEXT.md`](CONTEXT.md) for terminology, and
+[`docs/programs/`](docs/programs/) for per-tool usage docs.
 
 ## Installation
 
@@ -70,5 +71,6 @@ The username lives in one `let` binding in `home.nix`; change that one line per 
 ├── zed/                # Zed settings, keymap, and tasks
 ├── check-deps.sh       # Dependency checker
 ├── CONTEXT.md          # Domain glossary
+├── docs/programs/      # Per-tool usage docs
 └── docs/adr/           # Architecture decision records
 ```
