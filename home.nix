@@ -100,5 +100,7 @@ in
   home.file = lib.optionalAttrs pkgs.stdenv.isDarwin {
     ".claude/CLAUDE.md".source = ./claude/CLAUDE.md;
     ".claude/settings.json".source = config.lib.file.mkOutOfStoreSymlink "${repoDir}/claude/settings.json";
+    # kiro-cli loads ~/.kiro/steering/**/*.md globally into its default agent
+    ".kiro/steering/AGENTS.md".source = ./kiro/AGENTS.md;
   };
 }

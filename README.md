@@ -43,8 +43,9 @@ See [ADR-0002](docs/adr/0002-home-manager-standalone.md) for the design,
 - **zsh** — Oh My Zsh (`robbyrussell`, `git` plugin), autosuggestions,
   syntax-highlighting, fnm, uv completion. macOS-only integrations (brew, orbstack,
   global-protect, bun, opencode, cargo) are guarded with `isDarwin`.
-- **App configs** — wezterm, zed, opencode, claude via `home.file`/`xdg.configFile`.
+- **App configs** — wezterm, zed, opencode, claude, kiro via `home.file`/`xdg.configFile`.
   App-writable configs use out-of-store symlinks so the apps can still write them.
+  `kiro/AGENTS.md` is symlinked to `~/.kiro/steering/AGENTS.md` (kiro-cli's global steering).
 
 The username lives in one `let` binding in `home.nix`; change that one line per user.
 
@@ -65,6 +66,7 @@ The username lives in one `let` binding in `home.nix`; change that one line per 
 ├── claude/             # Claude Code settings and CLAUDE.md
 ├── gh-pr-notifier/     # GitHub PR review notifier (LaunchAgent) — not in Nix
 ├── global-protect/     # GlobalProtect VPN helper — not in Nix
+├── kiro/               # kiro-cli AGENTS.md (-> ~/.kiro/steering/)
 ├── opencode/           # opencode config and AGENTS.md
 ├── skills/             # Claude Code / opencode skills — not in Nix
 ├── wezterm/            # WezTerm config
