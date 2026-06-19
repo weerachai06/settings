@@ -35,6 +35,7 @@ in
       "wiki/"
       "AGENTS.md"
       "CLAUDE.md"
+      ".scratch"
     ];
   };
 
