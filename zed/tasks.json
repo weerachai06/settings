@@ -56,6 +56,7 @@
     // Represents the tags for inline runnable indicators, or spawning multiple tasks at once.
     // "tags": []
   },
+
   {
     "label": "Create branch from: $ZED_GIT_SHA_SHORT",
     "command": "printf 'New branch name: ' && read -r name && git -C \"${ZED_GIT_REPOSITORY_PATH:-.}\" checkout -b \"$name\" $ZED_GIT_SHA && echo \"Created: $name\"",
@@ -71,5 +72,11 @@
     "use_new_terminal": true,
     "reveal": "always",
     "hide": "always",
+  },
+  {
+    "label": "Generate & Commit",
+    "command": "bash",
+    "args": ["scripts/auto-commit.sh"],
+    "reveal": "always",
   },
 ]
