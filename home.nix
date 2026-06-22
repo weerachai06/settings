@@ -53,6 +53,8 @@ in
       eval "$(fnm env --use-on-cd --shell zsh)"
       # uv shell completion
       eval "$(uv generate-shell-completion zsh)"
+      # conventional commit message generator (opencode) — gen-commit/auto-commit
+      [ -f "$HOME/scripts/generate-commit.sh" ] && source "$HOME/scripts/generate-commit.sh"
       # machine-local overrides, not tracked in this repo
       [ -f "$HOME/.zshrc.local" ] && source "$HOME/.zshrc.local"
     ''
