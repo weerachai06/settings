@@ -18,31 +18,25 @@ Generate ONE conventional commit message for the staged changes below.
 Output format (exactly — nothing else):
 <type>(<domain>): <message>
 
-<description>
-One or two sentences explaining what changed and why. Imperative mood.
-</description>
+<description text — one or two sentences, imperative mood, plain text>
 
 Rules:
 - type: feat | fix | docs | style | refactor | perf | test | chore | ci | build
 - domain: the affected module/feature (e.g. auth, api, ui, db, tmux, skills)
 - message: imperative mood, lowercase, no trailing period, <= 50 chars
-- description: plain text, no bullet points, no code fences
-- Output ONLY the header line + description block. No extra commentary.
+- description: plain text, no bullet points, no code fences, no XML tags
+- Output ONLY the header line + blank line + description. No extra commentary.
 
 Examples:
-  feat(auth): add jwt token refresh
+feat(auth): add jwt token refresh
 
-  <description>
-  Adds a background token refresh so sessions stay alive beyond the
-  initial expiry without requiring a manual re-login.
-  </description>
+Adds a background token refresh so sessions stay alive beyond the
+initial expiry without requiring a manual re-login.
 
-  fix(api): handle null response in parser
+fix(api): handle null response in parser
 
-  <description>
-  Parser threw an unhandled TypeError when the upstream service returned
-  a null body. Now returns an empty result instead.
-  </description>
+Parser threw an unhandled TypeError when the upstream service returned
+a null body. Now returns an empty result instead.
 
 Staged diff:
 $1
@@ -70,7 +64,7 @@ gen-commit() {
 
   local title body
   title="$(echo "$raw" | grep -m1 -v '^[[:space:]]*$')"
-  body="$(echo "$raw" | sed -n '/<description>/,/<\/description>/{ /<description>/d; /<\/description>/d; p; }')"
+  body="$(echo "$raw" | tail -n +2 | sed '/./,$!d')"
 
   if [ -z "$title" ]; then
     echo "❌ Failed to generate commit message" >&2
