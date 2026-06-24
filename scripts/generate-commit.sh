@@ -15,19 +15,34 @@ _commit_prompt() {
   cat <<EOF
 Generate ONE conventional commit message for the staged changes below.
 
-Format (exactly):
+Output format (exactly — nothing else):
 <type>(<domain>): <message>
+
+<description>
+One or two sentences explaining what changed and why. Imperative mood.
+</description>
 
 Rules:
 - type: feat | fix | docs | style | refactor | perf | test | chore | ci | build
 - domain: the affected module/feature (e.g. auth, api, ui, db, tmux, skills)
 - message: imperative mood, lowercase, no trailing period, <= 50 chars
-- Output ONLY the single message line. No quotes, no code fences, no explanation.
+- description: plain text, no bullet points, no code fences
+- Output ONLY the header line + description block. No extra commentary.
 
 Examples:
   feat(auth): add jwt token refresh
+
+  <description>
+  Adds a background token refresh so sessions stay alive beyond the
+  initial expiry without requiring a manual re-login.
+  </description>
+
   fix(api): handle null response in parser
-  docs(readme): update installation steps
+
+  <description>
+  Parser threw an unhandled TypeError when the upstream service returned
+  a null body. Now returns an empty result instead.
+  </description>
 
 Staged diff:
 $1
@@ -35,6 +50,7 @@ EOF
 }
 
 # Generate a message from the staged diff and echo it to stdout.
+# Output: "<title>\n\n<description body>" (git commit -m compatible).
 gen-commit() {
   if ! git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
     echo "❌ Not inside a git repository" >&2
@@ -49,14 +65,23 @@ gen-commit() {
   fi
 
   echo "📋 Generating commit message (model: $COMMIT_MODEL)..." >&2
-  local msg
-  msg="$(opencode run --print-logs -m "$COMMIT_MODEL" "$(_commit_prompt "$diff")" 2>/dev/null | grep -v '^[[:space:]]*$' | tail -n 1)"
+  local raw
+  raw="$(opencode run --print-logs -m "$COMMIT_MODEL" "$(_commit_prompt "$diff")" 2>/dev/null)"
 
-  if [ -z "$msg" ]; then
+  local title body
+  title="$(echo "$raw" | grep -m1 -v '^[[:space:]]*$')"
+  body="$(echo "$raw" | sed -n '/<description>/,/<\/description>/{ /<description>/d; /<\/description>/d; p; }')"
+
+  if [ -z "$title" ]; then
     echo "❌ Failed to generate commit message" >&2
     return 1
   fi
-  echo "$msg"
+
+  if [ -n "$body" ]; then
+    printf '%s\n\n%s' "$title" "$body"
+  else
+    printf '%s' "$title"
+  fi
 }
 
 # Generate, show, ask for confirmation, then commit.
@@ -65,7 +90,7 @@ auto-commit() {
   msg="$(gen-commit)" || return 1
 
   echo "✓ Generated:" >&2
-  echo "  $msg" >&2
+  echo "$msg" | sed 's/^/  /' >&2
 
   if [ "${COMMIT_INTERACTIVE:-true}" = "false" ]; then
     git commit -m "$msg" && echo "✅ Committed!" >&2
