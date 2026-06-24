@@ -86,34 +86,38 @@ quick-commit() {
   COMMIT_INTERACTIVE=false auto-commit
 }
 
+# Print all conventional commit types with descriptions.
 commit-types() {
   cat >&2 <<'EOF'
-feat     — a new feature
+feat     — a new feature visible to users
 fix      — a bug fix
-docs     — documentation only
-style    — formatting, no code change
-refactor — code change that neither fixes a bug nor adds a feature
-perf     — performance improvement
-test     — adding or fixing tests
-chore    — tooling / maintenance
-ci       — CI configuration
-build    — build system or dependencies
+docs     — documentation only, no code change
+style    — formatting, whitespace, no logic change
+refactor — restructure code without changing behaviour
+perf     — measurable performance improvement
+test     — add or fix tests, no production code change
+chore    — tooling, deps, maintenance (no user-facing change)
+ci       — CI/CD pipeline configuration
+build    — build system or external dependency change
 EOF
 }
 
+# Show usage for all commit functions and env knobs.
 commit-help() {
   cat >&2 <<'EOF'
 Conventional commit generator (opencode)
 
-  gen-commit     Generate a message from staged changes (prints to stdout)
-  auto-commit    Generate -> confirm -> commit
-  quick-commit   Generate -> commit (no confirm)
-  commit-types   List commit types
-  commit-help    This help
+Commands:
+  gen-commit     Analyse staged diff, print a suggested message (stdout only — no commit)
+  auto-commit    gen-commit → show message → confirm → git commit
+  quick-commit   gen-commit → git commit (skips confirmation prompt)
+  commit-types   List all conventional commit types with descriptions
+  commit-help    Show this help
 
 Env:
-  COMMIT_MODEL=opencode-go/deepseek-v4-pro   model to use
-  COMMIT_INTERACTIVE=false                   skip the confirm prompt
+  COMMIT_MODEL=opencode-go/deepseek-v4-pro   OpenCode model to use for generation
+  COMMIT_INTERACTIVE=false                   Skip the y/n prompt (same as quick-commit)
+  COMMIT_VERBOSE=1                           Print a banner when the file is sourced
 EOF
 }
 
