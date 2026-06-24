@@ -100,7 +100,9 @@ in
     "opencode/opencode.jsonc".source = config.lib.file.mkOutOfStoreSymlink "${repoDir}/opencode/opencode.jsonc";
   };
 
-  home.file = lib.optionalAttrs pkgs.stdenv.isDarwin {
+  home.file = {
+    "scripts/generate-commit.sh".source = ./scripts/generate-commit.sh;
+  } // lib.optionalAttrs pkgs.stdenv.isDarwin {
     ".claude/CLAUDE.md".source = ./claude/CLAUDE.md;
     ".claude/settings.json".source = config.lib.file.mkOutOfStoreSymlink "${repoDir}/claude/settings.json";
     # kiro-cli loads ~/.kiro/steering/**/*.md globally into its default agent
