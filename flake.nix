@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    flake-utils.url = "github:numtide/flake-utils";
 
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -11,8 +12,11 @@
   };
 
   outputs =
-    { nixpkgs, home-manager, ... }:
+    { nixpkgs, flake-utils, home-manager, ... }:
     let
+      # Private per-machine values (gitignored) — copy env.nix.example -> env.nix
+      env = if builtins.pathExists ./env.nix then import ./env.nix else { };
+
       mkHome =
         system:
         home-manager.lib.homeManagerConfiguration {
@@ -23,6 +27,8 @@
             username =
               let u = builtins.getEnv "USER";
               in if u != "" then u else "weerachaiplodkaew";
+            gitName = env.gitName or "Weerachai Plodkaew";
+            gitEmail = env.gitEmail or "clkeen157@gmail.com";
           };
         };
     in
@@ -34,5 +40,33 @@
         "x86_64-linux" = mkHome "x86_64-linux"; # Linux / NixOS
         "aarch64-linux" = mkHome "aarch64-linux";
       };
-    };
+    }
+    // flake-utils.lib.eachDefaultSystem (
+      system:
+      let
+        pkgs = nixpkgs.legacyPackages.${system};
+      in
+      {
+        devShells.default = pkgs.mkShell {
+          # CLI tools, available via `nix develop` (or direnv) instead of the home profile.
+          packages = with pkgs; [
+            cmake
+            fnm
+            gh
+            jq
+            openssl
+            uv
+            direnv
+            nix-direnv
+          ];
+
+          shellHook = ''
+            echo ""
+            echo "  tip: run 'direnv allow' once so this shell auto-activates"
+            echo "       next time you cd into this directory."
+            echo ""
+          '';
+        };
+      }
+    );
 }

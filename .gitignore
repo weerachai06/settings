@@ -3,4 +3,6 @@ homebrew/Brewfile.lock.json
 .agents/
 skills-lock.json
 result
+env.nix
+.direnv/
 !CLAUDE.md

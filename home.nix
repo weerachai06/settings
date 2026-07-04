@@ -1,4 +1,4 @@
-{ config, pkgs, username, ... }:
+{ config, pkgs, username, gitName, gitEmail, ... }:
 let
   repoDir = "${config.home.homeDirectory}/.dotfiles";
 in
@@ -14,8 +14,8 @@ in
   programs.git = {
     enable = true;
     settings = {
-      user.name = "Weerachai Plodkaew";
-      user.email = "clkeen157@gmail.com";
+      user.name = gitName;
+      user.email = gitEmail;
       alias.adog = "log --all --decorate --oneline --graph";
       pull.rebase = true;
     };
