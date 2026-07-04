@@ -48,7 +48,6 @@
         devShells.default = pkgs.mkShell {
           # CLI tools, available via `nix develop` (or direnv) instead of the home profile.
           packages = with pkgs; [
-            cmake
             fnm
             gh
             jq
