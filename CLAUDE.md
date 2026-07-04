@@ -6,12 +6,12 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ```bash
 # Build the config without activating (verify it evaluates)
-nix build '.#homeConfigurations.aarch64-darwin.activationPackage'
+nix build '.#homeConfigurations.x86_64-linux.activationPackage'
 
 # Activate (no sudo). Use the matching system arch.
-home-manager switch --flake '.#aarch64-darwin'   # or .#x86_64-linux
+home-manager switch --flake '.#x86_64-linux'   # or .#aarch64-linux
 # first time, before home-manager is on PATH:
-nix run home-manager/master -- switch --flake '.#aarch64-darwin'
+nix run nixpkgs#home-manager -- switch --flake '.#x86_64-linux'
 
 # Update flake inputs (regenerate flake.lock)
 nix flake update

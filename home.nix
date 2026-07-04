@@ -29,6 +29,11 @@ in
     ];
   };
 
+  programs.direnv = {
+    enable = true;
+    nix-direnv.enable = true; # caches nix develop shells
+  };
+
   # App config files. App-writable configs use mkOutOfStoreSymlink -> the repo
   # so the apps can still write them; read-only configs are store symlinks.
   xdg.configFile = {

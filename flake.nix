@@ -33,10 +33,8 @@
         };
     in
     {
-      # One config, every platform — pick by the machine's system arch.
+      # Linux only on this branch — no Mac setup here.
       homeConfigurations = {
-        "aarch64-darwin" = mkHome "aarch64-darwin"; # Mac (Apple Silicon)
-        "x86_64-darwin" = mkHome "x86_64-darwin"; # Mac (Intel)
         "x86_64-linux" = mkHome "x86_64-linux"; # Linux / NixOS
         "aarch64-linux" = mkHome "aarch64-linux";
       };
@@ -56,8 +54,6 @@
             jq
             openssl
             uv
-            direnv
-            nix-direnv
           ];
 
           shellHook = ''
