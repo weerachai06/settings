@@ -1,4 +1,4 @@
-{ config, lib, pkgs, username, ... }:
+{ config, pkgs, username, ... }:
 let
   repoDir = "${config.home.homeDirectory}/.dotfiles";
 in
@@ -10,16 +10,6 @@ in
   # Pins the home-manager state version. Do not change after the first switch.
   home.stateVersion = "24.11";
   programs.home-manager.enable = true;
-
-  # CLI tools (cross-platform). Deferred: vault (unfree, needs allowUnfree).
-  home.packages = with pkgs; [
-    cmake
-    fnm
-    gh
-    jq
-    openssl
-    uv
-  ];
 
   programs.git = {
     enable = true;
@@ -39,70 +29,14 @@ in
     ];
   };
 
-  programs.zsh = {
-    enable = true;
-    autosuggestion.enable = true;
-    syntaxHighlighting.enable = true;
-    oh-my-zsh = {
-      enable = true;
-      theme = "robbyrussell";
-      plugins = [ "git" ];
-    };
-    initContent = ''
-      # fnm (Node version manager) — auto-switch on cd
-      eval "$(fnm env --use-on-cd --shell zsh)"
-      # uv shell completion
-      eval "$(uv generate-shell-completion zsh)"
-      # conventional commit message generator (opencode) — gen-commit/auto-commit
-      [ -f "$HOME/scripts/generate-commit.sh" ] && source "$HOME/scripts/generate-commit.sh"
-      # machine-local overrides, not tracked in this repo
-      [ -f "$HOME/.zshrc.local" ] && source "$HOME/.zshrc.local"
-    ''
-    # macOS-only integrations (GUI apps + tools managed outside Nix).
-    + lib.optionalString pkgs.stdenv.isDarwin ''
-      eval "$(/opt/homebrew/bin/brew shellenv)"
-      source ~/.orbstack/shell/init.zsh 2>/dev/null || :
-      [ -f "$HOME/global-protect.sh" ] && source "$HOME/global-protect.sh"
-      export BUN_INSTALL="$HOME/.bun"
-      export PATH="$BUN_INSTALL/bin:$PATH"
-      [ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
-      export PATH="$HOME/.opencode/bin:$HOME/.local/bin:$PATH"
-      [ -f "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"
-    '';
-  };
-
-  programs.tmux = {
-    enable = true;
-    prefix = "C-a";
-    mouse = true;
-    keyMode = "vi";
-    terminal = "tmux-256color";
-    extraConfig = ''
-      # true color passthrough (works with wezterm)
-      set -ag terminal-overrides ",xterm-256color:RGB"
-      # vi-style selection in copy mode
-      bind-key -T copy-mode-vi v send-keys -X begin-selection
-      bind-key -T copy-mode-vi y send-keys -X copy-selection-and-cancel
-    '';
-  };
-
   # App config files. App-writable configs use mkOutOfStoreSymlink -> the repo
   # so the apps can still write them; read-only configs are store symlinks.
   xdg.configFile = {
     "wezterm/wezterm.lua".source = ./wezterm/wezterm.lua;
-
-    "zed/keymap.json".source = ./zed/keymap.json;
-    "zed/tasks.json".source = ./zed/tasks.json;
-    "zed/settings.json".source = config.lib.file.mkOutOfStoreSymlink "${repoDir}/zed/settings.json";
-
-  } // lib.optionalAttrs pkgs.stdenv.isDarwin {
     "opencode/AGENTS.md".source = ./opencode/AGENTS.md;
-    "opencode/opencode.jsonc".source = config.lib.file.mkOutOfStoreSymlink "${repoDir}/opencode/opencode.jsonc";
   };
 
   home.file = {
-    "scripts/generate-commit.sh".source = ./scripts/generate-commit.sh;
-  } // lib.optionalAttrs pkgs.stdenv.isDarwin {
     ".claude/CLAUDE.md".source = ./claude/CLAUDE.md;
     ".claude/settings.json".source = config.lib.file.mkOutOfStoreSymlink "${repoDir}/claude/settings.json";
     # kiro-cli loads ~/.kiro/steering/**/*.md globally into its default agent
