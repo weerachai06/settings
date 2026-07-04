@@ -10,6 +10,9 @@ in
   # Pins the home-manager state version. Do not change after the first switch.
   home.stateVersion = "24.11";
   programs.home-manager.enable = true;
+  manual.manpages.enable = false;
+  manual.html.enable = false;
+  manual.json.enable = false;
 
   programs.git = {
     enable = true;
