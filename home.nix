@@ -14,6 +14,11 @@ in
   manual.html.enable = false;
   manual.json.enable = false;
 
+  # We don't declare any systemd user units; the module still defaults
+  # systemctlPath to pkgs.systemd, dragging in its full closure (cryptsetup,
+  # lvm2, kmod, kbd, kexec-tools, pam...). Disable it outright.
+  systemd.user.enable = false;
+
   programs.git = {
     enable = true;
     settings = {
