@@ -47,6 +47,20 @@ in
     nix-direnv.enable = true; # caches nix develop shells
   };
 
+  # Enables home-manager to wire ~/.bashrc so PATH/env vars from this config
+  # (and fnm's node bin dir) are available without a manual `source` step
+  # after activation. Coder's default login shell is bash.
+  programs.bash = {
+    enable = true;
+    initExtra = ''
+      # home-manager only sources hm-session-vars.sh from ~/.profile (login
+      # shells). Coder's SSH session spawns a non-login bash that skips it,
+      # so ~/.nix-profile/bin (fnm, gh) would otherwise be missing from PATH.
+      export PATH="$HOME/.nix-profile/bin:$PATH"
+      eval "$(fnm env --use-on-cd)"
+    '';
+  };
+
   # App config files. App-writable configs use mkOutOfStoreSymlink -> the repo
   # so the apps can still write them; read-only configs are store symlinks.
   xdg.configFile = {
