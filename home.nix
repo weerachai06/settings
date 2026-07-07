@@ -19,6 +19,11 @@ in
   # lvm2, kmod, kbd, kexec-tools, pam...). Disable it outright.
   systemd.user.enable = false;
 
+  home.packages = with pkgs; [
+    fnm
+    gh
+  ];
+
   programs.git = {
     enable = true;
     settings = {
