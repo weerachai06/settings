@@ -22,7 +22,6 @@ in
   home.packages = with pkgs; [
     fnm
     gh
-    vault
     pnpm
   ];
 

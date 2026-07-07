@@ -20,10 +20,7 @@
       mkHome =
         system:
         home-manager.lib.homeManagerConfiguration {
-          pkgs = import nixpkgs {
-            inherit system;
-            config.allowUnfreePredicate = pkg: builtins.elem (nixpkgs.lib.getName pkg) [ "vault" ];
-          };
+          pkgs = nixpkgs.legacyPackages.${system};
           modules = [ ./home.nix ];
           extraSpecialArgs = {
             # builtins.getEnv requires --impure; returns "" in pure mode → fallback used.
