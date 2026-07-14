@@ -26,6 +26,8 @@ done
 
 echo "==> symlink skills to tools"
 SKILLS=(
+  ast-grep
+  ast-grep-outline
   caveman
   design-an-interface
   diagnose
