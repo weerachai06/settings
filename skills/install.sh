@@ -18,8 +18,8 @@ echo "==> copy custom skills to .agents"
 mkdir -p "$HOME/.agents/skills"
 for skill_dir in "$DOTFILES/skills"/*/; do
   skill_name="$(basename "$skill_dir")"
-  # Remove old symlink if it exists
-  rm -f "$HOME/.agents/skills/$skill_name"
+  # Remove old symlink or directory if it exists
+  rm -rf "$HOME/.agents/skills/$skill_name"
   # Copy instead of symlink to avoid circular references
   cp -r "$skill_dir" "$HOME/.agents/skills/$skill_name"
 done
