@@ -28,11 +28,9 @@ echo "==> symlink skills to tools"
 SKILLS=(
   ast-grep
   ast-grep-outline
-  caveman
   design-an-interface
-  diagnose
+  diagnosing-bugs
   edit-article
-  find-skills
   git-guardrails-claude-code
   grill-me
   grill-with-docs
@@ -40,33 +38,33 @@ SKILLS=(
   improve-codebase-architecture
   migrate-to-shoehorn
   obsidian-vault
-  pr-reviewer
   pr-with-target-branch
   prototype
   qa
   request-refactor-plan
-  review
   scaffold-exercises
   setup-pre-commit
   tdd
   teach
-  to-issues
-  to-prd
+  to-tickets
+  to-spec
   triage
   ubiquitous-language
   vercel-react-best-practices
-  web-design-guidelines
   wiki-docs
-  write-a-skill
+  writing-great-skills
   writing-beats
   writing-fragments
   writing-shape
-  zoom-out
 )
 
 for tool_dir in "$HOME/.claude/skills" "$HOME/.config/opencode/skills" "$HOME/.kiro/skills"; do
+  # Replace old whole-directory symlinks (previously pointed at ~/.agents/skills)
+  # with a real directory, otherwise rm -rf below deletes through the symlink.
+  [ -L "$tool_dir" ] && rm -f "$tool_dir"
   mkdir -p "$tool_dir"
   for skill in "${SKILLS[@]}"; do
-    ln -sf "$HOME/.agents/skills/$skill" "$tool_dir/$skill"
+    rm -rf "$tool_dir/$skill"
+    cp -r "$HOME/.agents/skills/$skill" "$tool_dir/$skill"
   done
 done
