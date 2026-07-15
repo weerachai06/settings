@@ -64,7 +64,7 @@ SKILLS=(
   zoom-out
 )
 
-for tool_dir in "$HOME/.claude/skills" "$HOME/.config/opencode/skills"; do
+for tool_dir in "$HOME/.claude/skills" "$HOME/.config/opencode/skills" "$HOME/.kiro/skills"; do
   mkdir -p "$tool_dir"
   for skill in "${SKILLS[@]}"; do
     ln -sf "$HOME/.agents/skills/$skill" "$tool_dir/$skill"
