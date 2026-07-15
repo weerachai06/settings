@@ -51,6 +51,7 @@ SKILLS=(
   triage
   ubiquitous-language
   vercel-react-best-practices
+  web-design-guidelines
   wiki-docs
   writing-great-skills
   writing-beats
@@ -67,4 +68,12 @@ for tool_dir in "$HOME/.claude/skills" "$HOME/.config/opencode/skills" "$HOME/.k
     rm -rf "$tool_dir/$skill"
     cp -r "$HOME/.agents/skills/$skill" "$tool_dir/$skill"
   done
+done
+
+# skills@latest writes symlinks asynchronously and can still be finishing
+# after the npx process exits, so re-run the circular-symlink cleanup here
+# too (the early pass above can otherwise race and miss some).
+for _skill_dir in "$HOME/.agents/skills"/*/; do
+  _skill_name="$(basename "$_skill_dir")"
+  rm -f "$_skill_dir/$_skill_name"
 done
