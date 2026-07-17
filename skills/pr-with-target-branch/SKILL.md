@@ -47,7 +47,13 @@ After creating the PR, fill out the GitHub template with:
 - **Breaking change**: Specify if applicable
 - **Test Evidence**: Show how you tested
 
-See [REFERENCE.md](REFERENCE.md) for the complete template structure.
+**Exception — release flow**: if the source/target branch pair matches one of these, use the Release Flow Templates in [REFERENCE.md](REFERENCE.md) instead of the `[WEB]` template:
+- `releases/*` → `main`: **Release**
+- `sprint` → `dev`: **Release**
+- `releases/*` → `dev`: **Merge Down**
+- `dev` → `sprint`: **Merge Down**
+
+See [REFERENCE.md](REFERENCE.md) for the complete template structures.
 
 ## Notes
 
