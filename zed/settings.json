@@ -72,6 +72,10 @@
     },
   },
   "edit_predictions": {
+    "allow_data_collection": "no",
+    "ollama": {
+      "api_url": "http://localhost:11434"
+    },
     "disabled_globs": [
       "**/.env.local",
       "**/.env",
@@ -163,12 +167,6 @@
         "source.fixAll.eslint": true
       }
     },
-    "JSX": {
-      "format_on_save": "on",
-      "code_actions_on_format": {
-        "source.fixAll.eslint": true
-      }
-    }
   },
   "file_finder": {
     "modal_max_width": "xlarge",
