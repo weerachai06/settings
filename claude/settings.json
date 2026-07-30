@@ -1,5 +1,8 @@
 {
   "model": "sonnet",
+  "enabledPlugins": {
+    "figma@claude-plugins-official": true
+  },
   "effortLevel": "medium",
   "theme": "dark"
 }
