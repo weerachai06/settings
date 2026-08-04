@@ -8,7 +8,7 @@
 #   commit-types  List conventional commit types
 #   commit-help   Show usage
 
-: "${COMMIT_MODEL:=opencode-go/deepseek-v4-flash}"
+: "${COMMIT_MODEL:=opencode-go/qwen3.8-max}"
 
 # Build the prompt fed to opencode for a given diff.
 _commit_prompt() {
