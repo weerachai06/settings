@@ -35,9 +35,8 @@ Simply ask to create a PR. I will:
 1. Ask: "What is the target branch?"
 2. Wait for your input
 3. **Gate — read template before create**: read [REFERENCE.md](REFERENCE.md) first. Never run `gh pr create --body ...` before this.
-4. Invoke `caveman` skill, draft Change Description in caveman mode
-5. Create the PR using `gh pr create --draft --base <branch> --body <filled template>`
-6. Use current branch as source and commit message for PR title
+4. Create the PR using `gh pr create --draft --base <branch> --body <filled template>`
+5. Use current branch as source and commit message for PR title
 
 ## PR Template
 
