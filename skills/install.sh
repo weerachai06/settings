@@ -51,7 +51,6 @@ SKILLS=(
   triage
   ubiquitous-language
   vercel-react-best-practices
-  web-design-guidelines
   wiki-docs
   writing-great-skills
   writing-beats
