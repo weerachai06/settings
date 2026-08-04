@@ -4,7 +4,7 @@ When your PR is created, fill out the template using this structure:
 
 ## Header
 ```
-[WEB] brief-description-of-changes
+[JIRA-TICKET-NUMBER] brief-description-of-changes
 ```
 
 ## Related JIRA
@@ -39,7 +39,7 @@ Provide evidence of testing:
 
 ## Release Flow Templates
 
-Used instead of the `[WEB]` template above when the source/target branch pair matches the release process:
+Used instead of the `[JIRA-TICKET-NUMBER]` template above when the source/target branch pair matches the release process:
 
 | Source | Target | Flow |
 |---|---|---|
@@ -97,5 +97,3 @@ e.g. `[R X.X.X][Merge Down] Dev => Sprint` or `[R X.X.X][Merge Down] Releases/vX
 ```
 
 ---
-
-**Contact**: pawanachai.seeruesang@kingpower.com

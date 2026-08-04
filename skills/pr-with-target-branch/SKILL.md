@@ -34,20 +34,24 @@ Simply ask to create a PR. I will:
 
 1. Ask: "What is the target branch?"
 2. Wait for your input
-3. Create the PR using `gh pr create --base <branch>`
-4. Use current branch as source and commit message for PR title
+3. **Gate — read template before create**: read [REFERENCE.md](REFERENCE.md) first. Never run `gh pr create --body ...` before this.
+4. Invoke `caveman` skill, draft Change Description in caveman mode
+5. Create the PR using `gh pr create --draft --base <branch> --body <filled template>`
+6. Use current branch as source and commit message for PR title
 
 ## PR Template
 
-After creating the PR, fill out the GitHub template with:
-- **Title**: Follow `[WEB] description` format
+Template source: [REFERENCE.md](REFERENCE.md), read in step 3 above.
+
+Fill out the template with:
+- **Title**: Follow `[JIRA-TICKET-NUMBER] short description` format
 - **Related JIRA**: Add ticket reference if applicable
 - **Change Description**: Explain what and why
 - **Type of change**: Mark the appropriate checkbox
 - **Breaking change**: Specify if applicable
 - **Test Evidence**: Show how you tested
 
-**Exception — release flow**: if the source/target branch pair matches one of these, use the Release Flow Templates in [REFERENCE.md](REFERENCE.md) instead of the `[WEB]` template:
+**Exception — release flow**: if the source/target branch pair matches one of these, use the Release Flow Templates in [REFERENCE.md](REFERENCE.md) instead of the JIRA-ticket format above:
 - `releases/*` → `main`: **Release**
 - `sprint` → `dev`: **Release**
 - `releases/*` → `dev`: **Merge Down**
