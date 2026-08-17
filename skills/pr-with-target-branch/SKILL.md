@@ -50,7 +50,7 @@ Template source: [REFERENCE.md](REFERENCE.md), read in step 4 above.
 Fill out the template with:
 - **Title**: Follow `[JIRA-TICKET-NUMBER] short description` format
 - **Related JIRA**: Add ticket reference if applicable
-- **Change Description**: Explain what and why, grounded in the `git diff` from step 5
+- **Change Description**: Write as bullet points explaining what and why, grounded in the `git diff` from step 5
 - **Type of change**: Mark the appropriate checkbox
 - **Breaking change**: Specify if applicable
 - **Test Evidence**: Show how you tested

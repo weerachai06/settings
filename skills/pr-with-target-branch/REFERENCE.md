@@ -52,12 +52,12 @@ Used instead of the `[JIRA-TICKET-NUMBER]` template above when the source/target
 
 **Title:**
 ```
-Release: [XXR X.X] Releases/vX.XXX.X
+Release: [<Year 2 digit>R <Month>.<Patch Literal>] Releases/vX.XXX.X
 ```
 
 **Body:**
 ```
-# 🚀 [Release XXR X.X](<link url to release>)
+# 🚀 [Release <Year 2 digit>R <Month>.<Patch Literal>](<link url to release>)
 ## Version X.XXX.X <!-- Copy version from package.json -->
 
 ## Change Description
@@ -82,10 +82,10 @@ e.g. `[R X.X.X][Merge Down] Dev => Sprint` or `[R X.X.X][Merge Down] Releases/vX
 
 **Body:**
 ```
-# 🚀 [Release XXR X.X](<link url to release>)
+# 🚀 [Release <Year 2 digit>R <Month>.<Patch Literal>](<link url to release>)
 
 ## Change Description
-- 
+Explain in detail what this PR does and why.
 
 ## What kind of change ?
 - [ ] Service deploymented.
