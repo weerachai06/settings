@@ -16,3 +16,8 @@ After every task:
 
 Never use `/tmp`. Use `./tmp` at project root.
 Run `fnm use` before any Node/npm command.
+
+## Model delegation
+For pure file/code exploration (locating files, grepping symbols, "where is X defined"), delegate to the `file-explorer` subagent (haiku) instead of doing it inline.
+For heavy analysis (architecture review, cross-file consistency, design tradeoffs, root-cause diagnosis, planning nontrivial implementations), delegate to the `deep-analyzer` subagent (opus) instead of doing it inline.
+Simple, single-file edits and quick answers stay on the main model — don't delegate trivial work.
