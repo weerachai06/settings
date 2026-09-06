@@ -1,0 +1,12 @@
+{
+  "name": "kiro-acp",
+  "version": "0.0.0",
+  "type": "module",
+  "exports": "./index.ts",
+  "dependencies": {
+    "@opencode-ai/plugin": "beta"
+  },
+  "devDependencies": {
+    "bun-types": "^1.4.2"
+  }
+}

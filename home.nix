@@ -102,6 +102,8 @@ in
     # Out-of-store: bun resolves imports from the file's realpath, so the plugin
     # needs its own (writable) package.json + node_modules inside the repo dir.
     "opencode/plugins/cursor-rules".source = config.lib.file.mkOutOfStoreSymlink "${repoDir}/opencode/plugins/cursor-rules";
+    # kiro-acp bridge — delegate tasks from OpenCode agents to `kiro-cli acp` over ACP.
+    "opencode/plugins/kiro-acp".source = config.lib.file.mkOutOfStoreSymlink "${repoDir}/opencode/plugins/kiro-acp";
   };
 
   home.file = {

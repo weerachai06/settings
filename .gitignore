@@ -2,7 +2,9 @@ homebrew/.local
 homebrew/Brewfile.lock.json
 .agents/
 skills-lock.json
-opencode/plugins/cursor-rules/node_modules/
-opencode/plugins/cursor-rules/bun.lock
+opencode/plugins/**/node_modules/
+opencode/plugins/**/bun.lock
 result
 !CLAUDE.md
+node_modules
+opencode/plugins/kiro-acp/node_modules/

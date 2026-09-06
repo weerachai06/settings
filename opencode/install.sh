@@ -11,5 +11,6 @@ bun add -g @opencode-ai/cli@beta
 # Plugin symlinks come from home-manager (home.nix). This only installs the
 # plugin dependency — bun resolves "@opencode-ai/plugin" from the plugin dir's
 # realpath, so node_modules must live next to index.ts.
-echo "==> opencode: install cursor-rules plugin deps"
+echo "==> opencode: install plugin deps (cursor-rules, kiro-acp)"
 (cd "$DOTFILES/opencode/plugins/cursor-rules" && bun install)
+(cd "$DOTFILES/opencode/plugins/kiro-acp" && bun install)
