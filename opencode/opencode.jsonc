@@ -1,8 +1,25 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  "model": "opencode-go/glm-5.2",
+  "model": "opencode-go/glm-5.3-flash",
   "compaction": {
     "auto": true,
+  },
+  // per-role models: cheap/fast for background work, strongest for planning.
+  // Escalate hard build tasks manually by switching the session model to
+  // opencode-go/glm-5.3 (220 req/5h — occasional use only).
+  "agents": {
+    "explore": {
+      "model": "opencode-go/qwen3.8-flash",
+    },
+    "title": {
+      "model": "opencode/mimo-v2.5-free",
+    },
+    "summary": {
+      "model": "opencode/mimo-v2.5-free",
+    },
+    "plan": {
+      "model": "opencode-go/glm-5.3",
+    },
   },
   "mcp": {
     "atlassian-mcp-server": {

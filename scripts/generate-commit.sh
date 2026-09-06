@@ -8,7 +8,7 @@
 #   commit-types  List conventional commit types
 #   commit-help   Show usage
 
-: "${COMMIT_MODEL:=opencode-go/qwen3.8-max}"
+: "${COMMIT_MODEL:=opencode/mimo-v2.5-free}"
 
 # Build the prompt fed to opencode for a given diff.
 _commit_prompt() {
