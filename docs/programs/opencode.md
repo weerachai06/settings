@@ -4,16 +4,19 @@
 
 ## ติดตั้งจากไหน
 
-- จัดการโดย: installer ของ opencode เอง (อยู่นอก Nix — ดู [ADR-0002](../adr/))
-- อยู่บน PATH ผ่าน `~/.opencode/bin` (ตั้งใน [`home.nix`](../../home.nix) เฉพาะ macOS)
+- จัดการโดย: [`opencode/install.sh`](../../opencode/install.sh) — ติดตั้ง opencode2 (V2 beta) ผ่าน `bun add -g @opencode-ai/cli@beta` (อยู่นอก Nix — ดู [ADR-0002](../adr/))
+- binary `opencode2` อยู่บน PATH ผ่าน `~/.bun/bin` (ตั้งใน [`home.nix`](../../home.nix) เฉพาะ macOS); V1 `opencode` ยังอยู่ที่ `~/.opencode/bin` ถ้าเคยติดตั้งไว้
 - ไฟล์ config (symlink เฉพาะ macOS, ตั้งใน [`home.nix`](../../home.nix)):
 
 | ไฟล์ | symlink ไปที่ | ชนิด symlink |
 | --- | --- | --- |
 | [`opencode/opencode.jsonc`](../../opencode/opencode.jsonc) | `~/.config/opencode/opencode.jsonc` | `mkOutOfStoreSymlink` (เขียนกลับได้) |
 | [`opencode/AGENTS.md`](../../opencode/AGENTS.md) | `~/.config/opencode/AGENTS.md` | store symlink (read-only) |
+| [`opencode/plugins/cursor-rules`](../../opencode/plugins/cursor-rules) | `~/.config/opencode/plugins/cursor-rules` | `mkOutOfStoreSymlink` (เขียนกลับได้) |
 
 `opencode.jsonc` เป็น out-of-store symlink ชี้กลับรีโป — แก้ที่ไหนก็เป็นไฟล์เดียวกัน ส่วน `AGENTS.md` เป็น store symlink ต้องแก้ในรีโปแล้ว `home-manager switch`
+
+plugin `cursor-rules` ต้องมี `node_modules` ของตัวเองข้าง ๆ `index.ts` (bun resolve import จาก realpath ของไฟล์) — ติดตั้งด้วย `bash opencode/install.sh`
 
 ## การตั้งค่าที่สำคัญ
 
@@ -32,7 +35,7 @@
 ## ใช้งาน
 
 ```bash
-opencode            # เปิด TUI ใน working directory ปัจจุบัน
+opencode2            # เปิด TUI ใน working directory ปัจจุบัน (V2 beta)
 ```
 
 opencode ยังถูกต่อเป็น agent server ใน Zed ด้วย (effort medium) — ดู [zed.md](zed.md)
@@ -44,6 +47,6 @@ opencode ยังถูกต่อเป็น agent server ใน Zed ด้�
 
 ## ปัญหาที่เจอบ่อย
 
-- **`opencode: command not found`** → `~/.opencode/bin` เข้า PATH ผ่าน `~/.zshrc` (macOS only); เปิด shell ใหม่หรือ `source ~/.zshrc`
+- **`opencode2: command not found`** → `~/.bun/bin` เข้า PATH ผ่าน `~/.zshrc` (macOS only); เปิด shell ใหม่หรือ `source ~/.zshrc`
 - **แก้ `AGENTS.md` แล้วไม่มีผล** → เป็น store symlink (read-only) ต้องแก้ในรีโปแล้วรัน `home-manager switch`
 - **MCP/Atlassian ขอ auth** → server เป็น remote authv2 ต้องทำ auth flow ครั้งแรกตอนเรียกใช้

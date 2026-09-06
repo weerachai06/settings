@@ -5,7 +5,7 @@
  * พอร์ตจาก V1 (V1 plugin API ใช้กับ V2 ไม่ได้ — ดู https://opencode.ai/v2/docs/migrate-v1):
  * - V1 inject ผ่าน "tool.execute.before" แล้วแก้ output.system ของ tool call นั้น
  * - V2 hook ตัว tool แก้ได้แค่ input แก้ system ไม่ได้ จึงเปลี่ยนเป็นเก็บ path
- *   ของไฟล์ที่ read/edit ไว้ แล้ว inject rules ที่ match ผ่าน session.hook("context")
+ *   ของไฟล์ที่ read/edit/write ไว้ แล้ว inject rules ที่ match ผ่าน session.hook("context")
  *   ก่อนทุก model call แทน (behavior ใกล้เคียงกัน แต่ inject ต่อ model call ไม่ใช่ต่อ tool call)
  *
  * วาง plugin นี้ที่ (dotfiles จะ symlink ให้แล้วผ่าน home-manager):
@@ -23,7 +23,7 @@
 
 import { Plugin } from "@opencode-ai/plugin"
 import { readFileSync, readdirSync, statSync, existsSync } from "fs"
-import { join, relative } from "path"
+import { isAbsolute, join, relative } from "path"
 import { Glob } from "bun"
 
 // ─── Types ────────────────────────────────────────────────────────────────────
@@ -139,7 +139,7 @@ export default Plugin.define({
     // โหลด rules ครั้งเดียวตอน init (cache ไว้ในหน่วยความจำ)
     let cachedRules: ParsedRule[] = loadRules(rulesDir);
     let lastLoad = Date.now();
-    const CACHE_TTL_MS = 30_000; // reload ทุก 30 วิ ถ้ามีการแก้ไข rules
+    const CACHE_TTL_MS = 30_000; // reload ทุก 30 วิ (ไม่มี file watching — เช็คแบบ TTL)
 
     function getRules(): ParsedRule[] {
       // simple TTL cache — ไม่ต้อง watch file system
@@ -150,34 +150,37 @@ export default Plugin.define({
       return cachedRules;
     }
 
-    /** ไฟล์ (path สัมพัทธ์จาก worktree) ที่ session ปัจจุบันแตะด้วย read/edit */
-    const touched = new Set<string>();
-    let currentSession: string | undefined;
+    /** ไฟล์ (path สัมพัทธ์จาก worktree) ที่แตะด้วย read/edit/write — แยกตาม session
+     *  (tool hook ของ session ทุกตัวยิงมาที่ background service เดียวกัน) */
+    const touchedBySession = new Map<string, Set<string>>();
 
-    // เผื่อชื่อ tool ต่างกันตาม version — ครอบคลุม read/edit/write/patch ไว้เลย
-    const FILE_TOOLS = ["read", "edit", "write", "patch"];
+    function touchedFor(sessionID: string): Set<string> {
+      let set = touchedBySession.get(sessionID);
+      if (!set) touchedBySession.set(sessionID, (set = new Set()));
+      return set;
+    }
+
+    // ชื่อ tool + input field (`path`) ตรวจกับ opencode2 beta แล้ว — patch ใส่แค่
+    // patchText (ไม่มี path ให้ track) จึงไม่รวม
+    const FILE_TOOLS = ["read", "edit", "write"];
 
     /** จับ path ของไฟล์ที่ tool กำลังจะแตะ (แทน output.system ของ V1 ที่ใช้ไม่ได้แล้ว) */
     const toolHook = await ctx.tool.hook("execute.before", (event) => {
       if (!FILE_TOOLS.includes(event.tool)) return;
 
-      // ชื่อ arg ต่างกันตาม tool
-      const input = event.input as { filePath?: string; path?: string; file?: string } | undefined;
-      const filePath = input?.filePath ?? input?.path ?? input?.file;
+      const input = event.input as { path?: string } | undefined;
+      const filePath = input?.path;
       if (!filePath) return;
 
-      const rel = relative(worktree, filePath);
+      const abs = isAbsolute(filePath) ? filePath : join(worktree, filePath);
+      const rel = relative(worktree, abs);
       if (rel.startsWith("..")) return; // อยู่นอก worktree — ไม่สน
-      touched.add(rel);
+      touchedFor(event.sessionID).add(rel);
     });
 
     /** inject rules ที่ match เข้าไปใน system context ก่อนทุก model call */
     const contextHook = await ctx.session.hook("context", (event) => {
-      // สลับไป session ใหม่ → ล้างไฟล์ที่แตะจาก session เก่า
-      if (event.sessionID !== currentSession) {
-        currentSession = event.sessionID;
-        touched.clear();
-      }
+      const touched = touchedFor(event.sessionID);
 
       const matched = getRules().filter((rule) => {
         // alwaysApply: true → โหลดทุกครั้ง
@@ -193,13 +196,11 @@ export default Plugin.define({
         `[cursor-rules] injecting ${matched.length} rule(s) for ${touched.size} touched file(s)`,
       );
 
-      event.system.push({ text: formatRules(matched) });
+      event.system.push({ type: "text", text: formatRules(matched) });
     });
 
     /** Format rules เป็น string สำหรับ inject */
     function formatRules(rules: ParsedRule[]): string {
-      if (rules.length === 0) return "";
-
       return rules
         .map((r) => {
           const label =

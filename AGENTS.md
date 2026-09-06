@@ -70,5 +70,5 @@ user dev environment only — no nix-darwin, no system config, no sudo. See
 ### Deliberately outside Nix (see ADR-0002)
 
 GUI apps (orbstack, zed, wezterm, codexbar, fonts) are installed manually.
-`gh-pr-notifier/`, `global-protect/`, and `skills/` retain their own `install.sh`.
+`gh-pr-notifier/`, `global-protect/`, `skills/`, and `opencode/` retain their own `install.sh`.
 bun, rust, and opencode use their own installers.
