@@ -98,6 +98,10 @@ in
   } // lib.optionalAttrs pkgs.stdenv.isDarwin {
     "opencode/AGENTS.md".source = ./opencode/AGENTS.md;
     "opencode/opencode.jsonc".source = config.lib.file.mkOutOfStoreSymlink "${repoDir}/opencode/opencode.jsonc";
+    # cursor-rules plugin (V2 API) — auto-discovered from ~/.config/opencode/plugins/.
+    # Out-of-store: bun resolves imports from the file's realpath, so the plugin
+    # needs its own (writable) package.json + node_modules inside the repo dir.
+    "opencode/plugins/cursor-rules".source = config.lib.file.mkOutOfStoreSymlink "${repoDir}/opencode/plugins/cursor-rules";
   };
 
   home.file = {

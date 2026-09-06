@@ -39,6 +39,9 @@ nix flake update
 bash gh-pr-notifier/install.sh <name>
 bash global-protect/install.sh
 bash skills/install.sh
+
+# opencode cursor-rules plugin deps — symlinks themselves are in home.nix
+bash opencode/install.sh
 ```
 
 ## Git Safety
