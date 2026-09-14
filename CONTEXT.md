@@ -25,3 +25,4 @@ _Avoid_: Host (this setup does not manage whole machines)
 The guiding stance: the same `home.nix` works for any user on any machine. Machine-
 or OS-specific bits are guarded (e.g. `lib.optionalString pkgs.stdenv.isDarwin`) or
 left out of Nix entirely (GUI apps, system services).
+# test

@@ -134,7 +134,7 @@ Commands:
   commit-help    Show this help
 
 Env:
-  COMMIT_MODEL=opencode-go/deepseek-v4-pro   OpenCode model to use for generation
+  COMMIT_MODEL=opencode/mimo-v2.5-free       OpenCode model to use for generation
   COMMIT_INTERACTIVE=false                   Skip the y/n prompt (same as quick-commit)
   COMMIT_VERBOSE=1                           Print a banner when the file is sourced
 EOF
