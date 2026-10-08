@@ -7,6 +7,9 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "cursor_animation": {
+    "enabled": true
+  },
   "ssh_connections": [
     {
       "host": "main.magenta-hamster-76.weerachaiplodkaew.coder",
@@ -28,7 +31,7 @@
   "collaboration_panel": {
     "dock": "left",
   },
-  "diff_view_style": "split",
+  "diff_view_style": "unified",
   "search": {
     "center_on_match": false,
     "whole_word": true,
