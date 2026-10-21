@@ -49,6 +49,7 @@ SKILLS=(
   to-spec
   triage
   ubiquitous-language
+  ui-highlight-map
   vercel-react-best-practices
   wiki-docs
   writing-great-skills
