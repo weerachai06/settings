@@ -111,7 +111,35 @@
   "autoMode": {
     "soft_deny": [
       "$defaults",
-      "Writes to .env.local, .env.production.example, or other .env* files in this repo"
+      "Writes to .env.local, .env.production.example, or other .env* files in this repo",
+      "git force-push or git reset --hard in weerachai06/settings (CLAUDE.md states: never force push; ask before destructive git ops)"
+    ],
+    "environment": [
+      "### Org-wide",
+      "**Organization**: None configured",
+      "**Cloud provider(s)**: None configured",
+      "**Repository visibility**: PUBLIC — weerachai06/settings (github.com:weerachai06/settings.git). Any push here is publishing.",
+      "**Internal sharing / snippet hosting**: None configured — treat public paste/gist services as outside the trust boundary",
+      "**Secrets management**: None configured",
+      "**Default / protected branches**: Default branch is main; Protected branches: none listed; Rulesets: none listed (gh-verified)",
+      "**CI/CD deploy targets**: None configured",
+      "**Network posture**: None configured",
+      "**Host containment**: None configured — assume Claude Code runs on an ordinary developer machine or CI runner with open internet",
+      "**Source control**: The trusted repo (weerachai06/settings, public) and its origin remote only — no additional orgs configured",
+      "**Trusted internal domains**: None configured",
+      "**Trusted cloud buckets**: None configured",
+      "**Key internal services**: None configured",
+      "**Internal package registry**: None configured",
+      "**Sensitive data locations & audiences**: any file or store holding personal data, confidential business data, credentials, regulated data, or similarly sensitive material; preserve exact handles when known and share only with audiences cleared at the [named+specifics] bar. Note: skills/security-review/references/secret-patterns.md is a secret-pattern reference file, not itself a secret store.",
+      "**Data retention / declassification**: None configured",
+      "**Sensitive remote targets**: any namespace, host, or container whose name carries `prod` or `production` as a whole word or name segment",
+      "**Protected deployment namespaces / environments**: None configured — fall back to the Sensitive remote targets heuristic",
+      "**Protected IaC scopes**: IAM, RBAC, networking, quota, and node-pool resources; anything whose name or tag carries `prod` or `production` as a whole word or name segment",
+      "### User-specific",
+      "**Primary use of Claude Code**: personal dotfiles / dev environment management (home-manager standalone config) — hobby/personal use",
+      "**Trusted repo**: ~/.dotfiles (weerachai06/settings, public repo) and its origin remote — since it's public, only this repo's own work belongs here; confidential material does not clear into it by virtue of visibility",
+      "**Org-specific CLIs**: None configured — personal tool usage observed (home-manager, nix, fnm) but no org-specific internal CLIs found",
+      "Routine under ~/.dotfiles/ prefix: nix build/activate commands, home-manager switch, flake update, and the repo's own install.sh scripts (gh-pr-notifier, global-protect, skills) are routine project operations per CLAUDE.md"
     ]
   }
 }
