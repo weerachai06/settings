@@ -32,7 +32,6 @@ SKILLS=(
   diagnosing-bugs
   edit-article
   git-guardrails-claude-code
-  grill-me
   grill-with-docs
   handoff
   improve-codebase-architecture
