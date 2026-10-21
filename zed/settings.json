@@ -31,7 +31,7 @@
   "collaboration_panel": {
     "dock": "left",
   },
-  "diff_view_style": "unified",
+  "diff_view_style": "split",
   "search": {
     "center_on_match": false,
     "whole_word": true,
