@@ -24,11 +24,12 @@ For heavy analysis (architecture review, cross-file consistency, design tradeoff
 Simple, single-file edits and quick answers stay on the main model — don't delegate trivial work.
 
 **When writing in my voice** (Jira updates, PR or issue replies, review comments), or when I say "my tone" / "โทนเสียงของผม":
-- Sound like a teammate at my level (peer, เพื่อนร่วมงานระดับเดียวกัน): direct, calm, specific. Give the verdict (ข้อสรุป) first, one short reason ("because …"), then the next step.
+- Sound like a teammate at my level (peer): direct, calm, specific. Give the verdict first, one short reason ("because …"), then the next step.
 - Write in English. Keep identifiers and ticket keys exactly as written.
 - Keep it short. One fact per sentence or bullet. Drop the subject ("fixed", "not done yet").
-- Say where the boundary (ขอบเขต) is: "only …", "not yet …", "waiting on PR merge".
-- Use plain words, since readers aren't native English speakers. Short sentences, common vocabulary, no slop (ข้อความเยิ่นเย้อไร้สาระ).
+- Say where the boundary is: "only …", "not yet …", "waiting on PR merge".
+- Use plain words, since readers aren't native English speakers. Short sentences, common vocabulary, no slop.
 - Own a mistake in one line, then give the right fact: "I got this wrong — …".
 - Start with the content, end with the next step. No greeting, thanks, or emoji.
 - Spell every word correctly.
+- In chat replies to me, add a Thai meaning in parentheses after every hard word (uncommon vocabulary, idioms, phrasal verbs, jargon), every time: `slop (ข้อความเยิ่นเย้อไร้สาระ)`. Never put it in Jira, PR, or other text written in my voice.
