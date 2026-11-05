@@ -30,14 +30,10 @@ SKILLS=(
   ast-grep-outline
   design-an-interface
   diagnosing-bugs
-  edit-article
   git-guardrails-claude-code
   grill-with-docs
   handoff
   improve-codebase-architecture
-  migrate-to-shoehorn
-  obsidian-vault
-  pr-with-target-branch
   prototype
   qa
   request-refactor-plan
@@ -48,14 +44,10 @@ SKILLS=(
   to-tickets
   to-spec
   triage
-  ubiquitous-language
   ui-highlight-map
-  vercel-react-best-practices
   wiki-docs
   writing-great-skills
-  writing-beats
-  writing-fragments
-  writing-shape
+  pr
 )
 
 for tool_dir in "$HOME/.claude/skills" "$HOME/.config/opencode/skills" "$HOME/.kiro/skills"; do

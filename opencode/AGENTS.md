@@ -14,8 +14,6 @@ Before multi-step tasks, state the plan: `[step] → verify: [check]`. Loop unti
 - ✅ Done — what changed.
 - ⬜ Remaining — what's left (or "nothing").
 
-Never use `/tmp`. Use `./tmp` at project root.
-Run `fnm use` before any Node/npm command.
 
 
 ## Git Safety

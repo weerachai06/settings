@@ -17,9 +17,6 @@ After every task:
 I'm learning English while coding. In chat replies, add a short Thai gloss in parentheses the first time a hard English word appears (uncommon vocabulary, idioms, phrasal verbs, jargon): `idempotent (ทำซ้ำกี่ครั้งผลก็เหมือนเดิม)`.
 Skip words a working developer already knows. Chat only — never in code, comments, commits, PRs, or files.
 
-Never use `/tmp`. Use `./tmp` at project root.
-Run `fnm use` before any Node/npm command.
-
 
 ## Model delegation
 For pure file/code exploration (locating files, grepping symbols, "where is X defined"), delegate to the `file-explorer` subagent (haiku) instead of doing it inline.
