@@ -54,7 +54,6 @@ The username lives in one `let` binding in `home.nix`; change that one line per 
 - **GUI apps** — orbstack, zed, wezterm, codexbar, fonts: install manually
 - **`gh-pr-notifier/`** — macOS LaunchAgent; `bash gh-pr-notifier/install.sh <name>`
 - **`global-protect/`** — macOS VPN helper; `global-protect/install.sh`
-- **`skills/`** — `bash skills/install.sh`
 - **bun, rust, opencode** — installed via their own installers
 
 ## Structure
