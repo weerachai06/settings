@@ -27,25 +27,15 @@ done
 echo "==> symlink skills to tools"
 SKILLS=(
   ast-grep
-  ast-grep-outline
-  design-an-interface
   diagnosing-bugs
-  git-guardrails-claude-code
   grill-with-docs
   handoff
   improve-codebase-architecture
-  prototype
-  qa
-  request-refactor-plan
-  scaffold-exercises
-  setup-pre-commit
   tdd
-  teach
   to-tickets
   to-spec
   triage
   ui-highlight-map
-  wiki-docs
   writing-great-skills
   pr
 )
