@@ -94,7 +94,7 @@
       "**Primary use of Claude Code**: personal dotfiles / dev environment management (home-manager standalone config) — hobby/personal use",
       "**Trusted repo**: ~/.dotfiles (weerachai06/settings, public repo) and its origin remote — since it's public, only this repo's own work belongs here; confidential material does not clear into it by virtue of visibility",
       "**Org-specific CLIs**: None configured — personal tool usage observed (home-manager, nix, fnm) but no org-specific internal CLIs found",
-      "Routine under ~/.dotfiles/ prefix: nix build/activate commands, home-manager switch, flake update, and the repo's own install.sh scripts (gh-pr-notifier, global-protect) are routine project operations per CLAUDE.md"
+      "Routine under ~/.dotfiles/ prefix: nix build/activate commands, home-manager switch, flake update, and the repo's own install.sh scripts (gh-pr-notifier, global-protect, skills) are routine project operations per CLAUDE.md"
     ]
   }
 }

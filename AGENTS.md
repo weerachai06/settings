@@ -38,6 +38,7 @@ nix flake update
 # Script-based pieces (deliberately not in Nix — see ADR-0002)
 bash gh-pr-notifier/install.sh <name>
 bash global-protect/install.sh
+bash skills/install.sh
 
 # opencode v2 (beta) + cursor-rules plugin deps — symlinks/config are in home.nix
 bash opencode/install.sh
@@ -69,5 +70,5 @@ user dev environment only — no nix-darwin, no system config, no sudo. See
 ### Deliberately outside Nix (see ADR-0002)
 
 GUI apps (orbstack, zed, wezterm, codexbar, fonts) are installed manually.
-`gh-pr-notifier/`, `global-protect/`, and `opencode/` retain their own `install.sh`.
+`gh-pr-notifier/`, `global-protect/`, `skills/`, and `opencode/` retain their own `install.sh`.
 bun, rust, and opencode use their own installers.
