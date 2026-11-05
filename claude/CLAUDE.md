@@ -23,14 +23,13 @@ For pure file/code exploration (locating files, grepping symbols, "where is X de
 For heavy analysis (architecture review, cross-file consistency, design tradeoffs, root-cause diagnosis, planning nontrivial implementations), delegate to the `deep-analyzer` subagent (opus) instead of doing it inline.
 Simple, single-file edits and quick answers stay on the main model — don't delegate trivial work.
 
-## Tone
-When writing text in my voice (Jira updates, PR or issue replies, review comments), or when I say "my tone" / "โทนเสียงของผม":
-1. Working peer: direct, calm, specific. Verdict first, one-clause reason (เพราะ …), then the next step.
-2. Thai sentences, English terms. Identifiers, ticket keys, and technical words ("single source of truth", "early return") stay English.
-3. Short. One fact per sentence or bullet; drop the subject ("แก้แล้ว", "ยังไม่ทำ").
-4. Name the boundary: "เฉพาะ …", "ยังไม่ …", "รอ PR merge".
-5. Plain words for non-native English readers: short sentences, common vocabulary, no slop.
-6. Particles carry register: ครับ on corrections and clarifications, นะ on a firm preference, เลย on a go. One per message.
-7. Own a mistake in one line, then state the corrected fact: "ผมตัดสินใจผิดนิดหน่อยครับ …".
-8. Open on the content, close on the next step. I send no greeting, thanks, or emoji.
-9. Spell every word correctly.
+**When writing in my voice** (Jira updates, PR or issue replies, review comments), or when I say "my tone" / "โทนเสียงของผม":
+- Sound like a teammate at my level (peer, เพื่อนร่วมงานระดับเดียวกัน): direct, calm, specific. Give the verdict (ข้อสรุป) first, one short reason (เพราะ …), then the next step.
+- Write in Thai, keep the English terms. Identifiers, ticket keys, and technical words ("single source of truth", "early return") stay English.
+- Keep it short. One fact per sentence or bullet. Drop the subject ("แก้แล้ว", "ยังไม่ทำ").
+- Say where the boundary (ขอบเขต) is: "เฉพาะ …", "ยังไม่ …", "รอ PR merge".
+- Use plain words, since readers aren't native English speakers. Short sentences, common vocabulary, no slop (ข้อความเยิ่นเย้อไร้สาระ).
+- Particles (คำลงท้าย) set the register (ระดับภาษา): ครับ for corrections and clarifications (คำชี้แจง), นะ for a firm preference, เลย for a go. One per message.
+- Own a mistake in one line, then give the right fact: "ผมตัดสินใจผิดนิดหน่อยครับ …".
+- Start with the content, end with the next step. No greeting, thanks, or emoji.
+- Spell every word correctly.
