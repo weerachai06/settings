@@ -45,10 +45,14 @@
     "anthropic-skills:skill-creator": "off",
     "anthropic-skills:xlsx": "off"
   },
+  "worktree": {
+    "baseRef": "head"
+  },
   "enabledPlugins": {
     "figma@claude-plugins-official": true,
     "atlassian-mcp@anthropic-plugin-directory": true
   },
+  "language": "Thai",
   "effortLevel": "medium",
   "modelSettings": {
     "claude-opus-5-5": {
@@ -58,8 +62,11 @@
       "effortLevel": "high"
     }
   },
+  "awaySummaryEnabled": false,
   "theme": "dark",
+  "verbose": true,
   "preferredNotifChannel": "auto",
+  "fileCheckpointingEnabled": true,
   "crossSessionInbound": "accept",
   "inputNeededNotifEnabled": true,
   "agentPushNotifEnabled": true,
@@ -96,5 +103,6 @@
       "**Org-specific CLIs**: None configured — personal tool usage observed (home-manager, nix, fnm) but no org-specific internal CLIs found",
       "Routine under ~/.dotfiles/ prefix: nix build/activate commands, home-manager switch, flake update, and the repo's own install.sh scripts (gh-pr-notifier, global-protect, skills) are routine project operations per CLAUDE.md"
     ]
-  }
+  },
+  "idleCompaction": false
 }
