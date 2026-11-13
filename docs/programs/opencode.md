@@ -14,7 +14,7 @@
 | `opencode/AGENTS.md` (Home Repo: `~/Documents/projects/home-repo`) | `~/.config/opencode/AGENTS.md` | `mkOutOfStoreSymlink` (เขียนกลับได้) |
 | [`opencode/plugins/cursor-rules`](../../opencode/plugins/cursor-rules) | `~/.config/opencode/plugins/cursor-rules` | `mkOutOfStoreSymlink` (เขียนกลับได้) |
 
-`opencode.jsonc` เป็น out-of-store symlink ชี้กลับรีโป — แก้ที่ไหนก็เป็นไฟล์เดียวกัน ส่วน `AGENTS.md` เป็น store symlink ต้องแก้ในรีโปแล้ว `home-manager switch`
+`opencode.jsonc` เป็น out-of-store symlink ชี้กลับรีโป — แก้ที่ไหนก็เป็นไฟล์เดียวกัน ส่วน `AGENTS.md` เป็น out-of-store symlink ชี้ไป Home Repo — แก้ในนั้นมีผลทันที ไม่ต้อง `home-manager switch`
 
 plugin `cursor-rules` ต้องมี `node_modules` ของตัวเองข้าง ๆ `index.ts` (bun resolve import จาก realpath ของไฟล์) — ติดตั้งด้วย `bash opencode/install.sh`
 
@@ -48,5 +48,5 @@ opencode ยังถูกต่อเป็น agent server ใน Zed ด้�
 ## ปัญหาที่เจอบ่อย
 
 - **`opencode2: command not found`** → `~/.bun/bin` เข้า PATH ผ่าน `~/.zshrc` (macOS only); เปิด shell ใหม่หรือ `source ~/.zshrc`
-- **แก้ `AGENTS.md` แล้วไม่มีผล** → เป็น store symlink (read-only) ต้องแก้ในรีโปแล้วรัน `home-manager switch`
+- **แก้ `AGENTS.md` แล้วไม่มีผล** → symlink ชี้ไป `~/Documents/projects/home-repo/opencode/AGENTS.md` ต้องแก้ที่ Home Repo และเช็คว่า path นั้นมีอยู่จริง
 - **MCP/Atlassian ขอ auth** → server เป็น remote authv2 ต้องทำ auth flow ครั้งแรกตอนเรียกใช้
