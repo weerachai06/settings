@@ -68,7 +68,6 @@ The username lives in one `let` binding in `home.nix`; change that one line per 
 ├── global-protect/     # GlobalProtect VPN helper — not in Nix
 ├── kiro/               # kiro-cli AGENTS.md (-> ~/.kiro/steering/)
 ├── opencode/           # opencode config and AGENTS.md
-├── skills/             # Claude Code / opencode skills — not in Nix
 ├── wezterm/            # WezTerm config
 ├── zed/                # Zed settings, keymap, and tasks
 ├── check-deps.sh       # Dependency checker
