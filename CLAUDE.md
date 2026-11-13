@@ -19,7 +19,7 @@ nix flake update
 # Script-based pieces (deliberately not in Nix — see ADR-0002)
 bash gh-pr-notifier/install.sh <name>
 bash global-protect/install.sh
-bash skills/install.sh
+bash ~/Documents/projects/home-repo/skills/install.sh   # skills live in the Home Repo
 ```
 
 ## Agent skills
@@ -62,5 +62,6 @@ user dev environment only — no nix-darwin, no system config, no sudo. See
 ### Deliberately outside Nix (see ADR-0002)
 
 GUI apps (orbstack, zed, wezterm, codexbar, fonts) are installed manually.
-`gh-pr-notifier/`, `global-protect/`, and `skills/` retain their own `install.sh`.
+`gh-pr-notifier/` and `global-protect/` retain their own `install.sh`.
+`skills/` and the shared agent files (`claude/CLAUDE.md`, `claude/agents/`, `kiro/AGENTS.md`, `opencode/AGENTS.md`) live in the Home Repo (`~/Documents/projects/home-repo`); `home.nix` symlinks them from there.
 bun, rust, and opencode use their own installers.

@@ -1,6 +1,7 @@
 { config, lib, pkgs, username, ... }:
 let
   repoDir = "${config.home.homeDirectory}/.dotfiles";
+  homeRepoDir = "${config.home.homeDirectory}/Documents/projects/home-repo";
 in
 {
   home.username = username;
@@ -96,7 +97,7 @@ in
     "zed/settings.json".source = config.lib.file.mkOutOfStoreSymlink "${repoDir}/zed/settings.json";
 
   } // lib.optionalAttrs pkgs.stdenv.isDarwin {
-    "opencode/AGENTS.md".source = ./opencode/AGENTS.md;
+    "opencode/AGENTS.md".source = config.lib.file.mkOutOfStoreSymlink "${homeRepoDir}/opencode/AGENTS.md";
     "opencode/opencode.jsonc".source = config.lib.file.mkOutOfStoreSymlink "${repoDir}/opencode/opencode.jsonc";
     # cursor-rules plugin (V2 API) — auto-discovered from ~/.config/opencode/plugins/.
     # Out-of-store: bun resolves imports from the file's realpath, so the plugin
@@ -109,10 +110,10 @@ in
   home.file = {
     "scripts/generate-commit.sh".source = ./scripts/generate-commit.sh;
   } // lib.optionalAttrs pkgs.stdenv.isDarwin {
-    ".claude/CLAUDE.md".source = ./claude/CLAUDE.md;
+    ".claude/CLAUDE.md".source = config.lib.file.mkOutOfStoreSymlink "${homeRepoDir}/claude/CLAUDE.md";
     ".claude/settings.json".source = config.lib.file.mkOutOfStoreSymlink "${repoDir}/claude/settings.json";
-    ".claude/agents".source = ./claude/agents;
+    ".claude/agents".source = config.lib.file.mkOutOfStoreSymlink "${homeRepoDir}/claude/agents";
     # kiro-cli loads ~/.kiro/steering/**/*.md globally into its default agent
-    ".kiro/steering/AGENTS.md".source = ./kiro/AGENTS.md;
+    ".kiro/steering/AGENTS.md".source = config.lib.file.mkOutOfStoreSymlink "${homeRepoDir}/kiro/AGENTS.md";
   };
 }

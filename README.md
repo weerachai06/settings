@@ -45,7 +45,7 @@ See [ADR-0002](docs/adr/0002-home-manager-standalone.md) for the design,
   global-protect, bun, opencode, cargo) are guarded with `isDarwin`.
 - **App configs** — wezterm, zed, opencode, claude, kiro via `home.file`/`xdg.configFile`.
   App-writable configs use out-of-store symlinks so the apps can still write them.
-  `kiro/AGENTS.md` is symlinked to `~/.kiro/steering/AGENTS.md` (kiro-cli's global steering).
+  `kiro/AGENTS.md` (in the Home Repo, `~/Documents/projects/home-repo`) is symlinked to `~/.kiro/steering/AGENTS.md` (kiro-cli's global steering).
 
 The username lives in one `let` binding in `home.nix`; change that one line per user.
 
@@ -54,7 +54,7 @@ The username lives in one `let` binding in `home.nix`; change that one line per 
 - **GUI apps** — orbstack, zed, wezterm, codexbar, fonts: install manually
 - **`gh-pr-notifier/`** — macOS LaunchAgent; `bash gh-pr-notifier/install.sh <name>`
 - **`global-protect/`** — macOS VPN helper; `global-protect/install.sh`
-- **`skills/`** — `bash skills/install.sh`
+- **`skills/`** — moved to the Home Repo (`~/Documents/projects/home-repo`); `bash ~/Documents/projects/home-repo/skills/install.sh`
 - **bun, rust, opencode** — installed via their own installers
 
 ## Structure

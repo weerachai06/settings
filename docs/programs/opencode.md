@@ -11,7 +11,7 @@
 | ไฟล์ | symlink ไปที่ | ชนิด symlink |
 | --- | --- | --- |
 | [`opencode/opencode.jsonc`](../../opencode/opencode.jsonc) | `~/.config/opencode/opencode.jsonc` | `mkOutOfStoreSymlink` (เขียนกลับได้) |
-| [`opencode/AGENTS.md`](../../opencode/AGENTS.md) | `~/.config/opencode/AGENTS.md` | store symlink (read-only) |
+| `opencode/AGENTS.md` (Home Repo: `~/Documents/projects/home-repo`) | `~/.config/opencode/AGENTS.md` | `mkOutOfStoreSymlink` (เขียนกลับได้) |
 | [`opencode/plugins/cursor-rules`](../../opencode/plugins/cursor-rules) | `~/.config/opencode/plugins/cursor-rules` | `mkOutOfStoreSymlink` (เขียนกลับได้) |
 
 `opencode.jsonc` เป็น out-of-store symlink ชี้กลับรีโป — แก้ที่ไหนก็เป็นไฟล์เดียวกัน ส่วน `AGENTS.md` เป็น store symlink ต้องแก้ในรีโปแล้ว `home-manager switch`
@@ -28,7 +28,7 @@ plugin `cursor-rules` ต้องมี `node_modules` ของตัวเอ
 
 ## AGENTS.md
 
-[`opencode/AGENTS.md`](../../opencode/AGENTS.md) คือ instruction กลางที่ opencode โหลดทุก session (เทียบเท่า `CLAUDE.md` ของ Claude Code) — กำหนดสไตล์การทำงาน: เขียนโค้ดน้อยที่สุด, แตะเฉพาะที่งานต้องการ, วางแผนก่อนทำงานหลายขั้น, สรุป ✅/⬜ ท้ายงาน, และ git safety (ห้าม force push)
+`opencode/AGENTS.md` (อยู่ใน Home Repo `~/Documents/projects/home-repo`) คือ instruction กลางที่ opencode โหลดทุก session (เทียบเท่า `CLAUDE.md` ของ Claude Code) — กำหนดสไตล์การทำงาน: เขียนโค้ดน้อยที่สุด, แตะเฉพาะที่งานต้องการ, วางแผนก่อนทำงานหลายขั้น, สรุป ✅/⬜ ท้ายงาน, และ git safety (ห้าม force push)
 
 > เนื้อหาส่วนใหญ่ตรงกับ global `~/.claude/CLAUDE.md` โดยตั้งใจ เพื่อให้ agent ทุกตัวทำงานสไตล์เดียวกัน
 
