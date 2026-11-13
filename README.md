@@ -63,11 +63,10 @@ The username lives in one `let` binding in `home.nix`; change that one line per 
 .dotfiles/
 ├── flake.nix           # inputs + homeConfigurations.<system>
 ├── home.nix            # the portable dev env (packages, git, zsh, app configs)
-├── claude/             # Claude Code settings and CLAUDE.md
+├── claude/             # Claude Code settings
 ├── gh-pr-notifier/     # GitHub PR review notifier (LaunchAgent) — not in Nix
 ├── global-protect/     # GlobalProtect VPN helper — not in Nix
-├── kiro/               # kiro-cli AGENTS.md (-> ~/.kiro/steering/)
-├── opencode/           # opencode config and AGENTS.md
+├── opencode/           # opencode config and plugins
 ├── wezterm/            # WezTerm config
 ├── zed/                # Zed settings, keymap, and tasks
 ├── check-deps.sh       # Dependency checker
