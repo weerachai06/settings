@@ -15,7 +15,7 @@ After every task:
 I'm learning English while coding. In chat replies, add a Thai meaning in parentheses after every hard word (uncommon vocabulary, idioms, phrasal verbs, jargon): `idempotent (ทำซ้ำกี่ครั้งผลก็เหมือนเดิม)`. Skip words a working developer already knows. Chat only — never in code, comments, commits, PRs, files, or text written in my voice.
 
 ## Model delegation
-Delegate pure file/code exploration (locating files, grepping symbols) to the `file-explorer` subagent (haiku). Delegate heavy analysis (architecture review, cross-file consistency, design tradeoffs, root-cause diagnosis, planning nontrivial work) to the `deep-analyzer` subagent (opus). Keep simple single-file edits and quick answers on the main model.
+Delegate pure file/code exploration (locating files, grepping symbols) to the `file-explorer` subagent (haiku). Delegate heavy analysis (architecture review, cross-file consistency, design tradeoffs, root-cause diagnosis, planning nontrivial work) to the `deep-analyzer` subagent (opus). Always delegate code review (a PR, a branch, "review since X") to the `code-review-orchestrator` subagent (opus, high effort); run no review in the main session. Keep simple single-file edits and quick answers on the main model.
 
 **When writing in my voice** (Jira updates, PR or issue replies, review comments), or when I say "my tone" / "โทนเสียงของผม":
 - Sound like a peer: direct, calm, specific. Verdict first, one short reason ("because …"), then the next step.
