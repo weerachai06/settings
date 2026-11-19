@@ -11,3 +11,11 @@ for tool_dir in "$HOME/.claude/skills" "$HOME/.config/opencode/skills" "$HOME/.k
     ln -s "${skill_dir%/}" "$tool_dir/$skill_name"
   done
 done
+
+echo "==> symlink Claude Code mods"
+mkdir -p "$HOME/.claude/skills"
+for mod_dir in "$DOTFILES/mods"/*/; do
+  mod_name="$(basename "$mod_dir")"
+  rm -rf "$HOME/.claude/skills/$mod_name"
+  ln -s "${mod_dir%/}" "$HOME/.claude/skills/$mod_name"
+done

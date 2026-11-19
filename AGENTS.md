@@ -7,6 +7,8 @@ skills and global instructions, and points at the repos I work in.
 
 - `skills/` — my own skills. `skills/install.sh` links them into
   `~/.claude/skills`, `~/.config/opencode/skills` and `~/.kiro/skills`.
+- `mods/` — my Claude Code mods. `skills/install.sh` links them into
+  `~/.claude/skills`, where Claude Code loads them as plugins.
 - `claude/`, `kiro/`, `opencode/` — global instructions and subagents per tool.
   `~/.dotfiles/home.nix` links them into place.
 - Skills installed from published repos are not stored here.
