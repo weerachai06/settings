@@ -1,14 +1,16 @@
 ---
 name: code-review
-description: "Review a GitHub PR (or the changes since a fixed point) on two axes: Standards and Spec. Reports findings with severity, then saves them as inline suggestion comments in a Pending review. Use when the user wants to review a PR, a branch, work-in-progress changes, or asks to \"review since X\"."
+description: "Review a GitHub PR (or the changes since a fixed point) on two axes: Spec, and Standards (which includes accessibility). Reports findings with severity, then saves them as inline suggestion comments in a Pending review. Use when the user wants to review a PR, a branch, work-in-progress changes, or asks to \"review since X\"."
 ---
 
 Two-axis review of a PR diff:
 
-- **Standards**: does the code conform to this repo's documented coding standards and to modern web guidance?
 - **Spec**: does the code faithfully implement the originating issue / spec?
+- **Standards**: does the code conform to this repo's documented coding standards, to modern web guidance, and to accessibility (a11y) requirements?
 
-Both axes run as **parallel sub-agents** so they don't pollute each other's context, then this skill aggregates their findings. Start every sub-agent with a fresh context window.
+Each axis runs as its own **parallel sub-agent**, on **Opus with high effort**, so the axes don't pollute each other's context. This skill then aggregates their findings. Start every sub-agent with a fresh context window.
+
+The parent (the agent running this skill) must not run on or spawn itself as Opus. Only the two axis sub-agents use Opus.
 
 ## Severity
 
@@ -103,12 +105,22 @@ Each smell reads *what it is* → *how to fix*; match it against the diff:
 
 Issue both sub-agent calls together, in the foreground, and aggregate the reports they return.
 
+Spawn one sub-agent per axis, each with model `opus` and effort `high`:
+
+- Spec axis: sub-agent `code-review-spec`.
+- Standards axis: sub-agent `code-review-standards`.
+
+These agent definitions (in `claude/agents/`) pin `model: opus` and `effort: high`. If your runtime cannot select a sub-agent by name, spawn a general sub-agent and set model `opus` and effort `high` on the call. Never raise the parent to Opus.
+
 **Standards sub-agent prompt** should include:
 
 - The diff command, (for a PR) the PR number, and `WT`. Tell it to read repo files only from `WT`.
 - The list of standards-source files from step 4, **plus the smell baseline from step 4** pasted in full (the sub-agent has no other access to it).
 - When the diff touches HTML, CSS, or client-side JS/TSX: the instruction to invoke the `modern-web-guidance` skill for those hunks (search per web capability, retrieve the matching guides) and review the hunks against the retrieved guides. Cite the guide `id` in each finding. Skip the skill's "Disclose Skill Usage" section; this review does not deliver code. Skip the skill when the diff has no web UI code.
+- When the diff touches UI code (HTML, JSX/TSX, templates, CSS): the **a11y brief** below.
 - The brief: "Report, per file/line, (a) every place the diff violates a documented standard or a retrieved modern-web guide: cite the standard (file + the rule) or the guide id; and (b) any baseline smell you spot: name it and quote the hunk. Give every finding a severity prefix from the scale below, the file path, and the line number in the new version of the file. When the fix is a small exact code change, add the replacement code for the line(s). Skip anything tooling enforces. Follow the writing style below. Under 400 words." Paste the Severity and Writing style sections into the prompt.
+
+**a11y brief** (part of the Standards prompt): "For UI hunks, also check accessibility against WCAG 2.2 AA: semantic elements and landmarks, accessible names and labels for controls, `alt` text, keyboard access and focus order and visible focus, correct ARIA (no redundant or invalid roles), colour contrast and non-colour cues, form errors and status messages, motion and reduced-motion, touch target size. Prefix each a11y finding with `a11y:` after the severity and cite the WCAG success criterion (for example `WCAG 2.1.1`). Report only what the diff shows; do not guess at unseen markup."
 
 **Spec sub-agent prompt** should include:
 
@@ -120,9 +132,9 @@ If the spec is missing, skip the Spec sub-agent and note this in the final repor
 
 ### 6. Aggregate
 
-Present the two reports under `## Standards` and `## Spec` headings. Inside each heading, list the findings as a to-fix list ordered Blocker → Nit, one line each: `[Severity] path:line — what to fix`. Do **not** merge or rerank findings across axes, because the two axes are deliberately separate (see _Why two axes_).
+Present the two reports under `## Spec` and `## Standards` headings. Standards findings from the a11y brief stay inside `## Standards`, marked `a11y:`. Inside each heading, list the findings as a to-fix list ordered Blocker → Nit, one line each: `[Severity] path:line — what to fix`. Do **not** merge or rerank findings across axes, because the two axes are deliberately separate (see _Why two axes_).
 
-End with a one-line summary per axis: count per severity. Don't pick a single winner across axes.
+End with a one-line summary per axis: count per severity (for Standards, also the a11y count). Don't pick a single winner across axes.
 
 ### 7. Check the inline comments
 
