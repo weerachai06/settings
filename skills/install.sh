@@ -19,3 +19,14 @@ for mod_dir in "$DOTFILES/mods"/*/; do
   rm -rf "$HOME/.claude/skills/$mod_name"
   ln -s "${mod_dir%/}" "$HOME/.claude/skills/$mod_name"
 done
+
+echo "==> symlink subagents to Kiro and OpenCode"
+for pair in "kiro/agents:$HOME/.kiro/agents" "opencode/agents:$HOME/.config/opencode/agents"; do
+  src="$DOTFILES/${pair%%:*}"
+  dest="${pair#*:}"
+  mkdir -p "$dest"
+  for agent_file in "$src"/*; do
+    rm -f "$dest/$(basename "$agent_file")"
+    ln -s "$agent_file" "$dest/$(basename "$agent_file")"
+  done
+done
