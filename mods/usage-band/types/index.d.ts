@@ -2,7 +2,7 @@ export type Usage = {
   tokens?: number
   window: number
   percent?: number
-  rateLimits: { kind: string; percentUsed: number }[]
+  rateLimits: { kind: string; percentUsed: number; resetsAt?: string }[]
   usd?: number
 }
 

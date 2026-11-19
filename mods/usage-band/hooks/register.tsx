@@ -5,7 +5,12 @@ import type { Usage } from '../types'
 
 const usageAtom = atom({ plugin: 'usage-band', key: 'usage' } as const, null)
 
-const LABELS: Record<string, string> = { five_hour: '5h', seven_day: '7d', spend_limit: 'spend' }
+const LABELS: Record<string, string> = {
+  five_hour: '5-hour',
+  seven_day: 'Weekly',
+  spend_limit: 'Spend',
+}
+const DAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
 const BAR_WIDTH = 10
 
 const compact = (n: number) =>
@@ -16,6 +21,13 @@ const bar = (percent: number) => {
   return '█'.repeat(filled) + '░'.repeat(BAR_WIDTH - filled)
 }
 
+const resetLabel = (iso: string) => {
+  const d = new Date(iso)
+  const time = `${String(d.getHours()).padStart(2, '0')}:${String(d.getMinutes()).padStart(2, '0')}`
+
+  return d.toDateString() === new Date().toDateString() ? time : `${DAYS[d.getDay()]} ${time}`
+}
+
 const toUsage = (s: {
   context: SessionContextUsage
   rateLimits: SessionRateLimit[]
@@ -24,7 +36,11 @@ const toUsage = (s: {
   tokens: s.context.tokens,
   window: s.context.window,
   percent: s.context.percent,
-  rateLimits: s.rateLimits.map(r => ({ kind: r.kind, percentUsed: r.percentUsed })),
+  rateLimits: s.rateLimits.map(r => ({
+    kind: r.kind,
+    percentUsed: r.percentUsed,
+    resetsAt: r.resetsAt,
+  })),
   usd: s.cost?.usd,
 })
 
@@ -53,13 +69,18 @@ export const register: Register = on => {
     const percent = usage.percent ?? 0
 
     return (
-      <Box>
+      <Box flexDirection="column">
         <Text dimColor>
           Context {bar(percent)} {percent}%
           {usage.tokens === undefined ? '' : ` (${compact(usage.tokens)}/${compact(usage.window)})`}
-          {usage.rateLimits.map(r => ` · ${LABELS[r.kind] ?? r.kind} ${r.percentUsed}%`).join('')}
           {usage.usd === undefined ? '' : ` · ~$${usage.usd.toFixed(2)} est.`}
         </Text>
+        {usage.rateLimits.map(r => (
+          <Text dimColor>
+            {(LABELS[r.kind] ?? r.kind).padEnd(7)} {bar(r.percentUsed)} {r.percentUsed}%
+            {r.resetsAt === undefined ? '' : ` · resets ${resetLabel(r.resetsAt)}`}
+          </Text>
+        ))}
       </Box>
     )
   })
