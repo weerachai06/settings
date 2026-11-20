@@ -1,0 +1,24 @@
+# kiro-cli user-level permission rules (all workspaces). Adds to kiro's defaults
+# (fs_read on ./** and read-only git/system commands). Read-only commands only.
+# Compound commands are split, so `cd X && grep Y` needs both parts allowed.
+rules:
+  - capability: shell
+    effect: allow
+    match:
+      - "cd *"
+      - "grep *"
+      - "head *"
+      - "tail *"
+      - "cat *"
+      - "ls*"
+      - "wc *"
+      - "sed -n *"
+      - "gh pr view *"
+      - "gh pr diff *"
+      - "gh pr list*"
+      - "gh pr checks *"
+      - "herdr agent list*"
+      - "herdr agent read *"
+      - "herdr pane list*"
+      - "herdr workspace list*"
+      - "herdr status*"

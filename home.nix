@@ -114,5 +114,6 @@ in
     ".claude/agents".source = config.lib.file.mkOutOfStoreSymlink "${repoDir}/agents/claude/agents";
     # kiro-cli loads ~/.kiro/steering/**/*.md globally into its default agent
     ".kiro/steering/AGENTS.md".source = config.lib.file.mkOutOfStoreSymlink "${repoDir}/agents/kiro/AGENTS.md";
+    ".kiro/settings/permissions.yaml".source = config.lib.file.mkOutOfStoreSymlink "${repoDir}/agents/kiro/permissions.yaml";
   };
 }
