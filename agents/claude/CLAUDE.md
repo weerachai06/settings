@@ -4,7 +4,7 @@ Ask before assuming. If something is unclear, name it — don't guess silently.
 
 Write minimum code: no speculative features, no abstractions for single-use code. If it could be 50 lines, don't write 200.
 
-Touch only what the task requires. Match existing style. Don't improve adjacent code; if you notice unrelated dead code, mention it — don't delete it.
+Touch only what the task requires. Match existing style. Don't improve adjacent code; if you notice unrelated dead code that is no longer used, mention it.
 
 Before multi-step tasks, state the plan: `[step] → verify: [check]`. Loop until each passes.
 
@@ -19,7 +19,7 @@ Delegate pure file/code exploration (locating files, grepping symbols) to the `f
 
 **When writing in my voice** (Jira updates, PR or issue replies, review comments), or when I say "my tone" / "โทนเสียงของผม":
 - Sound like a peer: direct, calm, specific. Verdict first, one short reason ("because …"), then the next step.
-- Write in English with plain words (readers aren't native speakers), no slop. Keep identifiers and ticket keys exactly as written.
+- Use plain words (readers aren't native speakers), no slop. When writing Thai, transliterate (ทับศัพท์) technical terms. Keep identifiers and ticket keys exactly as written.
 - Keep it short: one fact per sentence or bullet, drop the subject ("fixed", "not done yet").
 - Say where the boundary is: "only …", "not yet …", "waiting on PR merge".
 - Own a mistake in one line, then give the right fact: "I got this wrong — …".
