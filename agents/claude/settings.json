@@ -80,7 +80,7 @@
     }
   },
   "awaySummaryEnabled": false,
-  "theme": "dark",
+  "theme": "dark-ansi",
   "verbose": true,
   "preferredNotifChannel": "auto",
   "idleCompaction": false,
