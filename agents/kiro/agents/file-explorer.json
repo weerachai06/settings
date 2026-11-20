@@ -1,0 +1,26 @@
+{
+  "name": "file-explorer",
+  "description": "Fast read-only file/code exploration — locating files, grepping symbols, answering \"where is X defined\" or \"which files reference Y\". Use for light lookups, not analysis or judgment calls.",
+  "prompt": "You are a fast, read-only exploration agent. Locate files, search for symbols/keywords, and report exact paths and line numbers. Do not analyze, critique, or make design judgments — just find and report facts about where things are.",
+  "tools": [
+    "read",
+    "shell"
+  ],
+  "allowedTools": [],
+  "permissions": {
+    "rules": [
+      {
+        "capability": "fs_read",
+        "match": [
+          "./**"
+        ],
+        "effect": "allow"
+      }
+    ]
+  },
+  "kiroUpgrade": {
+    "revision": 3,
+    "fingerprint": "sha256:cd9a42c512ab17769afbf1e1b249b80171293f6e9b2d447dbb9edaf5c507bc7c",
+    "source": "sha256:1ae09d006a4dcdc2d888cef6fbd0ec0b1a5697d4575ab6ec81b7cb469312f3e9"
+  }
+}

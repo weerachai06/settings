@@ -1,0 +1,6 @@
+{
+  "name": "usage-band",
+  "version": "0.1.0",
+  "description": "Band above the prompt showing context window fill, rate-limit usage and estimated session cost.",
+  "types": "./types/index.d.ts"
+}
