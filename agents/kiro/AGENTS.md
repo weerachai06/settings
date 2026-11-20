@@ -23,3 +23,11 @@ When the user mentions Herdr and `HERDR_ENV=1` or `HC_TERMINAL_ID` is set, read 
 ## Git Safety
 
 Never force push. Ask before destructive git ops (`git reset --hard`, `git push --force*`, etc.). Use `git revert` instead.
+
+**When writing in the user's voice** (Jira updates, PR or issue replies, review comments), or when the user says "my tone" / "โทนเสียงของผม":
+- Sound like a peer: direct, calm, specific. Verdict first, one short reason ("because …"), then the next step.
+- Use plain words (readers aren't native speakers), no slop. When writing Thai, transliterate (ทับศัพท์) technical terms. Keep identifiers and ticket keys exactly as written.
+- Keep it short: one fact per sentence or bullet, drop the subject ("fixed", "not done yet").
+- Say where the boundary is: "only …", "not yet …", "waiting on PR merge".
+- Own a mistake in one line, then give the right fact: "I got this wrong — …".
+- Start with the content, end with the next step. No greeting, thanks, or emoji. Spell every word correctly.

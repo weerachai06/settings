@@ -120,7 +120,7 @@ in
   home.file = {
     "scripts/generate-commit.sh".source = ./scripts/generate-commit.sh;
   } // lib.optionalAttrs pkgs.stdenv.isDarwin {
-    ".claude/CLAUDE.md".source = config.lib.file.mkOutOfStoreSymlink "${repoDir}/agents/claude/CLAUDE.md";
+    ".claude/CLAUDE.md".source = config.lib.file.mkOutOfStoreSymlink "${repoDir}/agents/opencode/AGENTS.md";
     ".claude/settings.json".source = config.lib.file.mkOutOfStoreSymlink "${repoDir}/agents/claude/settings.json";
     ".claude/agents".source = config.lib.file.mkOutOfStoreSymlink "${repoDir}/agents/claude/agents";
     # kiro-cli loads ~/.kiro/steering/**/*.md globally into its default agent

@@ -74,7 +74,7 @@ user dev environment only — no nix-darwin, no system config, no sudo. See
 
 GUI apps (orbstack, zed, wezterm, codexbar, fonts) are installed manually.
 `gh-pr-notifier/`, `global-protect/`, and `agents/opencode/` retain their own `install.sh`.
-`agents/skills/` and the shared agent files (`agents/claude/CLAUDE.md`, `agents/claude/agents/`, `agents/kiro/AGENTS.md`, `agents/opencode/AGENTS.md`) live in `agents/`; `home.nix` symlinks them from there.
+`agents/skills/` and the shared agent files (`agents/claude/agents/`, `agents/kiro/AGENTS.md`, `agents/opencode/AGENTS.md`) live in `agents/`; `home.nix` symlinks them from there.
 bun, rust, and opencode use their own installers.
 
 ## Other Repos
