@@ -71,6 +71,15 @@ in
     '';
   };
 
+  programs.neovim = {
+    enable = true;
+    # LSP servers on nvim's PATH only (config: nvim/init.lua)
+    extraPackages = with pkgs; [
+      typescript
+      typescript-language-server
+    ];
+  };
+
   programs.tmux = {
     enable = true;
     prefix = "C-a";
@@ -90,6 +99,8 @@ in
   # so the apps can still write them; read-only configs are store symlinks.
   xdg.configFile = {
     "wezterm/wezterm.lua".source = ./wezterm/wezterm.lua;
+
+    "nvim/init.lua".source = ./nvim/init.lua;
 
     "zed/keymap.json".source = ./zed/keymap.json;
     "zed/tasks.json".source = ./zed/tasks.json;
