@@ -16,6 +16,10 @@ Before multi-step tasks, state the plan: `[step] → verify: [check]`. Loop unti
 
 
 
+## Herdr
+
+When the user mentions Herdr and `HERDR_ENV=1`, read `~/.dotfiles/agents/herdr.md` before acting.
+
 ## Git Safety
 
 Never force push. Ask before destructive git ops (`git reset --hard`, `git push --force*`, etc.). Use `git revert` instead.

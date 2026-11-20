@@ -37,6 +37,7 @@ nix flake update
 # Script-based pieces (deliberately not in Nix — see ADR-0002)
 bash gh-pr-notifier/install.sh <name>
 bash global-protect/install.sh
+bash herdr/install.sh   # herdr binary, claude/opencode integrations, herdr skill for all three tools
 bash agents/skills/install.sh   # links agents/skills and agents/mods into the tools
 
 # opencode v2 (beta) + cursor-rules plugin deps — symlinks/config are in home.nix
@@ -82,11 +83,3 @@ bun, rust, and opencode use their own installers.
 - kpc-web-backoffice-2 (Back Office 2.0): ~/Documents/projects/kpc-web-backoffice-2. Clone from git@github.com:kingpowerclick/kpc-web-backoffice-2.git if missing. Read its AGENTS.md first.
 - kpc-web-frontend (KP Web Frontend): ~/Documents/projects/kpc-web-frontend. Clone from git@github.com:kingpowerclick/kpc-web-frontend.git if missing. No AGENTS.md; see .github/copilot-instructions.md.
 - crown-design-tokens (Crown design tokens monorepo): ~/Documents/projects/crown-design-tokens. Clone from git@github.com:kingpowerclick/crown-design-tokens.git if missing. Read its CLAUDE.md first (its AGENTS.md only points there); CONTEXT.md has the glossary.
-
-## Herdr
-
-Use only when I mention Herdr and `HERDR_ENV=1`. Run `herdr --skill` for exact syntax.
-
-- One workspace per repo in "Other Repos"; one worktree per task (`herdr worktree create --branch <name>`).
-- Send work with `herdr agent prompt <name> "<task>" --wait --timeout <ms>`, then `herdr agent read`.
-- A `blocked` worker is waiting for me. Never answer its approval prompt; report it.
