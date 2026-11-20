@@ -4,23 +4,23 @@
 
 ## ติดตั้งจากไหน
 
-- จัดการโดย: [`opencode/install.sh`](../../opencode/install.sh) — ติดตั้ง opencode2 (V2 beta) ผ่าน `bun add -g @opencode-ai/cli@beta` (อยู่นอก Nix — ดู [ADR-0002](../adr/))
+- จัดการโดย: [`agents/opencode/install.sh`](../../agents/opencode/install.sh) — ติดตั้ง opencode2 (V2 beta) ผ่าน `bun add -g @opencode-ai/cli@beta` (อยู่นอก Nix — ดู [ADR-0002](../adr/))
 - binary `opencode2` อยู่บน PATH ผ่าน `~/.bun/bin` (ตั้งใน [`home.nix`](../../home.nix) เฉพาะ macOS); V1 `opencode` ยังอยู่ที่ `~/.opencode/bin` ถ้าเคยติดตั้งไว้
 - ไฟล์ config (symlink เฉพาะ macOS, ตั้งใน [`home.nix`](../../home.nix)):
 
 | ไฟล์ | symlink ไปที่ | ชนิด symlink |
 | --- | --- | --- |
-| [`opencode/opencode.jsonc`](../../opencode/opencode.jsonc) | `~/.config/opencode/opencode.jsonc` | `mkOutOfStoreSymlink` (เขียนกลับได้) |
-| `opencode/AGENTS.md` (Home Repo: `~/Documents/projects/home-repo`) | `~/.config/opencode/AGENTS.md` | `mkOutOfStoreSymlink` (เขียนกลับได้) |
-| [`opencode/plugins/cursor-rules`](../../opencode/plugins/cursor-rules) | `~/.config/opencode/plugins/cursor-rules` | `mkOutOfStoreSymlink` (เขียนกลับได้) |
+| [`agents/opencode/opencode.jsonc`](../../agents/opencode/opencode.jsonc) | `~/.config/opencode/opencode.jsonc` | `mkOutOfStoreSymlink` (เขียนกลับได้) |
+| [`agents/opencode/AGENTS.md`](../../agents/opencode/AGENTS.md) | `~/.config/opencode/AGENTS.md` | `mkOutOfStoreSymlink` (เขียนกลับได้) |
+| [`agents/opencode/plugins/cursor-rules`](../../agents/opencode/plugins/cursor-rules) | `~/.config/opencode/plugins/cursor-rules` | `mkOutOfStoreSymlink` (เขียนกลับได้) |
 
-`opencode.jsonc` เป็น out-of-store symlink ชี้กลับรีโป — แก้ที่ไหนก็เป็นไฟล์เดียวกัน ส่วน `AGENTS.md` เป็น out-of-store symlink ชี้ไป Home Repo — แก้ในนั้นมีผลทันที ไม่ต้อง `home-manager switch`
+`opencode.jsonc` เป็น out-of-store symlink ชี้กลับรีโป — แก้ที่ไหนก็เป็นไฟล์เดียวกัน ส่วน `AGENTS.md` เป็น out-of-store symlink ชี้ไป `agents/opencode/AGENTS.md` — แก้ในนั้นมีผลทันที ไม่ต้อง `home-manager switch`
 
-plugin `cursor-rules` ต้องมี `node_modules` ของตัวเองข้าง ๆ `index.ts` (bun resolve import จาก realpath ของไฟล์) — ติดตั้งด้วย `bash opencode/install.sh`
+plugin `cursor-rules` ต้องมี `node_modules` ของตัวเองข้าง ๆ `index.ts` (bun resolve import จาก realpath ของไฟล์) — ติดตั้งด้วย `bash agents/opencode/install.sh`
 
 ## การตั้งค่าที่สำคัญ
 
-จาก [`opencode.jsonc`](../../opencode/opencode.jsonc):
+จาก [`opencode.jsonc`](../../agents/opencode/opencode.jsonc):
 
 - `model: "opencode-go/deepseek-v4-pro"` — โมเดล default
 - `compaction.auto: true` — ย่อ context อัตโนมัติเมื่อบทสนทนายาว
@@ -28,7 +28,7 @@ plugin `cursor-rules` ต้องมี `node_modules` ของตัวเอ
 
 ## AGENTS.md
 
-`opencode/AGENTS.md` (อยู่ใน Home Repo `~/Documents/projects/home-repo`) คือ instruction กลางที่ opencode โหลดทุก session (เทียบเท่า `CLAUDE.md` ของ Claude Code) — กำหนดสไตล์การทำงาน: เขียนโค้ดน้อยที่สุด, แตะเฉพาะที่งานต้องการ, วางแผนก่อนทำงานหลายขั้น, สรุป ✅/⬜ ท้ายงาน, และ git safety (ห้าม force push)
+`agents/opencode/AGENTS.md` คือ instruction กลางที่ opencode โหลดทุก session (เทียบเท่า `CLAUDE.md` ของ Claude Code) — กำหนดสไตล์การทำงาน: เขียนโค้ดน้อยที่สุด, แตะเฉพาะที่งานต้องการ, วางแผนก่อนทำงานหลายขั้น, สรุป ✅/⬜ ท้ายงาน, และ git safety (ห้าม force push)
 
 > เนื้อหาส่วนใหญ่ตรงกับ global `~/.claude/CLAUDE.md` โดยตั้งใจ เพื่อให้ agent ทุกตัวทำงานสไตล์เดียวกัน
 
@@ -48,5 +48,5 @@ opencode ยังถูกต่อเป็น agent server ใน Zed ด้�
 ## ปัญหาที่เจอบ่อย
 
 - **`opencode2: command not found`** → `~/.bun/bin` เข้า PATH ผ่าน `~/.zshrc` (macOS only); เปิด shell ใหม่หรือ `source ~/.zshrc`
-- **แก้ `AGENTS.md` แล้วไม่มีผล** → symlink ชี้ไป `~/Documents/projects/home-repo/opencode/AGENTS.md` ต้องแก้ที่ Home Repo และเช็คว่า path นั้นมีอยู่จริง
+- **แก้ `AGENTS.md` แล้วไม่มีผล** → symlink ชี้ไป `~/.dotfiles/agents/opencode/AGENTS.md` ต้องแก้ที่ไฟล์นั้น และเช็คว่า path นั้นมีอยู่จริง
 - **MCP/Atlassian ขอ auth** → server เป็น remote authv2 ต้องทำ auth flow ครั้งแรกตอนเรียกใช้

@@ -45,7 +45,7 @@ See [ADR-0002](docs/adr/0002-home-manager-standalone.md) for the design,
   global-protect, bun, opencode, cargo) are guarded with `isDarwin`.
 - **App configs** — wezterm, zed, opencode, claude, kiro via `home.file`/`xdg.configFile`.
   App-writable configs use out-of-store symlinks so the apps can still write them.
-  `kiro/AGENTS.md` (in the Home Repo, `~/Documents/projects/home-repo`) is symlinked to `~/.kiro/steering/AGENTS.md` (kiro-cli's global steering).
+  `agents/kiro/AGENTS.md` is symlinked to `~/.kiro/steering/AGENTS.md` (kiro-cli's global steering).
 
 The username lives in one `let` binding in `home.nix`; change that one line per user.
 
@@ -54,7 +54,7 @@ The username lives in one `let` binding in `home.nix`; change that one line per 
 - **GUI apps** — orbstack, zed, wezterm, codexbar, fonts: install manually
 - **`gh-pr-notifier/`** — macOS LaunchAgent; `bash gh-pr-notifier/install.sh <name>`
 - **`global-protect/`** — macOS VPN helper; `global-protect/install.sh`
-- **`skills/`** — moved to the Home Repo (`~/Documents/projects/home-repo`); `bash ~/Documents/projects/home-repo/skills/install.sh`
+- **`agents/skills/`** — `bash agents/skills/install.sh` (links skills and mods into the tools)
 - **bun, rust, opencode** — installed via their own installers
 
 ## Structure
@@ -63,10 +63,9 @@ The username lives in one `let` binding in `home.nix`; change that one line per 
 .dotfiles/
 ├── flake.nix           # inputs + homeConfigurations.<system>
 ├── home.nix            # the portable dev env (packages, git, zsh, app configs)
-├── claude/             # Claude Code settings
+├── agents/             # coding-agent setup: skills/, mods/, claude/, kiro/, opencode/
 ├── gh-pr-notifier/     # GitHub PR review notifier (LaunchAgent) — not in Nix
 ├── global-protect/     # GlobalProtect VPN helper — not in Nix
-├── opencode/           # opencode config and plugins
 ├── wezterm/            # WezTerm config
 ├── zed/                # Zed settings, keymap, and tasks
 ├── check-deps.sh       # Dependency checker

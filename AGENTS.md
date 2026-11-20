@@ -38,10 +38,10 @@ nix flake update
 # Script-based pieces (deliberately not in Nix — see ADR-0002)
 bash gh-pr-notifier/install.sh <name>
 bash global-protect/install.sh
-bash ~/Documents/projects/home-repo/skills/install.sh   # skills live in the Home Repo
+bash agents/skills/install.sh   # links agents/skills and agents/mods into the tools
 
 # opencode v2 (beta) + cursor-rules plugin deps — symlinks/config are in home.nix
-bash opencode/install.sh
+bash agents/opencode/install.sh
 ```
 
 ## Git Safety
@@ -60,6 +60,9 @@ user dev environment only — no nix-darwin, no system config, no sudo. See
 - `flake.nix` — inputs (nixpkgs, home-manager) + `homeConfigurations.<system>`
 - `home.nix` — the entire portable dev env (CLI packages, `programs.git`,
   `programs.zsh`, app config symlinks). Username is one `let` binding.
+- `agents/` — coding-agent setup (formerly the Home Repo): `skills/`, `mods/`,
+  and per-tool `claude/`, `kiro/`, `opencode/` (instructions, subagents, settings).
+  `home.nix` symlinks them from here; `agents/skills/install.sh` links skills and mods.
 
 ### Config style (hybrid)
 
@@ -70,6 +73,21 @@ user dev environment only — no nix-darwin, no system config, no sudo. See
 ### Deliberately outside Nix (see ADR-0002)
 
 GUI apps (orbstack, zed, wezterm, codexbar, fonts) are installed manually.
-`gh-pr-notifier/`, `global-protect/`, and `opencode/` retain their own `install.sh`.
-`skills/` and the shared agent files (`claude/CLAUDE.md`, `claude/agents/`, `kiro/AGENTS.md`, `opencode/AGENTS.md`) live in the Home Repo (`~/Documents/projects/home-repo`); `home.nix` symlinks them from there.
+`gh-pr-notifier/`, `global-protect/`, and `agents/opencode/` retain their own `install.sh`.
+`agents/skills/` and the shared agent files (`agents/claude/CLAUDE.md`, `agents/claude/agents/`, `agents/kiro/AGENTS.md`, `agents/opencode/AGENTS.md`) live in `agents/`; `home.nix` symlinks them from there.
 bun, rust, and opencode use their own installers.
+
+## Other Repos
+
+- kpc-web-frontend-2 (KPC Web Frontend 2, Next.js 15 + TypeScript app): ~/Documents/projects/kpc-web-frontend-2. Clone from git@github.com:kingpowerclick/kpc-web-frontend-2.git if missing. Read its AGENTS.md first. Branches: `KPGDX-XXXXX/feature-name`.
+- kpc-web-backoffice-2 (Back Office 2.0): ~/Documents/projects/kpc-web-backoffice-2. Clone from git@github.com:kingpowerclick/kpc-web-backoffice-2.git if missing. Read its AGENTS.md first.
+- kpc-web-frontend (KP Web Frontend): ~/Documents/projects/kpc-web-frontend. Clone from git@github.com:kingpowerclick/kpc-web-frontend.git if missing. No AGENTS.md; see .github/copilot-instructions.md.
+- crown-design-tokens (Crown design tokens monorepo): ~/Documents/projects/crown-design-tokens. Clone from git@github.com:kingpowerclick/crown-design-tokens.git if missing. Read its CLAUDE.md first (its AGENTS.md only points there); CONTEXT.md has the glossary.
+
+## Herdr
+
+Use only when I mention Herdr and `HERDR_ENV=1`. Run `herdr --skill` for exact syntax.
+
+- One workspace per repo in "Other Repos"; one worktree per task (`herdr worktree create --branch <name>`).
+- Send work with `herdr agent prompt <name> "<task>" --wait --timeout <ms>`, then `herdr agent read`.
+- A `blocked` worker is waiting for me. Never answer its approval prompt; report it.
