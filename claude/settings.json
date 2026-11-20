@@ -1,5 +1,8 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "env": {
+    "CLAUDE_CODE_NO_FLICKER": "1"
+  },
   "attribution": {
     "commit": "",
     "pr": "",
@@ -45,6 +48,20 @@
     "anthropic-skills:skill-creator": "off",
     "anthropic-skills:xlsx": "off"
   },
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "^(startup|resume|clear|compact|fork)$",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash '/Users/weerachaiplodkaew/.claude/hooks/herdr-agent-state.sh' session",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  },
   "worktree": {
     "baseRef": "head"
   },
@@ -66,6 +83,7 @@
   "theme": "dark",
   "verbose": true,
   "preferredNotifChannel": "auto",
+  "idleCompaction": false,
   "fileCheckpointingEnabled": true,
   "crossSessionInbound": "accept",
   "inputNeededNotifEnabled": true,
@@ -103,6 +121,5 @@
       "**Org-specific CLIs**: None configured — personal tool usage observed (home-manager, nix, fnm) but no org-specific internal CLIs found",
       "Routine under ~/.dotfiles/ prefix: nix build/activate commands, home-manager switch, flake update, and the repo's own install.sh scripts (gh-pr-notifier, global-protect, skills) are routine project operations per CLAUDE.md"
     ]
-  },
-  "idleCompaction": false
+  }
 }
