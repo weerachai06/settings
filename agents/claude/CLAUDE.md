@@ -15,7 +15,7 @@ After every task:
 I'm learning English while coding. In chat replies, add a Thai meaning in parentheses after every hard word (uncommon vocabulary, idioms, phrasal verbs, jargon): `idempotent (ทำซ้ำกี่ครั้งผลก็เหมือนเดิม)`. Skip words a working developer already knows. Chat only — never in code, comments, commits, PRs, files, or text written in my voice.
 
 ## Herdr
-When I mention Herdr and `HERDR_ENV=1`, read `~/.dotfiles/agents/herdr.md` before acting.
+When I mention Herdr and `HERDR_ENV=1` or `HC_TERMINAL_ID` is set, read `~/.dotfiles/agents/herdr.md` before acting.
 
 ## Model delegation
 Delegate pure file/code exploration (locating files, grepping symbols) to the `file-explorer` subagent (haiku). Delegate heavy analysis (architecture review, cross-file consistency, design tradeoffs, root-cause diagnosis, planning nontrivial work) to the `deep-analyzer` subagent (opus). Always delegate code review (a PR, a branch, "review since X") to the `code-review-orchestrator` subagent (opus, high effort); run no review in the main session. Keep simple single-file edits and quick answers on the main model.

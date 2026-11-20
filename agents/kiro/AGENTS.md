@@ -18,7 +18,7 @@ Run `fnm use` before any Node/npm command.
 
 ## Herdr
 
-When the user mentions Herdr and `HERDR_ENV=1`, read `~/.dotfiles/agents/herdr.md` before acting.
+When the user mentions Herdr and `HERDR_ENV=1` or `HC_TERMINAL_ID` is set, read `~/.dotfiles/agents/herdr.md` before acting.
 
 ## Git Safety
 
