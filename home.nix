@@ -73,47 +73,47 @@ in
     '';
   };
 
-  programs.neovim = {
-    enable = true;
-    # LSP servers on nvim's PATH only (config: nvim/init.lua)
-    extraPackages = with pkgs; [
-      typescript
-      typescript-language-server
-    ];
-    plugins = with pkgs.vimPlugins; [
-      nvim-tree-lua
-      nvim-web-devicons
-      (nvim-treesitter.withPlugins (p: [
-        p.typescript
-        p.tsx
-        p.javascript
-        p.json
-        p.lua
-      ]))
-    ];
-  };
+  # programs.neovim = {
+  #   enable = true;
+  #   # LSP servers on nvim's PATH only (config: nvim/init.lua)
+  #   extraPackages = with pkgs; [
+  #     typescript
+  #     typescript-language-server
+  #   ];
+  #   plugins = with pkgs.vimPlugins; [
+  #     nvim-tree-lua
+  #     nvim-web-devicons
+  #     (nvim-treesitter.withPlugins (p: [
+  #       p.typescript
+  #       p.tsx
+  #       p.javascript
+  #       p.json
+  #       p.lua
+  #     ]))
+  #   ];
+  # };
 
-  programs.tmux = {
-    enable = true;
-    prefix = "C-a";
-    mouse = true;
-    keyMode = "vi";
-    terminal = "tmux-256color";
-    extraConfig = ''
-      # true color passthrough (works with wezterm)
-      set -ag terminal-overrides ",xterm-256color:RGB"
-      # vi-style selection in copy mode
-      bind-key -T copy-mode-vi v send-keys -X begin-selection
-      bind-key -T copy-mode-vi y send-keys -X copy-selection-and-cancel
-    '';
-  };
+  # programs.tmux = {
+  #   enable = true;
+  #   prefix = "C-a";
+  #   mouse = true;
+  #   keyMode = "vi";
+  #   terminal = "tmux-256color";
+  #   extraConfig = ''
+  #     # true color passthrough (works with wezterm)
+  #     set -ag terminal-overrides ",xterm-256color:RGB"
+  #     # vi-style selection in copy mode
+  #     bind-key -T copy-mode-vi v send-keys -X begin-selection
+  #     bind-key -T copy-mode-vi y send-keys -X copy-selection-and-cancel
+  #   '';
+  # };
 
   # App config files. App-writable configs use mkOutOfStoreSymlink -> the repo
   # so the apps can still write them; read-only configs are store symlinks.
   xdg.configFile = {
     "wezterm/wezterm.lua".source = ./wezterm/wezterm.lua;
 
-    "nvim/init.lua".source = ./nvim/init.lua;
+    # "nvim/init.lua".source = ./nvim/init.lua;
 
     "zed/keymap.json".source = ./zed/keymap.json;
     "zed/tasks.json".source = ./zed/tasks.json;
