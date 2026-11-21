@@ -39,6 +39,8 @@ in
     ];
   };
 
+  programs.lazygit.enable = true;
+
   programs.zsh = {
     enable = true;
     autosuggestion.enable = true;
