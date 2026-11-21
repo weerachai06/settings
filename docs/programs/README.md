@@ -12,7 +12,7 @@
 | `fnm` | Node version manager (auto-switch on `cd`) | [fnm.md](fnm.md) |
 | `gh` | GitHub CLI | [gh.md](gh.md) |
 | `jq` | ประมวลผล JSON | [jq.md](jq.md) |
-| `neovim` | editor ใน terminal (LSP ของ TypeScript) | [neovim.md](neovim.md) |
+| `neovim` | editor ใน terminal (LSP ของ TypeScript, file tree, tree-sitter) | [neovim.md](neovim.md) |
 | `openssl` | crypto / cert tooling | [openssl.md](openssl.md) |
 | `uv` | Python package/venv manager | [uv.md](uv.md) |
 

@@ -78,6 +78,17 @@ in
       typescript
       typescript-language-server
     ];
+    plugins = with pkgs.vimPlugins; [
+      nvim-tree-lua
+      nvim-web-devicons
+      (nvim-treesitter.withPlugins (p: [
+        p.typescript
+        p.tsx
+        p.javascript
+        p.json
+        p.lua
+      ]))
+    ];
   };
 
   programs.tmux = {
