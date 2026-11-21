@@ -69,7 +69,6 @@
     "figma@claude-plugins-official": true,
     "atlassian-mcp@anthropic-plugin-directory": true
   },
-  "language": "Thai",
   "effortLevel": "medium",
   "modelSettings": {
     "claude-opus-5-5": {
