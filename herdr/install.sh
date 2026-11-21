@@ -17,7 +17,7 @@ for tool in claude opencode; do
 done
 
 echo "==> write herdr skill from the installed binary"
-for tool_dir in "$HOME/.claude/skills" "$HOME/.config/opencode/skills" "$HOME/.kiro/skills"; do
+for tool_dir in "$HOME/.claude/skills" "$HOME/.config/opencode/skills" "$HOME/.kiro/skills" "$HOME/.pi/agent/skills"; do
   mkdir -p "$tool_dir/herdr"
   herdr --skill > "$tool_dir/herdr/SKILL.md"
 
